@@ -4,8 +4,8 @@
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.0.xsd">
   <header>
     <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
-    <title lang="en-gb">NV "who was here?"</title>
-    <title lang="de">NV "Wer war da?"</title>
+    <title lang="en-gb"><![CDATA[NV "who was here?"]]></title>
+    <title lang="de"><![CDATA[NV "Wer war da?"]]></title>
     <description lang="en-gb"><![CDATA[Adds a list with all users, which visited the page today, on the index.php.
 With saving the record of usercount.
 Features:
@@ -31,15 +31,15 @@ Features:
 
 	• Rekord speichern und anzeigen (im ACP einstellbar)
 	• Es gibt 2 Modi:
-	   • "Wer war heute da?": Hier bei werden alle Benutzer angezeigt, die am heutigen Tage online waren.
-	   • "Wer war in der letzten Zeit da?": Der Zeitraum in dem die Besucher dagewesen sein sollen, kann im ACP eingestellt werden.
+	   1. "Wer war heute da?": Hier bei werden alle Benutzer angezeigt, die am heutigen Tage online waren.
+	   2. "Wer war in der letzten Zeit da?": Der Zeitraum in dem die Besucher dagewesen sein sollen, kann im ACP eingestellt werden.
 	• Die Liste kann im Administrationsbereich zurückgesetzt werden.
 
 	• Die Zeit wird nach der Einstellung des Benutzers im persönlichen Bereich ausgegeben. Also mit Berücksichtigung von Zeitzone und Sommerzeit.
 	• Die Benutzernamen sind eingefärbt.
 ]]></description>
-    <author-notes lang="en-gb">i hope you get it installed, otherwise you can ask for help on phpbb.de and phpbb.com</author-notes>
-    <author-notes lang="de">Ich hoffe ihr kommt mit dem MOD klar. Wenn nicht, könnt ihr auf phpbb.de oder phpbb.com eure Fragen stellen.</author-notes>
+    <author-notes lang="en-gb"><![CDATA[i hope you get it installed, otherwise you can ask for help on phpbb.de and phpbb.com]]></author-notes>
+    <author-notes lang="de"><![CDATA[Ich hoffe ihr kommt mit dem MOD klar. Wenn nicht, könnt ihr auf phpbb.de oder phpbb.com eure Fragen stellen.]]></author-notes>
     <author-group>
       <author>
         <realname>(N/A)</realname>
@@ -200,13 +200,13 @@ Features:
 	<p><!-- IF WHO_WAS_HERE_LIST2 -->{WHO_WAS_HERE_LIST2}<br />({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}<!-- ELSE -->{L_WWH_UPDATE_NEED}<!-- ENDIF --></p>]]></action>
       </edit>
     </open>
-    <diy-instructions lang="en-gb">If you want me to add your language file to the download, just leave me a pm:
+    <diy-instructions lang="en-gb"><![CDATA[If you want me to add your language file to the download, just leave me a pm:
 http://www.phpbb.com/community/ucp.php?i=pm&amp;mode=compose&amp;u=315319
 
-Browse to install_wwh/install.php and run the installer</diy-instructions>
-    <diy-instructions lang="de">Wenn ihr den MOD in eine weitere Sprache übersetzt habt, schickt mir doch eine pm:
+Browse to install_wwh/install.php and run the installer]]></diy-instructions>
+    <diy-instructions lang="de"><![CDATA[Wenn ihr den MOD in eine weitere Sprache übersetzt habt, schickt mir doch eine pm:
 http://www.phpbb.com/community/ucp.php?i=pm&amp;mode=compose&amp;u=315319
 
-install_wwh/install.php aufrufen und ausführen</diy-instructions>
+install_wwh/install.php aufrufen und ausführen]]></diy-instructions>
   </action-group>
 </mod>
