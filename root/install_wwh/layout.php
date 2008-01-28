@@ -40,9 +40,7 @@ echo '							<li' . (($mode == 'else') ? $activemenu : '') . '><a href="install.
 echo '							<li class="header">' . $user->lang['INSTALLER_INSTALL_MENU'] . '</li>';
 echo '							<li' . (($mode == 'install') ? $activemenu : '') . '><a href="install.php?mode=install"><span>' . sprintf($user->lang['INSTALLER_INSTALL_VERSION'], $new_mod_version) . '</span></a></li>';
 echo '							<li class="header">' . $user->lang['INSTALLER_UPDATE_MENU'] . '</li>';
-echo '							<li' . (($mode == 'update601') ? $activemenu : '') . '><a href="install.php?mode=update601&amp;v=6.0.1"><span>' . $user->lang['INSTALLER_UPDATE_VERSION'] . '6.0.1</span></a></li>';
-echo '							<li' . (($mode == 'update602') ? $activemenu : '') . '><a href="install.php?mode=update602&amp;v=6.0.2"><span>' . $user->lang['INSTALLER_UPDATE_VERSION'] . '6.0.2</span></a></li>';
-echo '							<li' . (($mode == 'update603') ? $activemenu : '') . '><a href="install.php?mode=update603&amp;v=6.0.3"><span>' . $user->lang['INSTALLER_UPDATE_VERSION'] . '6.0.3</span></a></li>';
+echo '							<li' . (($mode == 'update604') ? $activemenu : '') . '><a href="install.php?mode=update604&amp;v=6.0.4"><span>' . $user->lang['INSTALLER_UPDATE_VERSION'] . '6.0.4</span></a></li>';
 echo '						</ul>';
 echo '					</div>';
 echo '					<div id="main">';
@@ -85,7 +83,7 @@ if ($mode == 'install')
 		echo '</form>';
 	}
 }
-else if (($mode == 'update601') || ($mode == 'update602') || ($mode == 'update603'))
+else if ($mode == 'update604')
 {
 	if ($update == 1)
 	{

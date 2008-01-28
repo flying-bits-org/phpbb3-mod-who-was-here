@@ -21,6 +21,7 @@ if ($old_mod_version == $new_mod_version)
 	// first let's get some config's
 	$wwh_disp_bots		= $config['wwh_disp_bots'];
 	$wwh_disp_guests	= $config['wwh_disp_guests'];
+	$wwh_disp_hidden	= $config['wwh_disp_hidden'];
 	$wwh_disp_time		= $config['wwh_disp_time'];
 	$wwh_version		= $config['wwh_version'];
 	$wwh_del_time		= $config['wwh_del_time'];
@@ -127,7 +128,7 @@ if ($old_mod_version == $new_mod_version)
 				$who_was_here_list .= (($who_was_here_list != '') ? ', ' : '') . '<span' . $hover_time . '>' . $wwh_username_full . '</span>' . $disp_time;
 			}
 		}
-		else
+		else if ($wwh_disp_hidden)
 		{
 			if ($auth->acl_get('u_viewonline'))
 			{ // hidden users are seen by themselves and admin's in <em></em>
@@ -167,6 +168,10 @@ if ($old_mod_version == $new_mod_version)
 	{
 		$wwh_count_total = $wwh_count_total - $wwh_count_guests;
 	}
+	if ($wwh_disp_hidden == '0')
+	{
+		$wwh_count_total = $wwh_count_total - $wwh_count_hidden;
+	}
 	// ok, now we saved the data, lets make the record
 	if (($wwh_record == 1) && ( $config['wwh_record_ips'] < $wwh_count_total ))
 	{
@@ -201,35 +206,37 @@ if ($old_mod_version == $new_mod_version)
 	}
 	unset($vars_online);
 
+	$replacements = 0;
 	$who_was_here_list2 = sprintf($l_t2_user_s, $wwh_count_total);
 	$who_was_here_list2 .= sprintf($l_r2_user_s, $wwh_count_reg);
-	if (($wwh_disp_guests != 1) && ($wwh_disp_bots != 1))
+	if ($wwh_disp_hidden == 1)
 	{
-		$who_was_here_list2 .= $user->lang['WHO_WAS_HERE_WORD'];
+		$who_was_here_list2 .= '%s' . sprintf($l_h2_user_s, $wwh_count_hidden);
+		$replacements = $replacements + 1;
 	}
-	else
+	if ($wwh_disp_bots == 1)
 	{
-		$who_was_here_list2 .= ',';
+		$who_was_here_list2 .= '%s' . sprintf($l_b2_user_s, $wwh_count_bot);
+		$replacements = $replacements + 1;
 	}
-	$who_was_here_list2 .= sprintf($l_h2_user_s, $wwh_count_hidden);
-	if (($wwh_disp_bots == 1) && ($wwh_disp_guests != 1))
+	if ($wwh_disp_guests == 1)
 	{
-		$who_was_here_list2 .= $user->lang['WHO_WAS_HERE_WORD'];
-		$who_was_here_list2 .= sprintf($l_b2_user_s, $wwh_count_bot);
+		$who_was_here_list2 .= '%s' . sprintf($l_g2_user_s, $wwh_count_guests);
+		$replacements = $replacements + 1;
 	}
-	else if (($wwh_disp_bots != 1) && ($wwh_disp_guests == 1))
+
+	if ($replacements == 1)
 	{
-		$who_was_here_list2 .= $user->lang['WHO_WAS_HERE_WORD'];
-		$who_was_here_list2 .= sprintf($l_g2_user_s, $wwh_count_guests);
+		$who_was_here_list2 = sprintf($who_was_here_list2, $user->lang['WHO_WAS_HERE_WORD']);
 	}
-	else if (($wwh_disp_bots == 1) && ($wwh_disp_guests == 1))
+	if ($replacements == 2)
 	{
-		$who_was_here_list2 .= ',';
-		$who_was_here_list2 .= sprintf($l_b2_user_s, $wwh_count_bot);
-		$who_was_here_list2 .= $user->lang['WHO_WAS_HERE_WORD'];
-		$who_was_here_list2 .= sprintf($l_g2_user_s, $wwh_count_guests);
+		$who_was_here_list2 = sprintf($who_was_here_list2, ', ', $user->lang['WHO_WAS_HERE_WORD']);
 	}
-	$who_was_here_list2 .= '.';
+	if ($replacements == 3)
+	{
+		$who_was_here_list2 = sprintf($who_was_here_list2, ', ', ', ', $user->lang['WHO_WAS_HERE_WORD']);
+	}
 
 	if ($wwh_version == 1)
 	{

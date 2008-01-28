@@ -6,35 +6,46 @@
     <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
     <title lang="en-gb">NV "who was here?"</title>
     <title lang="de">NV "Wer war da?"</title>
-    <description lang="en-gb">Adds a list with all users, which visited the page today, on the index.php.
+    <description lang="en-gb"><![CDATA[Adds a list with all users, which visited the page today, on the index.php.
 With saving the record of usercount.
 Features:
-» en-/disable bots in the list (adjustable in ACP)
-» en-/disable guests in the record (adjustable in ACP)
-» en-/disable record (adjustable in ACP)
-» en-/disable visit-time in the list (adjustable in ACP)
-» "Who was here?" or "Who was here in the last time?" (adjustable in ACP)
-» record-reset-function (in ACP)
+	• en-/disable bots in the list (adjustable in ACP)
+	• en-/disable hidden users in the list (adjustable in ACP)
+	• en-/disable guests in the record (adjustable in ACP)
+	• en-/disable visit-time in the list or as "hover" on the name (adjustable in ACP)
 
-Thx to .:: Chico ::. for giving my access to his server to test the new version</description>
-    <description lang="de">Fügt auf der index.php einen Abschnitt hinzu, wo die User aufgelistet werden,
+	• "Who was here?" or "Who was here in the last time?" (adjustable in ACP)
+	• display and store the record (in ACP)
+	• reset-function (in ACP)
+
+	• time is displayed with user-timezone and dst(daylight-saving-time) adjustment of the ucp
+	• usernames are coloured
+	]]></description>
+    <description lang="de"><![CDATA[Fügt auf der index.php einen Abschnitt hinzu, wo die User aufgelistet werden,
 die am heutigem Tage online gewesen sind.
 Features:
-» Bots in der Liste ein-/ausblenden (im ACP einstellbar)
-» Gäste im Rekord ein-/ausschließen (im ACP einstellbar)
-» Rekord ein-/ausschalten (im ACP einstellbar)
-» Besuchszeit in der Liste ein-/ausblenden (im ACP einstellbar)
-» "Wer war heute da?" oder "Wer war im Zeitraum da?" (im ACP einstellbar)
-» Rekord-Reset-Funktion (im ACP)
-</description>
+	• Bots in der Liste ein-/ausblenden (im ACP einstellbar)
+	• unsichtbare Benutzer in der Liste ein-/ausblenden (im ACP einstellbar)
+	• Gäste im Rekord mitzählen (im ACP einstellbar)
+	• Besuchszeit in der Liste ein-/ausblenden oder als "hover"-Effekt auf dem Benutzernamen (im ACP einstellbar)
+
+	• Rekord speichern und anzeigen (im ACP einstellbar)
+	• Es gibt 2 Modi:
+	   • "Wer war heute da?": Hier bei werden alle Benutzer angezeigt, die am heutigen Tage online waren.
+	   • "Wer war in der letzten Zeit da?": Der Zeitraum in dem die Besucher dagewesen sein sollen, kann im ACP eingestellt werden.
+	• Die Liste kann im Administrationsbereich zurückgesetzt werden.
+
+	• Die Zeit wird nach der Einstellung des Benutzers im persönlichen Bereich ausgegeben. Also mit Berücksichtigung von Zeitzone und Sommerzeit.
+	• Die Benutzernamen sind eingefärbt.
+]]></description>
     <author-notes lang="en-gb">i hope you get it installed, otherwise you can ask for help on phpbb.de and phpbb.com</author-notes>
     <author-notes lang="de">Ich hoffe ihr kommt mit dem MOD klar. Wenn nicht, könnt ihr auf phpbb.de oder phpbb.com eure Fragen stellen.</author-notes>
     <author-group>
       <author>
-        <realname>(N/A) / nick: clusedo</realname>
+        <realname>(N/A)</realname>
         <email>nickvergessen@gmx.de</email>
         <username>nickvergessen</username>
-        <homepage>http://mods.flying-bits.org/</homepage>
+        <homepage>http://www.flying-bits.org/</homepage>
         <contributions />
       </author>
     </author-group>
@@ -54,6 +65,22 @@ Features:
     </installation>
     <history>
       <entry>
+        <date>2008-01-28</date>
+        <rev-version>
+          <major>6</major>
+          <minor>0</minor>
+          <revision>5</revision>
+        </rev-version>
+        <changelog lang="en-GB">
+          <change><![CDATA[[Add] Option to handle invisible users]]></change>
+          <change><![CDATA[[Add] sql-Index to id-column to improve reading speed. (credits to Mahony from the phpbb.de-Team)]]></change>
+        </changelog>
+        <changelog lang="de">
+          <change><![CDATA[[Add] Option zum ausblenden der unsichtbaren Benutzer]]></change>
+          <change><![CDATA[[Add] SQL-Index auf id-Spalte um die Auslese-geschwindigkeit zu verbessern (Dank an Mahony aus dem phpbb.de-Team)]]></change>
+        </changelog>
+      </entry>
+      <entry>
         <date>2007-12-13</date>
         <rev-version>
           <major>6</major>
@@ -61,10 +88,10 @@ Features:
           <revision>4</revision>
         </rev-version>
         <changelog lang="en-GB">
-          <change>fix: displaying wrong time in normal and 0 on hover</change>
+          <change><![CDATA[[Fix] displaying wrong time in normal and 0 on hover]]></change>
         </changelog>
         <changelog lang="de">
-          <change>Fix: falsche Zeit angezeigt, oder 0 beim Hover</change>
+          <change><![CDATA[[Fix] falsche Zeit angezeigt, oder 0 beim Hover]]></change>
         </changelog>
       </entry>
       <entry>
@@ -75,10 +102,10 @@ Features:
           <revision>3</revision>
         </rev-version>
         <changelog lang="en-GB">
-          <change>last feature: display time on name-hover</change>
+          <change><![CDATA[[Add] last feature: display time on name-hover]]></change>
         </changelog>
         <changelog lang="de">
-          <change>letztes Feature: Zeit beim überfahren des Namens anzeigen</change>
+          <change><![CDATA[[Add] letztes Feature: Zeit beim überfahren des Namens anzeigen]]></change>
         </changelog>
       </entry>
       <entry>
@@ -89,10 +116,10 @@ Features:
           <revision>2</revision>
         </rev-version>
         <changelog lang="en-GB">
-          <change>this should be the final fix for the timezone problem</change>
+          <change><![CDATA[[Fix] this should be the final fix for the timezone problem]]></change>
         </changelog>
         <changelog lang="de">
-          <change>Jetzt sollte endlich das Problem mit den Zeitzonen erledigt sein</change>
+          <change><![CDATA[[Fix] Jetzt sollte endlich das Problem mit den Zeitzonen erledigt sein]]></change>
         </changelog>
       </entry>
       <entry>
@@ -103,14 +130,12 @@ Features:
           <revision>1</revision>
         </rev-version>
         <changelog lang="en-GB">
-          <change>fixed 2 bugs:
-- on displaying a page without having installed
-- in the acp</change>
+          <change><![CDATA[[Fix] on displaying a page without having installed]]></change>
+          <change><![CDATA[[Fix] in the acp]]></change>
         </changelog>
         <changelog lang="de">
-          <change>2 Bugs behoben:
-- beim Aufrufen der Seite ohne Installation
-- im ACP</change>
+          <change><![CDATA[[Fix] beim Aufrufen der Seite ohne Installation]]></change>
+          <change><![CDATA[[Fix] im ACP]]></change>
         </changelog>
       </entry>
       <entry>
@@ -121,14 +146,14 @@ Features:
           <revision>0</revision>
         </rev-version>
         <changelog lang="en-GB">
-          <change>updated to RC7</change>
-          <change>created its own module</change>
-          <change>fixed some bugs</change>
+          <change><![CDATA[[Change] updated to RC7]]></change>
+          <change><![CDATA[[Change] created its own module]]></change>
+          <change><![CDATA[[Fix] fixed some bugs]]></change>
         </changelog>
         <changelog lang="de">
-          <change>auf RC7 angepasst</change>
-          <change>eigenes Modul erstellt</change>
-          <change>einige Bugs behoben</change>
+          <change><![CDATA[[Change] auf RC7 angepasst]]></change>
+          <change><![CDATA[[Change] eigenes Modul erstellt]]></change>
+          <change><![CDATA[[Fix] einige Bugs behoben]]></change>
         </changelog>
       </entry>
     </history>
@@ -149,9 +174,8 @@ Features:
     </copy>
     <open src="index.php">
       <edit>
-        <find><![CDATA[// Output page
-page_header($user->lang['INDEX']);]]></find>
-        <action type="after-add"><![CDATA[include($phpbb_root_path . 'includes/functions_wwh.' . $phpEx);]]></action>
+        <find><![CDATA[// Assign index specific vars]]></find>
+        <action type="before-add"><![CDATA[include($phpbb_root_path . 'includes/functions_wwh.' . $phpEx);]]></action>
       </edit>
     </open>
     <open src="includes/constants.php">
@@ -164,9 +188,7 @@ page_header($user->lang['INDEX']);]]></find>
       <edit>
         <find><![CDATA[	// Which timezone?
 	$tz = ($user->data['user_id'] != ANONYMOUS) ? strval(doubleval($user->data['user_timezone'])) : strval(doubleval($config['board_timezone']));]]></find>
-        <action type="after-add"><![CDATA[//---- [ who was here ] ----
-include_once($phpbb_root_path . 'includes/functions_wwh2.' . $phpEx);
-//---- [ who was here ] ----]]></action>
+        <action type="after-add"><![CDATA[include_once($phpbb_root_path . 'includes/functions_wwh2.' . $phpEx);]]></action>
       </edit>
     </open>
     <open src="styles/prosilver/template/index_body.html">

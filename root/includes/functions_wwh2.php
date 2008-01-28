@@ -13,7 +13,7 @@ if (!defined('IN_PHPBB'))
 {
 	exit;
 }
-$new_mod_version = '6.0.4';
+$new_mod_version = '6.0.5';
 $old_mod_version = (isset($config['wwh_mod_version'])) ? $config['wwh_mod_version'] : 'RC5';
 $user->add_lang('mods/lang_wwh');
 if ($old_mod_version == $new_mod_version)

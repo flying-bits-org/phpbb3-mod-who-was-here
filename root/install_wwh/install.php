@@ -14,20 +14,17 @@ $phpbb_root_path = '../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.'.$phpEx);
 include($phpbb_root_path . 'includes/acp/acp_modules.' . $phpEx);
+include($phpbb_root_path . 'includes/db/db_tools.' . $phpEx);
 
 // Start session management
 $user->session_begin();
 $auth->acl($user->data);
 $user->setup();
 $user->add_lang('mods/lang_wwh_acp');
-$new_mod_version = '6.0.4';
+$new_mod_version = '6.0.5';
 $page_title = 'NV "who was here?" v' . $new_mod_version;
 
 $mode = request_var('mode', 'else', true);
-if ($user->data['user_type'] != USER_FOUNDER)
-{
-	$mode  = '';
-}
 function split_sql_file($sql, $delimiter)
 {
 	$sql = str_replace("\r" , '', $sql);
@@ -137,10 +134,18 @@ switch ($mode)
 			}
 			unset($sql_query);
 
+			//we add a little index, so the sql runs faster
+			$create_index = new phpbb_db_tools($db);
+			$table_name = WWH_TABLE;
+			$index_name = 'wwh_user_id';
+			$column = array('id');
+			$create_index->sql_create_index($table_name, $index_name, $column);
+
 			set_config('wwh_record_ips', 1, true);
 			set_config('wwh_record_time', time(), true);
 			set_config('wwh_disp_bots', 1);
 			set_config('wwh_disp_guests', 1);
+			set_config('wwh_disp_hidden', 1);
 			set_config('wwh_disp_time', 1);
 			set_config('wwh_version', 1);
 			set_config('wwh_del_time', 86400);
@@ -173,45 +178,30 @@ switch ($mode)
 				'module_auth'		=> ''
 			);
 			$modules->update_module_data($config_wwh);
+
 			// clear cache and log what we did
 			$cache->purge();
 			add_log('admin', 'NV "who was here?" v' . $new_mod_version . ' installed');
+
 			$installed = true;
 		}
 	break;
-	case 'update603':
+	case 'update604':
 		$update = request_var('update', 0);
 		$version = request_var('v', '0', true);
 		$updated = false;
 		if ($update == 1)
 		{
+			//we add a little index, so the sql runs faster
+			$create_index = new phpbb_db_tools($db);
+			$table_name = WWH_TABLE;
+			$index_name = 'wwh_user_id';
+			$column = array('id');
+			$create_index->sql_create_index($table_name, $index_name, $column);
+
+			set_config('wwh_disp_hidden', 1);
 			set_config('wwh_mod_version', $new_mod_version);
-			// clear cache and log what we did
-			$cache->purge();
-			add_log('admin', 'NV "who was here?" updated to v' . $new_mod_version);
-			$updated = true;
-		}
-	break;
-	case 'update602':
-		$update = request_var('update', 0);
-		$version = request_var('v', '0', true);
-		$updated = false;
-		if ($update == 1)
-		{
-			set_config('wwh_mod_version', $new_mod_version);
-			// clear cache and log what we did
-			$cache->purge();
-			add_log('admin', 'NV "who was here?" updated to v' . $new_mod_version);
-			$updated = true;
-		}
-	break;
-	case 'update601':
-		$update = request_var('update', 0);
-		$version = request_var('v', '0', true);
-		$updated = false;
-		if ($update == 1)
-		{
-			set_config('wwh_mod_version', $new_mod_version);
+
 			// clear cache and log what we did
 			$cache->purge();
 			add_log('admin', 'NV "who was here?" updated to v' . $new_mod_version);

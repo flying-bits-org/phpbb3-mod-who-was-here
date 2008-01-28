@@ -38,6 +38,7 @@ class acp_wwh
 			}
 			$wwh_disp_bots		= request_var('wwh_disp_bots', 0);
 			$wwh_disp_guests	= request_var('wwh_disp_guests', 0);
+			$wwh_disp_hidden	= request_var('wwh_disp_hidden', 0);
 			$wwh_disp_time		= request_var('wwh_disp_time', 0);
 			$wwh_version		= request_var('wwh_version', 0);
 			$wwh_del_time		= request_var('wwh_del_time', 86400);
@@ -51,6 +52,10 @@ class acp_wwh
 			if($wwh_disp_guests != $config['wwh_disp_guests'])
 			{
 				set_config('wwh_disp_guests', $wwh_disp_guests);
+			}
+			if($wwh_disp_hidden != $config['wwh_disp_hidden'])
+			{
+				set_config('wwh_disp_hidden', $wwh_disp_hidden);
 			}
 			if($wwh_disp_time != $config['wwh_disp_time'])
 			{
@@ -85,6 +90,7 @@ class acp_wwh
 			'WWH_MOD_VERSION'		=> sprintf($user->lang['WWH_INSTALLED'], $old_mod_version),
 			'WWH_DISP_BOTS'			=> $config['wwh_disp_bots'],
 			'WWH_DISP_GUESTS'		=> $config['wwh_disp_guests'],
+			'WWH_DISP_HIDDEN'		=> $config['wwh_disp_hidden'],
 			'WWH_DISP_TIME'			=> $config['wwh_disp_time'],
 			'WWH_VERSION'			=> $config['wwh_version'],
 			'WWH_DEL_TIME'			=> $config['wwh_del_time'],
