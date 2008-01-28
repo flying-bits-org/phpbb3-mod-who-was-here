@@ -197,7 +197,7 @@ Features:
 	<p>{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /> <br />{LOGGED_IN_USER_LIST}
 	<!-- IF LEGEND --><br /><em>{L_LEGEND}: {LEGEND}</em><!-- ENDIF --></p>]]></find>
         <action type="after-add"><![CDATA[	<h3>{L_WHO_WAS_HERE}</h3>
-	<p><!-- IF WHO_WAS_HERE_LIST2 -->{WHO_WAS_HERE_LIST2}<br />({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}<!-- ELSE -->{L_WWH_UPDATE_NEED}<!-- ENDIF --></p>]]></action>
+	<p><!-- IF WHO_WAS_HERE_LIST2 -->{WHO_WAS_HERE_LIST2} ({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}<!-- ELSE -->{L_WWH_UPDATE_NEED}<!-- ENDIF --></p>]]></action>
       </edit>
     </open>
     <diy-instructions lang="en-gb"><![CDATA[If you want me to add your language file to the download, just leave me a pm:

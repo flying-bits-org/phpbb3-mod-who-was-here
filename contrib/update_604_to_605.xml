@@ -48,6 +48,12 @@
       <file from="root/language/en/mods/lang_wwh.php" to="language/en/mods/lang_wwh.php" />
       <file from="root/language/en/mods/lang_wwh_acp.php" to="language/en/mods/lang_wwh_acp.php" />
     </copy>
+    <open src="styles/prosilver/template/index_body.html">
+      <edit>
+        <find><![CDATA[{WHO_WAS_HERE_LIST2}<br />({WHO_WAS_HERE_EXP})]]></find>
+        <action type="replace-with"><![CDATA[{WHO_WAS_HERE_LIST2} ({WHO_WAS_HERE_EXP})]]></action>
+      </edit>
+    </open>
     <diy-instructions lang="en-gb">If you want me to add your language file to the download, just leave me a pm:
 http://www.phpbb.com/community/ucp.php?i=pm&amp;mode=compose&amp;u=315319
 
