@@ -49,7 +49,7 @@
 	</tr>
 	<tr>
 		<td class="row1" align="center" valign="middle"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_WHO_IS_ONLINE}" /></td>
-		<td class="row1" width="100%"><span class="genmed"><!-- IF WHO_WAS_HERE_LIST2 -->{WHO_WAS_HERE_LIST2}<br />({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}<!-- ELSE -->{L_WWH_UPDATE_NEED}<!-- ENDIF --></span></td>
+		<td class="row1" width="100%"><span class="genmed"><!-- IF WHO_WAS_HERE_LIST2 -->{WHO_WAS_HERE_LIST2} ({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}<!-- ELSE -->{L_WWH_UPDATE_NEED}<!-- ENDIF --></span></td>
 	</tr>
 	</table>]]></action>
       </edit>
