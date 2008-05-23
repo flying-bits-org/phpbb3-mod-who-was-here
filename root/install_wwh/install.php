@@ -4,7 +4,7 @@
 *
 * @package - NV "who was here?"
 * @version $Id: install.php 61 2007-12-17 20:15:23Z nickvergessen $
-* @copyright (c) nickvergessen ( http://mods.flying-bits.org/ )
+* @copyright (c) nickvergessen ( http://www.flying-bits.org/ )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
@@ -21,8 +21,13 @@ $user->session_begin();
 $auth->acl($user->data);
 $user->setup();
 $user->add_lang('mods/lang_wwh_acp');
-$new_mod_version = '6.0.5';
+
+$major_versions = array('6.0.');
+$minor_versions['6.0.'] = array(4, 5, 6);
+$new_mod_version = end($major_versions) . end($minor_versions[end($major_versions)]);
+
 $page_title = 'NV "who was here?" v' . $new_mod_version;
+$log_name = 'Modification NV "who was here?"' . ((request_var('update', 0) > 0) ? '-Update' : '') . ' v' . $new_mod_version;
 
 $mode = request_var('mode', 'else', true);
 function split_sql_file($sql, $delimiter)
@@ -96,10 +101,56 @@ switch ($db->sql_layer)
 		trigger_error('Sorry, unsupportet Databases found.');
 	break;
 }
+function wwh_create_index($table, $column)
+{
+	global $db;
+
+	switch ($db->sql_layer)
+	{
+		case 'firebird':
+		case 'postgres':
+		case 'oracle':
+		case 'sqlite':
+			$sql = 'CREATE INDEX ' . $table . "_$column ON " . TOPICS_TABLE . "($column)";
+		break;
+
+		case 'mysql':
+		case 'mysql4':
+		case 'mysqli':
+			$sql = "ALTER TABLE `" . $table . "` ADD INDEX (`$column`)";
+		break;
+
+		case 'mssql':
+		case 'mssql_odbc':
+			$sql = "CREATE INDEX $column ON " . $table . "($column) ON [PRIMARY]";
+		break;
+
+		default:
+			trigger_error("Your database ({$db->sql_layer})is not supported by phpbb3 itself.");
+		break;
+	}
+	$db->sql_query($sql);
+}
+
+function add_module($array)
+{
+	global $user;
+	$modules = new acp_modules();
+	$failed = $modules->update_module_data($array, true);
+	if ($failed == 'PARENT_NO_EXIST')
+	{
+		trigger_error(sprintf($user->lang['MISSING_PARENT_MODULE'], $array['parent_id'], $user->lang[$array['module_langname']]));
+	}
+}
+
+$delete = request_var('delete', 0);
+$index = request_var('index', 0);
+$install = request_var('install', 0);
+$update = request_var('update', 0);
+$version = request_var('v', '0', true);
 switch ($mode)
 {
 	case 'install':
-		$install = request_var('install', 0);
 		$installed = false;
 		if ($install == 1)
 		{
@@ -112,8 +163,8 @@ switch ($mode)
 			}
 			else
 			{
-				$sql = 'if exists (select * from sysobjects where name = "' . $table_prefix . 'wwh")
-				drop table ' . $table_prefix . 'wwh';
+				$sql = 'if exists (select * from sysobjects where name = ' . $table_prefix . 'wwh)
+					drop table ' . $table_prefix . 'wwh';
 				$result = $db->sql_query($sql);
 				$db->sql_freeresult($result);
 			}
@@ -134,12 +185,11 @@ switch ($mode)
 			}
 			unset($sql_query);
 
-			//we add a little index, so the sql runs faster
-			$create_index = new phpbb_db_tools($db);
-			$table_name = WWH_TABLE;
-			$index_name = 'wwh_user_id';
-			$column = array('id');
-			$create_index->sql_create_index($table_name, $index_name, $column);
+			if ($index == 1)
+			{
+				//we add a little index, so the sql runs faster
+				wwh_create_index(WWH_TABLE, 'id');
+			}
 
 			set_config('wwh_record_ips', 1, true);
 			set_config('wwh_record_time', time(), true);
@@ -148,68 +198,90 @@ switch ($mode)
 			set_config('wwh_disp_hidden', 1);
 			set_config('wwh_disp_time', 1);
 			set_config('wwh_version', 1);
-			set_config('wwh_del_time', 86400);
+			set_config('wwh_del_time_h', 24);
+			set_config('wwh_del_time_m', 0);
+			set_config('wwh_del_time_s', 0);
 			set_config('wwh_sort_by', 3);
 			set_config('wwh_record', 1);
+			set_config('wwh_record_timestamp', 'D j. M Y');
 			set_config('wwh_reset_time', 1);
-			set_config('wwh_mod_version', $new_mod_version);
 
 			// create the acp modules
 			$modules = new acp_modules();
-			$wwh = array(
-				'module_basename'	=> '',
-				'module_enabled'	=> 1,
-				'module_display'	=> 1,
-				'parent_id'			=> 31,
-				'module_class'		=> 'acp',
-				'module_langname'	=> 'WWH_TITLE',
-				'module_mode'		=> '',
-				'module_auth'		=> ''
-			);
-			$modules->update_module_data($wwh);
-			$config_wwh = array(
-				'module_basename'	=> 'wwh',
-				'module_enabled'	=> 1,
-				'module_display'	=> 1,
-				'parent_id'			=> $wwh['module_id'],
-				'module_class'		=> 'acp',
-				'module_langname'	=> 'WWH_CONFIG',
-				'module_mode'		=> 'overview',
-				'module_auth'		=> ''
-			);
-			$modules->update_module_data($config_wwh);
+			$wwh = array('module_basename' => '', 'module_enabled' => 1, 'module_display' => 1, 'parent_id' => 31, 'module_class' => 'acp', 'module_langname' => 'WWH_TITLE', 'module_mode' => '', 'module_auth' => '');
+			add_module($wwh);
+			$sql = 'SELECT module_id
+				FROM ' . MODULES_TABLE . "
+				WHERE module_langname = 'WWH_TITLE'
+				LIMIT 1";
+			$result = $db->sql_query($sql);
+			while( $row = $db->sql_fetchrow($result) )
+			{
+				$wwh['module_id'] = $row['module_id'];
+			}
+			$db->sql_freeresult($result);
+
+			$config_wwh = array('module_basename' => 'wwh', 'module_enabled' => 1, 'module_display' => 1, 'parent_id' => $wwh['module_id'], 'module_class' => 'acp', 'module_langname' => 'WWH_CONFIG', 'module_mode' => 'overview', 'module_auth' => '');
+			add_module($config_wwh);
 
 			// clear cache and log what we did
+			set_config('wwh_mod_version', $new_mod_version);
 			$cache->purge();
-			add_log('admin', 'NV "who was here?" v' . $new_mod_version . ' installed');
-
+			add_log('admin', 'LOG_INSTALL_INSTALLED', $log_name);
+			add_log('admin', 'LOG_PURGE_CACHE');
 			$installed = true;
 		}
 	break;
-	case 'update604':
-		$update = request_var('update', 0);
+	case 'update':
 		$version = request_var('v', '0', true);
-		$updated = false;
+		$updated = $ask_for_index = false;
+		switch ($version)
+		{
+			case '6.0.4':
+				$ask_for_index = true;
+			case '6.0.5':
+			break;
+		}
+
 		if ($update == 1)
 		{
-			//we add a little index, so the sql runs faster
-			$create_index = new phpbb_db_tools($db);
-			$table_name = WWH_TABLE;
-			$index_name = 'wwh_user_id';
-			$column = array('id');
-			$create_index->sql_create_index($table_name, $index_name, $column);
+			switch ($version)
+			{
+				case '6.0.4':
+					set_config('wwh_disp_hidden', 1);
+					if ($index == 1)
+					{
+						wwh_create_index(WWH_TABLE, 'id');
+					}
 
-			set_config('wwh_disp_hidden', 1);
+				case '6.0.5':
+					set_config('wwh_record_timestamp', 'D j. M Y');
+					set_config('wwh_del_time_h', 0);
+					set_config('wwh_del_time_m', 0);
+					set_config('wwh_del_time_s', 0);
+				break;
+			}
 			set_config('wwh_mod_version', $new_mod_version);
-
-			// clear cache and log what we did
 			$cache->purge();
-			add_log('admin', 'NV "who was here?" updated to v' . $new_mod_version);
+			add_log('admin', 'LOG_INSTALL_INSTALLED', $log_name);
+			add_log('admin', 'LOG_PURGE_CACHE');
 			$updated = true;
 		}
 	break;
-	default:
-		//we had a little cheater
+	case 'delete':
+		$deleted = false;
+
+		if ($delete == 1)
+		{
+			$deleting_configs = 'wwh_record_ips, wwh_record_time, wwh_disp_bots, wwh_disp_guests, wwh_disp_hidden, wwh_disp_time, wwh_version, wwh_del_time_h, wwh_del_time_m, wwh_del_time_s, wwh_sort_by, wwh_record, wwh_record_timestamp, wwh_reset_time';
+			$sql = 'DELETE FROM ' . PHPBB_CONFIG . "
+				WHERE config_name IN ($deleting_configs);";
+			set_config('wwh_mod_version', $new_mod_version);
+			$cache->purge();
+			add_log('admin', 'LOG_INSTALL_INSTALLED', 'Modification NV "who was here?"-Uninstall');
+			add_log('admin', 'LOG_PURGE_CACHE');
+			$deleted = true;
+		}
 	break;
 }
 

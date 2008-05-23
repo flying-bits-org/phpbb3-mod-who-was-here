@@ -60,13 +60,10 @@
 			</dd>
 		</dl>
 		<dl>
-			<dt><label for="wwh_del_time">{L_WWH_VERSION2}:</label>
-				<br /><span>{L_WWH_VERSION2_EXP}</span>
-			</dt>
-			<dd>
-				<!-- IF WWH_VERSION --><span>{L_WWH_VERSION2_EXP2}</span><br /><!-- ENDIF -->
-				<input type="text" name="wwh_del_time" size="6" <!-- IF WWH_VERSION -->disabled="disabled"<!-- ENDIF --> value="{WWH_DEL_TIME}" /> {L_WWH_VERSION2_EXP3}
-			</dd>
+			<dt><label for="wwh_del_time">{L_WWH_VERSION2}:</label></dt>
+			<dd><input type="text" name="wwh_del_time_h" size="6" value="{WWH_DEL_TIME_H}" /> {L_HOURS}</dd>
+			<dd><input type="text" name="wwh_del_time_m" size="6" value="{WWH_DEL_TIME_M}" /> {L_MINUTES}</dd>
+			<dd><input type="text" name="wwh_del_time_s" size="6" value="{WWH_DEL_TIME_S}" /> {L_SECONDS}</dd>
 		</dl>
 		<dl>
 			<dt><label for="wwh_sort_by">{L_WWH_SORT_BY}:</label>
@@ -90,6 +87,14 @@
 			<dd>
 				<input type="radio" class="radio" name="wwh_record" value="1" <!-- IF WWH_RECORD -->checked="checked"<!-- ENDIF -->/> {L_YES} &nbsp; 
 				<input type="radio" class="radio" name="wwh_record" value="0" <!-- IF not WWH_RECORD -->checked="checked"<!-- ENDIF --> /> {L_NO}
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="wwh_record_timestamp">{L_WWH_RECORD_TIMESTAMP}:</label>
+				<br /><span>{L_BOARD_DATE_FORMAT_EXPLAIN}</span>
+			</dt>
+			<dd>
+				<input type="text" name="wwh_record_timestamp" size="12" value="{WWH_RECORD_TIMESTAMP}" />
 			</dd>
 		</dl>
 	</fieldset>

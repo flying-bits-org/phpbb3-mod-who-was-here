@@ -37,6 +37,7 @@ $lang = array_merge($lang, array(
 
 	'WWH_RECORD'				=> 'user-record',
 	'WWH_RECORD_EXP'			=> 'display and save user-record',
+	'WWH_RECORD_TIMESTAMP'		=> 'Timestamp for the record',
 	'WWH_RESET'					=> 'Reset Record',
 	'WWH_RESET_1'				=> 'reset record',
 	'WWH_RESET_EXP'				=> 'Resets the time and the counter of the who-was-here record.',
@@ -56,7 +57,7 @@ $lang = array_merge($lang, array(
 	'WWH_UPDATE'				=> 'Update',
 	'WWH_UPDATED'				=> 'Update "Who was here?" MOD from v%1s to v%2s',
 	'WWH_UPDATE_FALSE'			=> '"Who was here?" MOD was not updated',
-	'WWH_UPDATE_NEED'			=> 'Update the "Who was here?" MOD',
+	'WWH_UPDATE_NEED'			=> 'Update the "Who was here?" MOD. Therefor run the <a style="font-weight: bold;" href="' . $phpbb_root_path . 'install_wwh/install.php">install.php</a>.<br />If you did this, you should delete the install_wwh/ directory.',
 	'WWH_UPDATE_NEW_VERSION'	=> 'New MOD version',
 	'WWH_UPDATE_OLD_VERSION'	=> 'Old MOD version',
 
@@ -67,6 +68,17 @@ $lang = array_merge($lang, array(
 	'WWH_VERSION2_EXP'			=> 'type 0, if you want to display the users of the last 24h',
 	'WWH_VERSION2_EXP2'			=> 'disabled, if you have choosen "today"',
 	'WWH_VERSION2_EXP3'			=> 'seconds',
+
+	'CREATE_INDEX'						=> 'Create Index',
+	'CREATE_INDEX_EXP'					=> 'Creating an index improves the speed of this MOD. Some Users don\'t have the rights to create indexes and would receive an error on the installation. So just turn it off here.',
+
+	'INSTALLER_DELETE'					=> 'Delete',
+	'INSTALLER_DELETE_MENU'				=> 'Delete',
+	'INSTALLER_DELETE_NOTE'				=> 'Delete',
+	'INSTALLER_DELETE_SUCCESSFUL'		=> 'Deleted the MOD successfully.<br />Now delete all files.',
+	'INSTALLER_DELETE_UNSUCCESSFUL'		=> 'Could <strong>not</strong> delete the MOD.',
+	'INSTALLER_DELETE_WELCOME'			=> 'Welcome to the Deletemenu',
+	'INSTALLER_DELETE_WELCOME_NOTE'		=> 'When you choose to delete the MOD, we remove all sql-data insert by the installation.',
 
 	'INSTALLER_INTRO'					=> 'Intro',
 	'INSTALLER_INTRO_WELCOME'			=> 'Welcome to the MOD Installation',
@@ -89,6 +101,8 @@ $lang = array_merge($lang, array(
 	'INSTALLER_UPDATE_UNSUCCESSFUL'		=> 'Update of the MOD from v%s to v%s was <strong>not</strong> successful.',
 	'INSTALLER_UPDATE_VERSION'			=> 'Update MOD from v',
 	'INSTALLER_UPDATE_WELCOME'			=> 'Welcome to the Updatemenu',
+
+	'MISSING_PARENT_MODULE'				=> 'Module #%s is missing as a parent module for "%s".',
 
 	'WARNING'							=> 'Warning',
 ));

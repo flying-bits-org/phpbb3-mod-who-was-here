@@ -8,11 +8,25 @@
     <title lang="de">NV "Wer war da?"</title>
     <description lang="en-gb">see normal install--file</description>
     <description lang="de">siehe normale Installations--Datei</description>
-    <author-notes lang="en-gb">see normal install--file</author-notes>
-    <author-notes lang="de">siehe normale Installations--Datei</author-notes>
+    <author-notes lang="en-gb"><![CDATA[i hope you get it installed, otherwise you can ask for help on phpbb.de and phpbb.com
+
+
+
+	NOTE: If you want to be informed, when there should be a new version of this MOD available,
+	Please register on my Site and join the Group "MODs - NV Who Was Here? - Newsletter".
+
+	I you want to be informed when i release any new version for one of my MODs join the Group "MODs - Newsletter"]]></author-notes>
+    <author-notes lang="de"><![CDATA[Ich hoffe ihr kommt mit dem MOD klar. Wenn nicht, könnt ihr auf phpbb.de oder phpbb.com eure Fragen stellen.
+
+
+
+	HINWEIS: Wenn du über neue Versionen informiert werden willst,
+	Melde dich auch meiner Seite an und trette der Gruppe "MODs - NV AWho Was Here? - Newsletter" bei.
+
+	Wenn du über alle MODs von mir informiert werden willst, trette der Gruppe "MODs - Newsletter" bei]]></author-notes>
     <author-group>
       <author>
-        <realname>(N/A)</realname>
+        <realname>Joas Schilling</realname>
         <email>nickvergessen@gmx.de</email>
         <username>nickvergessen</username>
         <homepage>http://www.flying-bits.org/</homepage>
@@ -22,13 +36,13 @@
     <mod-version>
       <major>6</major>
       <minor>0</minor>
-      <revision>5</revision>
+      <revision>6</revision>
     </mod-version>
     <installation>
       <level>easy</level>
       <time>240</time>
       <target-version>
-        <target-primary>3.0.0</target-primary>
+        <target-primary>3.0.1</target-primary>
         <target-major allow="exact">3</target-major>
         <target-minor allow="exact">0</target-minor>
       </target-version>

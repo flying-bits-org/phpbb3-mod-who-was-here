@@ -37,6 +37,7 @@ $lang = array_merge($lang, array(
 
 	'WWH_RECORD'				=> 'Besucherrekord',
 	'WWH_RECORD_EXP'			=> 'Den Besucherrekord anzeigen und speichern.',
+	'WWH_RECORD_TIMESTAMP'		=> 'Datums-Format für den Rekord',
 	'WWH_RESET'					=> 'Besucherrekord zurücksetzen',
 	'WWH_RESET_1'				=> 'Besucherrekord zurücksetzen',
 	'WWH_RESET_EXP'				=> 'Setzt den Zeitpunkt und den Besucherrekord zurück.',
@@ -56,7 +57,7 @@ $lang = array_merge($lang, array(
 	'WWH_UPDATE'				=> 'Update',
 	'WWH_UPDATED'				=> 'Update "Wer War Da?" MOD von v%s auf v%s',
 	'WWH_UPDATE_FALSE'			=> '"Wer War Da?" MOD wurde nicht upgedated',
-	'WWH_UPDATE_NEED'			=> 'Update deinen "Wer War Da?" MOD',
+	'WWH_UPDATE_NEED'			=> 'Update deinen "Wer War Da?" MOD. Führe dazu die <a style="font-weight: bold;" href="' . $phpbb_root_path . 'install_wwh/install.php">install.php</a> aus.<br />Wenn du das getan hast, kannst solltest du das install_wwh/ Verzeichnis wieder entfernen.',
 	'WWH_UPDATE_NEW_VERSION'	=> 'Neue MOD Version',
 	'WWH_UPDATE_OLD_VERSION'	=> 'Alte MOD Version',
 
@@ -67,6 +68,17 @@ $lang = array_merge($lang, array(
 	'WWH_VERSION2_EXP'			=> 'geben 0 ein, wenn die Besucher der letzten 24 Stunden angezeigt werden sollen',
 	'WWH_VERSION2_EXP2'			=> 'deaktiviert, wenn "Heute" ausgewählt wurde',
 	'WWH_VERSION2_EXP3'			=> 'Sekunden',
+
+	'CREATE_INDEX'						=> 'Index erstellen',
+	'CREATE_INDEX_EXP'					=> 'Die Erstellung des Index erhöht die Geschwindigkeit der MOD. Manche Benutzer haben aber nicht die nötigen Rechte um einen Index zuerstellen. Sie erhalten eine Fehlermeldung bei der Installation. Sollte dies der Fall sein, einfach hier auf "Nein" stellen.',
+
+	'INSTALLER_DELETE'					=> 'Löschen',
+	'INSTALLER_DELETE_MENU'				=> 'Löschen',
+	'INSTALLER_DELETE_NOTE'				=> 'Löschen',
+	'INSTALLER_DELETE_SUCCESSFUL'		=> 'MOD erfolgreich deinstalliert.<br />Lösche nun die Dateien.',
+	'INSTALLER_DELETE_UNSUCCESSFUL'		=> 'MOD konnte <strong>nicht</strong> gelöscht werden.',
+	'INSTALLER_DELETE_WELCOME'			=> 'Willkommen zum Löschen',
+	'INSTALLER_DELETE_WELCOME_NOTE'		=> 'Wenn du die MOD löschst, werden alle SQL-Daten gelöscht, die bei der Installation eingetragen wurden.',
 
 	'INSTALLER_INTRO'					=> 'Intro',
 	'INSTALLER_INTRO_WELCOME'			=> 'Willkommen zur MOD-Installation',
@@ -89,6 +101,8 @@ $lang = array_merge($lang, array(
 	'INSTALLER_UPDATE_UNSUCCESSFUL'		=> 'Update der MOD von v%s nach v%s war <strong>nicht</strong> erfolgreich.',
 	'INSTALLER_UPDATE_VERSION'			=> 'Update MOD von v',
 	'INSTALLER_UPDATE_WELCOME'			=> 'Willkommen zum Update',
+
+	'MISSING_PARENT_MODULE'				=> 'Modul #%s fehlt als übergeordnetes Modul für "%s".',
 
 	'WARNING'							=> 'Warnung',
 ));

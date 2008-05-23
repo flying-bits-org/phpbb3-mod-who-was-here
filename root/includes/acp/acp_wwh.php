@@ -26,6 +26,7 @@ class acp_wwh
 		include($phpbb_root_path . 'includes/functions_wwh2.' . $phpEx);
 		$user->add_lang('acp/common');
 		$user->add_lang('mods/lang_wwh_acp');
+		$user->add_lang('ucp');
 		$this->tpl_name = 'acp_wwh';
 		$this->page_title = $user->lang['WWH_TITLE'];
 		$submit = (isset($_POST['submit'])) ? true : false;
@@ -36,48 +37,19 @@ class acp_wwh
 			{
 				trigger_error('FORM_INVALID');
 			}
-			$wwh_disp_bots		= request_var('wwh_disp_bots', 0);
-			$wwh_disp_guests	= request_var('wwh_disp_guests', 0);
-			$wwh_disp_hidden	= request_var('wwh_disp_hidden', 0);
-			$wwh_disp_time		= request_var('wwh_disp_time', 0);
-			$wwh_version		= request_var('wwh_version', 0);
-			$wwh_del_time		= request_var('wwh_del_time', 86400);
-			$wwh_sort_by		= request_var('wwh_sort_by', 0);
-			$wwh_record			= request_var('wwh_record', 0);
-			$wwh_reset			= request_var('wwh_reset', 0);
-			if($wwh_disp_bots != $config['wwh_disp_bots'])
-			{
-				set_config('wwh_disp_bots', $wwh_disp_bots);
-			}
-			if($wwh_disp_guests != $config['wwh_disp_guests'])
-			{
-				set_config('wwh_disp_guests', $wwh_disp_guests);
-			}
-			if($wwh_disp_hidden != $config['wwh_disp_hidden'])
-			{
-				set_config('wwh_disp_hidden', $wwh_disp_hidden);
-			}
-			if($wwh_disp_time != $config['wwh_disp_time'])
-			{
-				set_config('wwh_disp_time', $wwh_disp_time);
-			}
-			if($wwh_version != $config['wwh_version'])
-			{
-				set_config('wwh_version', $wwh_version);
-			}
-			if($wwh_del_time != $config['wwh_del_time'])
-			{
-				set_config('wwh_del_time', $wwh_del_time);
-			}
-			if($wwh_sort_by != $config['wwh_sort_by'])
-			{
-				set_config('wwh_sort_by', $wwh_sort_by);
-			}
-			if($wwh_record != $config['wwh_record'])
-			{
-				set_config('wwh_record', $wwh_record);
-			}
-			if($wwh_reset)
+
+			set_config('wwh_disp_bots', request_var('wwh_disp_bots', 0));
+			set_config('wwh_disp_guests', request_var('wwh_disp_guests', 0));
+			set_config('wwh_disp_hidden', request_var('wwh_disp_hidden', 0));
+			set_config('wwh_disp_time', request_var('wwh_disp_time', 0));
+			set_config('wwh_version', request_var('wwh_version', 0));
+			set_config('wwh_del_time_h', request_var('wwh_del_time_h', 0));
+			set_config('wwh_del_time_m', request_var('wwh_del_time_m', 0));
+			set_config('wwh_del_time_s', request_var('wwh_del_time_s', 0));
+			set_config('wwh_sort_by', request_var('wwh_sort_by', 0));
+			set_config('wwh_record', request_var('wwh_record', 0));
+			set_config('wwh_record_timestamp', request_var('wwh_record_timestamp', 'D j. M Y'));
+			if (request_var('wwh_reset', 0) > 0)
 			{
 				set_config('wwh_record_ips', 1);
 				set_config('wwh_record_time', time());
@@ -93,9 +65,12 @@ class acp_wwh
 			'WWH_DISP_HIDDEN'		=> $config['wwh_disp_hidden'],
 			'WWH_DISP_TIME'			=> $config['wwh_disp_time'],
 			'WWH_VERSION'			=> $config['wwh_version'],
-			'WWH_DEL_TIME'			=> $config['wwh_del_time'],
+			'WWH_DEL_TIME_H'		=> $config['wwh_del_time_h'],
+			'WWH_DEL_TIME_M'		=> $config['wwh_del_time_m'],
+			'WWH_DEL_TIME_S'		=> $config['wwh_del_time_s'],
 			'WWH_SORT_BY'			=> $config['wwh_sort_by'],
 			'WWH_RECORD'			=> $config['wwh_record'],
+			'WWH_RECORD_TIMESTAMP'	=> $config['wwh_record_timestamp'],
 			'U_ACTION'				=> $this->u_action,
 		));
 	}

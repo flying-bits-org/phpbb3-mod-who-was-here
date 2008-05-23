@@ -13,10 +13,10 @@ if (!defined('IN_PHPBB'))
 {
 	exit;
 }
-$new_mod_version = $old_mod_version = '1';
+$user->add_lang('mods/lang_wwh');
 include_once($phpbb_root_path . 'includes/functions_wwh2.' . $phpEx);
 
-if ($old_mod_version == $new_mod_version)
+if (!file_exists($phpbb_root_path . 'install_wwh'))
 {
 	// first let's get some config's
 	$wwh_disp_bots		= $config['wwh_disp_bots'];
@@ -120,19 +120,19 @@ if ($old_mod_version == $new_mod_version)
 			{
 				if ($wwh_disp_bots == '1')
 				{
-					$who_was_here_list .= (($who_was_here_list != '') ? ', ' : '') . '<span' . $hover_time . '>' . $wwh_username_full . '</span>' . $disp_time;
+					$who_was_here_list .= (($who_was_here_list != '') ? $user->lang['COMMA_SEPARATOR'] : '') . '<span' . $hover_time . '>' . $wwh_username_full . '</span>' . $disp_time;
 				}
 			}
 			else if ($row['user_id'] != ANONYMOUS)
 			{
-				$who_was_here_list .= (($who_was_here_list != '') ? ', ' : '') . '<span' . $hover_time . '>' . $wwh_username_full . '</span>' . $disp_time;
+				$who_was_here_list .= (($who_was_here_list != '') ? $user->lang['COMMA_SEPARATOR'] : '') . '<span' . $hover_time . '>' . $wwh_username_full . '</span>' . $disp_time;
 			}
 		}
 		else if ($wwh_disp_hidden)
 		{
 			if ($auth->acl_get('u_viewonline'))
 			{ // hidden users are seen by themselves and admin's in <em></em>
-				$who_was_here_list .= (($who_was_here_list != '') ? ', ' : '') . '<em' . $hover_time . '>' .$wwh_username_full . '</em>' . $disp_time;
+				$who_was_here_list .= (($who_was_here_list != '') ? $user->lang['COMMA_SEPARATOR'] : '') . '<em' . $hover_time . '>' .$wwh_username_full . '</em>' . $disp_time;
 			}
 		}
 	// at the end let's count them =)
@@ -211,81 +211,69 @@ if ($old_mod_version == $new_mod_version)
 	$who_was_here_list2 .= sprintf($l_r2_user_s, $wwh_count_reg);
 	if ($wwh_disp_hidden == 1)
 	{
-		$who_was_here_list2 .= '%s' . sprintf($l_h2_user_s, $wwh_count_hidden);
-		$replacements = $replacements + 1;
+		$who_was_here_list2 .= '%s ' . sprintf($l_h2_user_s, $wwh_count_hidden);
 	}
 	if ($wwh_disp_bots == 1)
 	{
-		$who_was_here_list2 .= '%s' . sprintf($l_b2_user_s, $wwh_count_bot);
-		$replacements = $replacements + 1;
+		$who_was_here_list2 .= '%s ' . sprintf($l_b2_user_s, $wwh_count_bot);
 	}
 	if ($wwh_disp_guests == 1)
 	{
-		$who_was_here_list2 .= '%s' . sprintf($l_g2_user_s, $wwh_count_guests);
-		$replacements = $replacements + 1;
+		$who_was_here_list2 .= '%s ' . sprintf($l_g2_user_s, $wwh_count_guests);
 	}
+	switch (substr_count($who_was_here_list2, '%s'))
+	{
+		case 3:
+			$who_was_here_list2 = sprintf($who_was_here_list2, $user->lang['COMMA_SEPARATOR'], $user->lang['COMMA_SEPARATOR'], $user->lang['WHO_WAS_HERE_WORD']);
+			break;
 
-	if ($replacements == 1)
-	{
-		$who_was_here_list2 = sprintf($who_was_here_list2, $user->lang['WHO_WAS_HERE_WORD']);
-	}
-	if ($replacements == 2)
-	{
-		$who_was_here_list2 = sprintf($who_was_here_list2, ', ', $user->lang['WHO_WAS_HERE_WORD']);
-	}
-	if ($replacements == 3)
-	{
-		$who_was_here_list2 = sprintf($who_was_here_list2, ', ', ', ', $user->lang['WHO_WAS_HERE_WORD']);
+		case 2:
+			$who_was_here_list2 = sprintf($who_was_here_list2, $user->lang['COMMA_SEPARATOR'], $user->lang['WHO_WAS_HERE_WORD']);
+			break;
+
+		case 1:
+			$who_was_here_list2 = sprintf($who_was_here_list2, $user->lang['WHO_WAS_HERE_WORD']);
+			break;
 	}
 
 	if ($wwh_version == 1)
 	{
 		$who_was_here_explain = $user->lang['WHO_WAS_HERE_EXP'];
+		if ($wwh_record == 1)
+		{
+			$who_was_here_record = sprintf($user->lang['WHO_WAS_HERE_RECORD'], $config['wwh_record_ips'], $user->format_date($config['wwh_record_time'], $config['wwh_record_timestamp'])) . '<br />';
+		}
 	}
 	else
 	{
-		$time_hours = 0;
-		$time_minutes = 0;
-		$time_seconds = $wwh_del_time;
-		while ($time_seconds >= 60)
-		{
-			$time_seconds = $time_seconds - 60;
-			$time_minutes = $time_minutes + 1;
-		}
-		while ($time_minutes >= 60)
-		{
-			$time_minutes = $time_minutes - 60;
-			$time_hours = $time_hours + 1;
-		}
 		$who_was_here_explain = $user->lang['WHO_WAS_HERE_EXP_TIME'];
-		if ($time_hours != 1)
+		if ($config['wwh_del_time_h'])
 		{
-			$who_was_here_explain .= sprintf($user->lang['WWH_HOURS'], $time_hours);
+			$who_was_here_explain .= sprintf($user->lang['WWH_HOUR' . (($config['wwh_del_time_h'] == 1) ? '' : 'S')], $config['wwh_del_time_h']);
 		}
-		else
+		if ($config['wwh_del_time_m'])
 		{
-			$who_was_here_explain .= sprintf($user->lang['WWH_HOUR'], $time_hours);
+			$who_was_here_explain .= '%s ' . sprintf($user->lang['WWH_MINUTE' . (($config['wwh_del_time_m'] == 1) ? '' : 'S')], $config['wwh_del_time_m']);
 		}
-		if ($time_minutes != 1)
+		if ($config['wwh_del_time_s'])
 		{
-			$who_was_here_explain .= sprintf($user->lang['WWH_MINUTES'], $time_minutes);
+			$who_was_here_explain .= '%s ' . sprintf($user->lang['WWH_SECOND' . (($config['wwh_del_time_s'] == 1) ? '' : 'S')], $config['wwh_del_time_s']);
 		}
-		else
+		switch (substr_count($who_was_here_explain, '%s'))
 		{
-			$who_was_here_explain .= sprintf($user->lang['WWH_MINUTE'], $time_minutes);
+			case 2:
+				$who_was_here_explain = sprintf($who_was_here_explain, $user->lang['COMMA_SEPARATOR'], $user->lang['WHO_WAS_HERE_WORD']);
+				break;
+
+			case 1:
+				$who_was_here_explain = sprintf($who_was_here_explain, $user->lang['WHO_WAS_HERE_WORD']);
+				break;
 		}
-		if ($time_seconds != 1)
+		if ($wwh_record == 1)
 		{
-			$who_was_here_explain .= sprintf($user->lang['WWH_SECONDS'], $time_seconds);
+			$config['wwh_record_time2'] = $config['wwh_record_time'] - (3600 * $config['wwh_del_time_h']) - (60 * $config['wwh_del_time_m']) - $config['wwh_del_time_s'];
+			$who_was_here_record = sprintf($user->lang['WHO_WAS_HERE_RECORD_TIME'], $config['wwh_record_ips'], $user->format_date($config['wwh_record_time2'], $config['wwh_record_timestamp']), $user->format_date($config['wwh_record_time'], $config['wwh_record_timestamp'])) . '<br />';
 		}
-		else
-		{
-			$who_was_here_explain .= sprintf($user->lang['WWH_SECOND'], $time_seconds);
-		}
-	}
-	if ($wwh_record == 1)
-	{
-		$who_was_here_record = sprintf($user->lang['WHO_WAS_HERE_RECORD'], $config['wwh_record_ips'],$user->format_date($config['wwh_record_time'])) . '<br />';
 	}
 	$template->assign_vars(array(
 			'WHO_WAS_HERE_LIST'		=> $user->lang['REGISTERED_USERS'] .' '. $who_was_here_list,

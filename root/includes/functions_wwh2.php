@@ -13,10 +13,8 @@ if (!defined('IN_PHPBB'))
 {
 	exit;
 }
-$new_mod_version = '6.0.5';
-$old_mod_version = (isset($config['wwh_mod_version'])) ? $config['wwh_mod_version'] : 'RC5';
-$user->add_lang('mods/lang_wwh');
-if ($old_mod_version == $new_mod_version)
+
+if (!file_exists($phpbb_root_path . 'install_wwh'))
 {
 	if (($user->data['user_id'] != ANONYMOUS) && ($user->data['user_type'] != USER_IGNORE))
 	{
@@ -46,4 +44,5 @@ else
 {
 	$user->add_lang('mods/lang_wwh_acp');
 }
+
 ?>

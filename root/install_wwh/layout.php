@@ -4,7 +4,7 @@
 *
 * @package - NV "who was here?"
 * @version $Id: layout.php 61 2007-12-17 20:15:23Z nickvergessen $
-* @copyright (c) nickvergessen ( http://mods.flying-bits.org/ )
+* @copyright (c) nickvergessen ( http://www.flying-bits.org/ )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
@@ -39,8 +39,19 @@ echo '						<ul>';
 echo '							<li' . (($mode == 'else') ? $activemenu : '') . '><a href="install.php"><span>' . $user->lang['INSTALLER_INTRO'] . '</span></a></li>';
 echo '							<li class="header">' . $user->lang['INSTALLER_INSTALL_MENU'] . '</li>';
 echo '							<li' . (($mode == 'install') ? $activemenu : '') . '><a href="install.php?mode=install"><span>' . sprintf($user->lang['INSTALLER_INSTALL_VERSION'], $new_mod_version) . '</span></a></li>';
-echo '							<li class="header">' . $user->lang['INSTALLER_UPDATE_MENU'] . '</li>';
-echo '							<li' . (($mode == 'update604') ? $activemenu : '') . '><a href="install.php?mode=update604&amp;v=6.0.4"><span>' . $user->lang['INSTALLER_UPDATE_VERSION'] . '6.0.4</span></a></li>';
+foreach ($major_versions as $major_version)
+{
+	echo '							<li class="header">' . $user->lang['INSTALLER_UPDATE_MENU'] . '</li>';
+	foreach ($minor_versions[$major_version] as $minor_version)
+	{
+		if ($new_mod_version != $major_version . $minor_version)
+		{
+			echo '							<li' . (($version == $major_version . $minor_version) ? $activemenu : '') . '><a href="install.php?mode=update&amp;v=' . $major_version . $minor_version . '"><span>' . $user->lang['INSTALLER_UPDATE_VERSION'] . $major_version . $minor_version . '</span></a></li>';
+		}
+	}
+}
+echo '							<li class="header">' . $user->lang['INSTALLER_DELETE_MENU'] . '</li>';
+echo '							<li' . (($mode == 'delete') ? $activemenu : '') . '><a href="install.php?mode=delete"><span>' . $user->lang['INSTALLER_DELETE'] . '</span></a></li>';
 echo '						</ul>';
 echo '					</div>';
 echo '					<div id="main">';
@@ -75,6 +86,11 @@ if ($mode == 'install')
 		echo '			<dt><label for="install">v' . $new_mod_version . ':</label></dt>';
 		echo '			<dd><label><input name="install" value="1" class="radio" type="radio" />' . $user->lang['YES'] . '</label><label><input name="install" value="0" checked="checked" class="radio" type="radio" />' . $user->lang['NO'] . '</label></dd>';
 		echo '		</dl>';
+		echo '		<dl>';
+		echo '			<dt><label for="index">' . $user->lang['CREATE_INDEX'] . ':</label>';
+		echo '				<br /><span>' . $user->lang['CREATE_INDEX_EXP'] . '</span></dt>';
+		echo '			<dd><label><input name="index" value="1" class="radio" checked="checked" type="radio" />' . $user->lang['YES'] . '</label><label><input name="index" value="0" class="radio" type="radio" />' . $user->lang['NO'] . '</label></dd>';
+		echo '		</dl>';
 		echo '		<p class="submit-buttons">';
 		echo '			<input class="button1" id="submit" name="submit" value="Submit" type="submit" />&nbsp;';
 		echo '			<input class="button2" id="reset" name="reset" value="Reset" type="reset" />';
@@ -83,7 +99,7 @@ if ($mode == 'install')
 		echo '</form>';
 	}
 }
-else if ($mode == 'update604')
+else if ($mode == 'update')
 {
 	if ($update == 1)
 	{
@@ -112,6 +128,14 @@ else if ($mode == 'update604')
 		echo '			<dt><label for="update">' . sprintf($user->lang['INSTALLER_UPDATE_NOTE'], $version, $new_mod_version) . ':</label></dt>';
 		echo '			<dd><label><input name="update" value="1" class="radio" type="radio" />' . $user->lang['YES'] . '</label><label><input name="update" value="0" checked="checked" class="radio" type="radio" />' . $user->lang['NO'] . '</label></dd>';
 		echo '		</dl>';
+		if ($ask_for_index)
+		{
+			echo '		<dl>';
+			echo '			<dt><label for="index">' . $user->lang['CREATE_INDEX'] . ':</label>';
+			echo '				<br /><span>' . $user->lang['CREATE_INDEX_EXP'] . '</span></dt>';
+			echo '			<dd><label><input name="index" value="1" class="radio" checked="checked" type="radio" />' . $user->lang['YES'] . '</label><label><input name="index" value="0" class="radio" type="radio" />' . $user->lang['NO'] . '</label></dd>';
+			echo '		</dl>';
+		}
 		echo '		<p class="submit-buttons">';
 		echo '			<input class="button1" id="submit" name="submit" value="Submit" type="submit" />&nbsp;';
 		echo '			<input class="button2" id="reset" name="reset" value="Reset" type="reset" />';
@@ -120,17 +144,48 @@ else if ($mode == 'update604')
 		echo '</form>';
 	}
 }
-else if ($mode == 'else')
+else if ($mode == 'delete')
 {
-	echo '<h1>' . $user->lang['INSTALLER_INTRO_WELCOME'] . '</h1>';
-	echo '<p>' . $user->lang['INSTALLER_INTRO_WELCOME_NOTE'] . '</p>';
+	if ($delete == 1)
+	{
+		if ($deleted)
+		{
+			echo '<div class="successbox">';
+			echo '	<h3>' . $user->lang['INFORMATION'] . '</h3>';
+			echo '	<p>' . $user->lang['INSTALLER_DELETE_SUCCESSFUL'] . '</p>';
+			echo '</div>';
+		}
+		else
+		{
+			echo '<div class="errorbox">';
+			echo '	<h3>' . $user->lang['WARNING'] . '</h3>';
+			echo '	<p>' .$user->lang['INSTALLER_DELETE_UNSUCCESSFUL'] . '</p>';
+			echo '</div>';
+		}
+	}
+	else
+	{
+		echo '<h1>' . $user->lang['INSTALLER_DELETE_WELCOME'] . '</h1>';
+		echo '<p>' . $user->lang['INSTALLER_DELETE_WELCOME_NOTE'] . '</p>';
+		echo '<form id="acp_board" method="post" action="install.php?mode=' . $mode . '">';
+		echo '	<fieldset>';
+		echo '		<legend>' . $user->lang['INSTALLER_DELETE'] . '</legend>';
+		echo '		<dl>';
+		echo '			<dt><label for="delete">' . $user->lang['INSTALLER_DELETE_NOTE'] . ':</label></dt>';
+		echo '			<dd><label><input name="delete" value="1" class="radio" type="radio" />' . $user->lang['YES'] . '</label><label><input name="delete" value="0" checked="checked" class="radio" type="radio" />' . $user->lang['NO'] . '</label></dd>';
+		echo '		</dl>';
+		echo '		<p class="submit-buttons">';
+		echo '			<input class="button1" id="submit" name="submit" value="Submit" type="submit" />&nbsp;';
+		echo '			<input class="button2" id="reset" name="reset" value="Reset" type="reset" />';
+		echo '		</p>';
+		echo '	</fieldset>';
+		echo '</form>';
+	}
 }
 else
 {
-	echo '<div class="errorbox">';
-	echo '	<h3>ERROR</h3>';
-	echo '	<p>' . $user->lang['INSTALLER_NEEDS_FOUNDER'] . '</p>';
-	echo '</div>';
+	echo '<h1>' . $user->lang['INSTALLER_INTRO_WELCOME'] . '</h1>';
+	echo '<p>' . $user->lang['INSTALLER_INTRO_WELCOME_NOTE'] . '</p>';
 }
 echo '						</div>';
 echo '					</div>';
@@ -147,7 +202,7 @@ echo '		"phpBB" linked to www.phpbb.com. If you refuse to include even this then
 echo '		forums may be affected.';
 echo '		The phpBB Group : 2006';
 echo '	// -->';
-echo '<div id="page-footer">Powered by phpBB &copy; 2000, 2002, 2005, 2007 <a href="http://www.phpbb.com/">phpBB Group</a><br />Installer by <a href="http://mods.flying-bits.org/">nickvergessen</a></div>';
+echo '<div id="page-footer">Powered by phpBB &copy; 2000, 2002, 2005, 2007 <a href="http://www.phpbb.com/">phpBB Group</a><br />Installer by <a href="http://www.flying-bits.org/">nickvergessen</a></div>';
 echo '</div>';
 echo '</body>';
 echo '</html>';
