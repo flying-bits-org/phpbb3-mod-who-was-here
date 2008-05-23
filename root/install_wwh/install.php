@@ -276,7 +276,21 @@ switch ($mode)
 			$deleting_configs = 'wwh_record_ips, wwh_record_time, wwh_disp_bots, wwh_disp_guests, wwh_disp_hidden, wwh_disp_time, wwh_version, wwh_del_time_h, wwh_del_time_m, wwh_del_time_s, wwh_sort_by, wwh_record, wwh_record_timestamp, wwh_reset_time';
 			$sql = 'DELETE FROM ' . PHPBB_CONFIG . "
 				WHERE config_name IN ($deleting_configs);";
-			set_config('wwh_mod_version', $new_mod_version);
+			$db->sql_query($sql);
+			// Drop thes tables if existing
+			if ($db->sql_layer != 'mssql')
+			{
+				$sql = 'DROP TABLE IF EXISTS ' . $table_prefix . 'wwh';
+				$result = $db->sql_query($sql);
+				$db->sql_freeresult($result);
+			}
+			else
+			{
+				$sql = 'if exists (select * from sysobjects where name = ' . $table_prefix . 'wwh)
+					drop table ' . $table_prefix . 'wwh';
+				$result = $db->sql_query($sql);
+				$db->sql_freeresult($result);
+			}
 			$cache->purge();
 			add_log('admin', 'LOG_INSTALL_INSTALLED', 'Modification NV "who was here?"-Uninstall');
 			add_log('admin', 'LOG_PURGE_CACHE');
