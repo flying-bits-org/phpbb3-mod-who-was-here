@@ -273,8 +273,12 @@ switch ($mode)
 
 		if ($delete == 1)
 		{
-			$deleting_configs = 'wwh_record_ips, wwh_record_time, wwh_disp_bots, wwh_disp_guests, wwh_disp_hidden, wwh_disp_time, wwh_version, wwh_del_time_h, wwh_del_time_m, wwh_del_time_s, wwh_sort_by, wwh_record, wwh_record_timestamp, wwh_reset_time';
-			$sql = 'DELETE FROM ' . PHPBB_CONFIG . "
+			$deleting_modules = "'WWH_TITLE', 'WWH_CONFIG'";
+			$sql = 'DELETE FROM ' . MODULES_TABLE . "
+				WHERE module_langname IN ($deleting_modules);";
+			$db->sql_query($sql);
+			$deleting_configs = "'wwh_record_ips', 'wwh_record_time', 'wwh_disp_bots', 'wwh_disp_guests', 'wwh_disp_hidden', 'wwh_disp_time', 'wwh_version', 'wwh_del_time_h', 'wwh_del_time_m', 'wwh_del_time_s', 'wwh_sort_by', 'wwh_record', 'wwh_record_timestamp', 'wwh_reset_time'";
+			$sql = 'DELETE FROM ' . CONFIG_TABLE . "
 				WHERE config_name IN ($deleting_configs);";
 			$db->sql_query($sql);
 			// Drop thes tables if existing
