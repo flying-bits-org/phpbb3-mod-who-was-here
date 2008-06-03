@@ -32,6 +32,13 @@
         <homepage>http://www.flying-bits.org/</homepage>
         <contributions />
       </author>
+      <author>
+        <realname>French Translator: Frédéric Mangenot</realname>
+        <email>informaide@free.fr</email>
+        <username>freud47</username>
+        <homepage>http://www.informaide.info</homepage>
+        <contributions />
+      </author>
     </author-group>
     <mod-version>
       <major>6</major>
@@ -51,9 +58,9 @@
   </header>
   <action-group>
     <copy>
-      <file from="languages/de/language/de/mods/info_acp_wwh.php" to="language/de/mods/info_acp_wwh.php" />
-      <file from="languages/de/language/de/mods/lang_wwh.php" to="language/de/mods/lang_wwh.php" />
-      <file from="languages/de/language/de/mods/lang_wwh_acp.php" to="language/de/mods/lang_wwh_acp.php" />
+      <file from="languages/fr/language/fr/mods/info_acp_wwh.php" to="language/fr/mods/info_acp_wwh.php" />
+      <file from="languages/fr/language/fr/mods/lang_wwh.php" to="language/fr/mods/lang_wwh.php" />
+      <file from="languages/fr/language/fr/mods/lang_wwh_acp.php" to="language/fr/mods/lang_wwh_acp.php" />
     </copy>
     <diy-instructions lang="en-gb">see normal install--file</diy-instructions>
     <diy-instructions lang="de">siehe normale Installations--Datei</diy-instructions>
