@@ -59,7 +59,7 @@ class acp_wwh
 		}
 
 		$template->assign_vars(array(
-			'WWH_MOD_VERSION'		=> sprintf($user->lang['WWH_INSTALLED'], $old_mod_version),
+			'WWH_MOD_VERSION'		=> sprintf($user->lang['WWH_INSTALLED'], $config['wwh_mod_version']),
 			'WWH_DISP_BOTS'			=> $config['wwh_disp_bots'],
 			'WWH_DISP_GUESTS'		=> $config['wwh_disp_guests'],
 			'WWH_DISP_HIDDEN'		=> $config['wwh_disp_hidden'],
