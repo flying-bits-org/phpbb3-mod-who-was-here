@@ -24,7 +24,7 @@ if (!file_exists($phpbb_root_path . 'install_wwh'))
 	$wwh_disp_hidden	= $config['wwh_disp_hidden'];
 	$wwh_disp_time		= $config['wwh_disp_time'];
 	$wwh_version		= $config['wwh_version'];
-	$wwh_del_time		= $config['wwh_del_time'];
+	$wwh_del_time		= (3600 * $config['wwh_del_time_h']) + (60 * $config['wwh_del_time_m']) + $config['wwh_del_time_s'];
 	$wwh_reset_time		= $config['wwh_reset_time'];
 	$wwh_record			= $config['wwh_record'];
 	$wwh_sort_by		= $config['wwh_sort_by'];
