@@ -52,6 +52,8 @@
     </copy>
     <open src="styles/prosilver/template/index_body.html">
       <edit>
+        <comment lang="en-gb">You just need to do this, when you installed 6.0.6. If you updated from 6.0.5 you already did this.</comment>
+        <comment lang="de">Die Änderung muss nur gemacht werden, wenn 6.0.6 installiert wurde. Wenn von 6.0.5 upgedated wurde, wurde die Änderung schon gemacht.</comment>
         <find><![CDATA[	<h3>{L_WHO_WAS_HERE}</h3>
 	<p><!-- IF WHO_WAS_HERE_LIST2 -->{WHO_WAS_HERE_LIST2} ({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}<!-- ELSE -->{L_WWH_UPDATE_NEED}<!-- ENDIF --></p>]]></find>
         <action type="replace-with"><![CDATA[	<!-- IF WHO_WAS_HERE_LIST2 -->
