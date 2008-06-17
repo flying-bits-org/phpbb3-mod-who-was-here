@@ -57,7 +57,7 @@ $lang = array_merge($lang, array(
 	'WWH_UPDATE'				=> 'Mise à jour',
 	'WWH_UPDATED'				=> 'Mettre à jour le MOD "Qui était en ligne ?" de la v%s vers la v%s',
 	'WWH_UPDATE_FALSE'			=> 'Le MOD "Qui était en ligne ?" n\'est pas à jour',
-	'WWH_UPDATE_NEED'			=> 'Mettre à jour le MOD "Qui était en ligne ?"',
+	'WWH_UPDATE_NEED'			=> 'Mettez à jour le MOD "Qui était en ligne?". Pour celà lancer l\' <a style="font-weight: bold;" href="' . $phpbb_root_path . 'install_wwh/install.php">install.php</a>.<br />Si vous l\'avez fait, vous devez effacer le répertoire install_wwh/ .',
 	'WWH_UPDATE_NEW_VERSION'	=> 'Nouvelle version du MOD',
 	'WWH_UPDATE_OLD_VERSION'	=> 'Ancienne version du MOD',
 
