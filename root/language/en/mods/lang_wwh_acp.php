@@ -1,13 +1,13 @@
 <?php
+
 /**
 *
-* wwh acp [English]
-*
-* @package language
-* @version $Id: lang_wwh.php 4 2007-06-02
+* @package phpBB3 - who was here MOD
+* @version $Id: lang_wwh.php 61 2007-12-17 20:15:23Z nickvergessen $
+* @copyright (c) nickvergessen ( http://www.flying-bits.org/ )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 *
-**/
+*/
 if (!defined('IN_PHPBB'))
 {
 	exit;

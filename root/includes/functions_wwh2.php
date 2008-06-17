@@ -4,7 +4,7 @@
 *
 * @package - NV "who was here?"
 * @version $Id: functions_wwh2.php 61 2007-12-17 20:15:23Z nickvergessen $
-* @copyright (c) nickvergessen ( http://mods.flying-bits.org/ )
+* @copyright (c) nickvergessen ( http://www.flying-bits.org/ )
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
 */
