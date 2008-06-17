@@ -8,9 +8,11 @@
     <title lang="de">NV "Wer war da?"</title>
     <description lang="en-gb">see normal install--file</description>
     <description lang="de">siehe normale Installations--Datei</description>
+    <author-notes lang="en-gb">see normal install--file</author-notes>
+    <author-notes lang="de">siehe normale Installations--Datei</author-notes>
     <author-group>
       <author>
-        <realname>Joas Schilling</realname>
+        <realname>(N/A)</realname>
         <email>nickvergessen@gmx.de</email>
         <username>nickvergessen</username>
         <homepage>http://www.flying-bits.org/</homepage>
@@ -20,21 +22,17 @@
     <mod-version>
       <major>6</major>
       <minor>0</minor>
-      <revision>6</revision>
+      <revision>5</revision>
     </mod-version>
     <installation>
       <level>easy</level>
       <time>240</time>
       <target-version>
-        <target-primary>3.0.1</target-primary>
+        <target-primary>3.0.0</target-primary>
         <target-major allow="exact">3</target-major>
         <target-minor allow="exact">0</target-minor>
       </target-version>
     </installation>
-    <link-group>
-      <link type="template" lang="de" href="subsilver2.xml">Anleitung für das Style subsilver2</link>
-      <link type="template" lang="en-gb" href="subsilver2.xml">Manual for subsilver2 Style</link>
-    </link-group>
     <meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
   </header>
   <action-group>
@@ -52,15 +50,8 @@
     </copy>
     <open src="styles/prosilver/template/index_body.html">
       <edit>
-        <find><![CDATA[	<h3>{L_WHO_WAS_HERE}</h3>
-	<p><!-- IF WHO_WAS_HERE_LIST2 -->{WHO_WAS_HERE_LIST2} ({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}<!-- ELSE -->{L_WWH_UPDATE_NEED}<!-- ENDIF --></p>]]></find>
-        <action type="replace-with"><![CDATA[	<!-- IF WHO_WAS_HERE_LIST2 -->
-		<h3>{L_WHO_WAS_HERE}</h3>
-		<p>{WHO_WAS_HERE_LIST2} ({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}</p>
-	<!-- ELSEIF U_ACP -->
-		<h3>{L_WHO_WAS_HERE}</h3>
-		<p>{L_WWH_UPDATE_NEED}</p>
-	<!-- ENDIF -->]]></action>
+        <find><![CDATA[{WHO_WAS_HERE_LIST2}<br />({WHO_WAS_HERE_EXP})]]></find>
+        <action type="replace-with"><![CDATA[{WHO_WAS_HERE_LIST2} ({WHO_WAS_HERE_EXP})]]></action>
       </edit>
     </open>
     <diy-instructions lang="en-gb">If you want me to add your language file to the download, just leave me a pm:

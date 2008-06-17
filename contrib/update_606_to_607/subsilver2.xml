@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<?xml-stylesheet type="text/xsl" href="../../modx.prosilver.en.xsl"?>
 <!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.0.xsd">
   <header>
@@ -21,7 +21,7 @@
 
 
 	HINWEIS: Wenn du über neue Versionen informiert werden willst,
-	Melde dich auch meiner Seite an und trette der Gruppe "MODs - NV AWho Was Here? - Newsletter" bei.
+	Melde dich auch meiner Seite an und trette der Gruppe "MODs - NV Who Was Here? - Newsletter" bei.
 
 	Wenn du über alle MODs von mir informiert werden willst, trette der Gruppe "MODs - Newsletter" bei]]></author-notes>
     <author-group>
@@ -36,7 +36,7 @@
     <mod-version>
       <major>6</major>
       <minor>0</minor>
-      <revision>6</revision>
+      <revision>7</revision>
     </mod-version>
     <installation>
       <level>easy</level>
@@ -48,21 +48,52 @@
       </target-version>
     </installation>
     <link-group>
-      <link type="parent" lang="de" href="install.xml">Installations-Anleitung</link>
-      <link type="parent" lang="en-gb" href="install.xml">Install-Manual</link>
-      <link type="language" lang="de" href="fr.xml">Anleitung für das französische Sprachpaket</link>
-      <link type="language" lang="en-gb" href="fr.xml">Manual for French Language-set</link>
-      <link type="template" lang="de" href="subsilver2.xml">Anleitung für das Style subsilver2</link>
-      <link type="template" lang="en-gb" href="subsilver2.xml">Manual for subsilver2 Style</link>
+      <link type="parent" lang="de" href="update.xml">Installations-Anleitung</link>
+      <link type="parent" lang="en-gb" href="update.xml">Install-Manual</link>
     </link-group>
     <meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
   </header>
   <action-group>
-    <copy>
-      <file from="languages/de/language/de/mods/info_acp_wwh.php" to="language/de/mods/info_acp_wwh.php" />
-      <file from="languages/de/language/de/mods/lang_wwh.php" to="language/de/mods/lang_wwh.php" />
-      <file from="languages/de/language/de/mods/lang_wwh_acp.php" to="language/de/mods/lang_wwh_acp.php" />
-    </copy>
+    <open src="styles/subsilver2/template/index_body.html">
+      <edit>
+        <find><![CDATA[	<br clear="all" />
+
+	<table class="tablebg" width="100%" cellspacing="1">
+	<tr>
+		<td class="cat" colspan="2"><h4>{L_WHO_WAS_HERE}</h4></td>
+	</tr>
+	<tr>
+		<td class="row1" align="center" valign="middle"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_WHO_IS_ONLINE}" /></td>
+		<td class="row1" width="100%"><span class="genmed"><!-- IF WHO_WAS_HERE_LIST2 -->{WHO_WAS_HERE_LIST2} ({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}<!-- ELSE -->{L_WWH_UPDATE_NEED}<!-- ENDIF --></span></td>
+	</tr>
+	</table>]]></find>
+        <action type="replace-with"><![CDATA[	<!-- IF WHO_WAS_HERE_LIST2 -->
+		<br clear="all" />
+
+		<table class="tablebg" width="100%" cellspacing="1">
+		<tr>
+			<td class="cat" colspan="2"><h4>{L_WHO_WAS_HERE}</h4></td>
+		</tr>
+		<tr>
+			<td class="row1" align="center" valign="middle"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_WHO_IS_ONLINE}" /></td>
+			<td class="row1" width="100%"><span class="genmed">{WHO_WAS_HERE_LIST2} ({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}</span></td>
+		</tr>
+		</table>
+	<!-- ELSEIF U_ACP -->
+		<br clear="all" />
+
+		<table class="tablebg" width="100%" cellspacing="1">
+		<tr>
+			<td class="cat" colspan="2"><h4>{L_WHO_WAS_HERE}</h4></td>
+		</tr>
+		<tr>
+			<td class="row1" align="center" valign="middle"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_WHO_IS_ONLINE}" /></td>
+			<td class="row1" width="100%"><span class="genmed">{L_WWH_UPDATE_NEED}</span></td>
+		</tr>
+		</table>
+	<!-- ENDIF -->]]></action>
+      </edit>
+    </open>
     <diy-instructions lang="en-gb">see normal install--file</diy-instructions>
     <diy-instructions lang="de">siehe normale Installations--Datei</diy-instructions>
   </action-group>
