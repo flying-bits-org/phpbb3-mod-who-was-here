@@ -33,10 +33,10 @@
         <contributions />
       </author>
       <author>
-        <realname>French Translator: Frédéric Mangenot</realname>
-        <email>informaide@free.fr</email>
-        <username>freud47</username>
-        <homepage>http://www.informaide.info</homepage>
+        <realname>Turkish Translator: Ilker Demirkaya</realname>
+        <email>denizlerinpenceresi@hotmail.de</email>
+        <username>BizimPencere</username>
+        <homepage>http://www.bizimpencere.com</homepage>
         <contributions />
       </author>
     </author-group>
@@ -62,9 +62,9 @@
   </header>
   <action-group>
     <copy>
-      <file from="root/language/fr/mods/info_acp_wwh.php" to="language/fr/mods/info_acp_wwh.php" />
-      <file from="root/language/fr/mods/lang_wwh.php" to="language/fr/mods/lang_wwh.php" />
-      <file from="root/language/fr/mods/lang_wwh_acp.php" to="language/fr/mods/lang_wwh_acp.php" />
+      <file from="root/language/tr/mods/info_acp_wwh.php" to="language/tr/mods/info_acp_wwh.php" />
+      <file from="root/language/tr/mods/lang_wwh.php" to="language/tr/mods/lang_wwh.php" />
+      <file from="root/language/tr/mods/lang_wwh_acp.php" to="language/tr/mods/lang_wwh_acp.php" />
     </copy>
     <diy-instructions lang="en-gb">see normal install--file</diy-instructions>
     <diy-instructions lang="de">siehe normale Installations--Datei</diy-instructions>
