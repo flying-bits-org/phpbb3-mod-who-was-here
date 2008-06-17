@@ -59,9 +59,9 @@
   </header>
   <action-group>
     <copy>
-      <file from="languages/de/language/de/mods/info_acp_wwh.php" to="language/de/mods/info_acp_wwh.php" />
-      <file from="languages/de/language/de/mods/lang_wwh.php" to="language/de/mods/lang_wwh.php" />
-      <file from="languages/de/language/de/mods/lang_wwh_acp.php" to="language/de/mods/lang_wwh_acp.php" />
+      <file from="root/language/de/mods/info_acp_wwh.php" to="language/de/mods/info_acp_wwh.php" />
+      <file from="root/language/de/mods/lang_wwh.php" to="language/de/mods/lang_wwh.php" />
+      <file from="root/language/de/mods/lang_wwh_acp.php" to="language/de/mods/lang_wwh_acp.php" />
     </copy>
     <diy-instructions lang="en-gb">see normal install--file</diy-instructions>
     <diy-instructions lang="de">siehe normale Installations--Datei</diy-instructions>
