@@ -28,6 +28,8 @@ $lang = array_merge($lang, array(
 	'WWH_DISP_TIME'				=> 'show time',
 	'WWH_DISP_HOVER'			=> 'display on hover',
 	'WWH_DISP_TIME_EXP'			=> 'All User see it or none. No special function for Admins.',
+	'WWH_DISP_IP'				=> 'show ip',
+	'WWH_DISP_IP_EXP'			=> 'Just for the Users with Admin-Permissions, like on the viewonline.php',
 
 	'WWH_INSTALL'				=> 'Installation',
 	'WWH_INSTALLED'				=> 'Installed "Who was here?" MOD v%s',

@@ -46,7 +46,7 @@ if (!file_exists($phpbb_root_path . 'install_wwh'))
 	$sql = 'DELETE FROM ' . WWH_TABLE . " WHERE last_page <= " . $timestamp_cleaning;
 	$db->sql_query($sql);
 
-	$pre_sql = 'SELECT u.user_id, u.username, u.username_clean, u.user_type, u.user_colour, u.user_allow_viewonline, u.user_lastvisit, w.viewonline, w.id, w.last_page
+	$pre_sql = 'SELECT u.user_id, u.username, u.username_clean, u.user_type, u.user_colour, u.user_allow_viewonline, u.user_lastvisit, w.viewonline, w.id, w.last_page, w.ip, u.user_ip
 		FROM ' . USERS_TABLE . ' u
 		LEFT JOIN ' . WWH_TABLE . ' w
 			ON u.user_id = w.id
@@ -100,19 +100,11 @@ if (!file_exists($phpbb_root_path . 'install_wwh'))
 	$result = $db->sql_query($sql);
 	while ($row = $db->sql_fetchrow($result))
 	{
-		// colour them
-		if ($row['user_type'] == USER_IGNORE)
-		{
-			$wwh_username = get_username_string('username', $row['user_id'], $row['username'], $row['user_colour'], $guest_username = false, $custom_profile_url = false);
-			$wwh_username_colour = get_username_string('colour', $row['user_id'], $row['username'], $row['user_colour'], $guest_username = false, $custom_profile_url = false);
-			$wwh_username_full = '<span style="color: ' . $wwh_username_colour . ';" class="username-coloured">' . $wwh_username . '</span>';
-		}
-		else
-		{
-			$wwh_username_full = get_username_string('full', $row['user_id'], $row['username'], $row['user_colour'], $guest_username = false, $custom_profile_url = false);
-		}
-		$hover_time = (($wwh_disp_time == '2') ? ' title="' . $user->lang['WHO_WAS_HERE_LATEST1'] . '&nbsp;' . $user->format_date((($row['user_type'] == USER_IGNORE) ? $row['user_lastvisit'] : $row['last_page']),'H:i') . $user->lang['WHO_WAS_HERE_LATEST2'] . '" ' : '' );
-		$disp_time = (($wwh_disp_time == '1') ? '&nbsp;(' . $user->lang['WHO_WAS_HERE_LATEST1'] . '&nbsp;' . $user->format_date((($row['user_type'] == USER_IGNORE) ? $row['user_lastvisit'] : $row['last_page']),'H:i') . $user->lang['WHO_WAS_HERE_LATEST2'] . ')' : '' );
+		$wwh_username_full = get_username_string(($row['user_type'] == USER_IGNORE) ? 'no_profile' : 'full', $row['user_id'], $row['username'], $row['user_colour'], $guest_username = false, $custom_profile_url = false);
+		$hover_time = (($wwh_disp_time == '2') ? $user->lang['WHO_WAS_HERE_LATEST1'] . '&nbsp;' . $user->format_date((($row['user_type'] == USER_IGNORE) ? $row['user_lastvisit'] : $row['last_page']),'H:i') . $user->lang['WHO_WAS_HERE_LATEST2'] : '' );
+		$hover_ip = ($auth->acl_get('a_') && $config['wwh_disp_ip']) ? $user->lang['IP'] . ':&nbsp;' . (($row['user_type'] == USER_IGNORE) ? $row['ip'] : $row['user_ip']) : '';
+		$hover_info = (($hover_time || $hover_ip) ? ' title="' . $hover_time . (($hover_time && $hover_ip) ? ' | ' : '') . $hover_ip . '"' : '');
+		$disp_time = (($wwh_disp_time == '1') ? '&nbsp;(' . $user->lang['WHO_WAS_HERE_LATEST1'] . '&nbsp;' . $user->format_date((($row['user_type'] == USER_IGNORE) ? $row['user_lastvisit'] : $row['last_page']),'H:i') . $user->lang['WHO_WAS_HERE_LATEST2'] . (($hover_ip) ? ' | ' . $hover_ip : '' ) . ')' : '' );
 		//list the user / bot
 		if (($row['user_allow_viewonline'] && $row['viewonline']) || ($row['user_type'] == USER_IGNORE))
 		{
@@ -120,19 +112,19 @@ if (!file_exists($phpbb_root_path . 'install_wwh'))
 			{
 				if ($wwh_disp_bots == '1')
 				{
-					$who_was_here_list .= (($who_was_here_list != '') ? $user->lang['COMMA_SEPARATOR'] : '') . '<span' . $hover_time . '>' . $wwh_username_full . '</span>' . $disp_time;
+					$who_was_here_list .= (($who_was_here_list != '') ? $user->lang['COMMA_SEPARATOR'] : '') . '<span' . $hover_info . '>' . $wwh_username_full . '</span>' . $disp_time;
 				}
 			}
 			else if ($row['user_id'] != ANONYMOUS)
 			{
-				$who_was_here_list .= (($who_was_here_list != '') ? $user->lang['COMMA_SEPARATOR'] : '') . '<span' . $hover_time . '>' . $wwh_username_full . '</span>' . $disp_time;
+				$who_was_here_list .= (($who_was_here_list != '') ? $user->lang['COMMA_SEPARATOR'] : '') . '<span' . $hover_info . '>' . $wwh_username_full . '</span>' . $disp_time;
 			}
 		}
 		else if ($wwh_disp_hidden)
 		{
 			if ($auth->acl_get('u_viewonline'))
 			{ // hidden users are seen by themselves and admin's in <em></em>
-				$who_was_here_list .= (($who_was_here_list != '') ? $user->lang['COMMA_SEPARATOR'] : '') . '<em' . $hover_time . '>' .$wwh_username_full . '</em>' . $disp_time;
+				$who_was_here_list .= (($who_was_here_list != '') ? $user->lang['COMMA_SEPARATOR'] : '') . '<em' . $hover_info . '>' .$wwh_username_full . '</em>' . $disp_time;
 			}
 		}
 	// at the end let's count them =)

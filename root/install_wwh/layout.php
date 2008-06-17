@@ -50,8 +50,8 @@ foreach ($major_versions as $major_version)
 		}
 	}
 }
-echo '							<li class="header">' . $user->lang['INSTALLER_DELETE_MENU'] . '</li>';
-echo '							<li' . (($mode == 'delete') ? $activemenu : '') . '><a href="install.php?mode=delete"><span>' . $user->lang['INSTALLER_DELETE'] . '</span></a></li>';
+//echo '							<li class="header">' . $user->lang['INSTALLER_DELETE_MENU'] . '</li>';
+//echo '							<li' . (($mode == 'delete') ? $activemenu : '') . '><a href="install.php?mode=delete"><span>' . $user->lang['INSTALLER_DELETE'] . '</span></a></li>';
 echo '						</ul>';
 echo '					</div>';
 echo '					<div id="main">';

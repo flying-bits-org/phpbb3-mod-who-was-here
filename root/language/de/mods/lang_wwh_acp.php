@@ -28,6 +28,8 @@ $lang = array_merge($lang, array(
 	'WWH_DISP_TIME'				=> 'Zeit anzeigen',
 	'WWH_DISP_HOVER'			=> 'als Hover-Effekt',
 	'WWH_DISP_TIME_EXP'			=> 'Entweder sehen alle Benutzer die Zeit oder niemand.',
+	'WWH_DISP_IP'				=> 'IP anzeigen',
+	'WWH_DISP_IP_EXP'			=> 'Nur für Administratoren, wie auf der viewonline.php',
 
 	'WWH_INSTALL'				=> 'Installation',
 	'WWH_INSTALLED'				=> '"Wer War Da?" MOD v%s installiert.',
