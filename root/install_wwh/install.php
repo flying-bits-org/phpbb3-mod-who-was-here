@@ -23,7 +23,7 @@ $user->setup();
 $user->add_lang('mods/lang_wwh_acp');
 
 $major_versions = array('6.0.');
-$minor_versions['6.0.'] = array(4, 5, 6);
+$minor_versions['6.0.'] = array(4, 5, 6, 7);
 $new_mod_version = end($major_versions) . end($minor_versions[end($major_versions)]);
 
 $page_title = 'NV "who was here?" v' . $new_mod_version;
@@ -197,6 +197,7 @@ switch ($mode)
 			set_config('wwh_disp_guests', 1);
 			set_config('wwh_disp_hidden', 1);
 			set_config('wwh_disp_time', 1);
+			set_config('wwh_disp_ip', 1);
 			set_config('wwh_version', 1);
 			set_config('wwh_del_time_h', 24);
 			set_config('wwh_del_time_m', 0);
@@ -259,6 +260,9 @@ switch ($mode)
 					set_config('wwh_del_time_h', 0);
 					set_config('wwh_del_time_m', 0);
 					set_config('wwh_del_time_s', 0);
+
+				case '6.0.6':
+					set_config('wwh_disp_ip', 1);
 				break;
 			}
 			set_config('wwh_mod_version', $new_mod_version);
