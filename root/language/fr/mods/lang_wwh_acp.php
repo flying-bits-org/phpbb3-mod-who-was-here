@@ -28,6 +28,8 @@ $lang = array_merge($lang, array(
 	'WWH_DISP_TIME'				=> 'Afficher l\'heure',
 	'WWH_DISP_HOVER'			=> 'En incrustation sur le nom',
 	'WWH_DISP_TIME_EXP'			=> 'Soit tous les utilisateurs peuvent la voir, soit personne ne le peut. Il n\'y a pas de fonctionnalité spéciale pour les administrateurs.',
+	'WWH_DISP_IP'				=> 'montrer l\'ip',
+	'WWH_DISP_IP_EXP'			=> 'Uniquement pour les utilisateurs ayant des droits d\'administration, comme dans le viewonline.php',
 
 	'WWH_INSTALL'				=> 'Installation',
 	'WWH_INSTALLED'				=> 'Le MOD "Qui était en ligne ?" v%s installé',
