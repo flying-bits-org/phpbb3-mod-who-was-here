@@ -205,7 +205,7 @@ $old_configs = array('wwh_record_ips', 'wwh_record_time', 'wwh_disp_bots', 'wwh_
 $delete = request_var('delete', 0);
 $install = request_var('install', 0);
 $update = request_var('update', 0);
-$version = request_var('v', '0', true);
+$version = request_var('v', '0.0.0');
 switch ($mode)
 {
 	case 'install':
@@ -270,7 +270,6 @@ switch ($mode)
 		}
 	break;
 	case 'update':
-		$version = request_var('v', '0.0.0');
 		$updated = $ask_for_index = false;
 
 		if ($update == 1)
