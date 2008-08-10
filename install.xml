@@ -75,6 +75,20 @@ You may install it, to be informed about future versions, as I'm not going to se
     </link-group>
     <history>
       <entry>
+        <date>2008-08-10</date>
+        <rev-version>1.0.0-RC1</rev-version>
+        <changelog lang="en-GB">
+          <change><![CDATA[[Change] don't use users-Table any more (should be faster now)]]></change>
+          <change><![CDATA[[Add] display IP for Admins]]></change>
+          <change><![CDATA[[Change] reversioned: 6.0.7 -> 1.0.0-RC1]]></change>
+        </changelog>
+        <changelog lang="de">
+          <change><![CDATA[[Change] Benutzerfarbe, usw. werden jetzt mit gespeichert. (sollte schneller sein so)]]></change>
+          <change><![CDATA[[Add] IP-Anzeige für Admins]]></change>
+          <change><![CDATA[[Change] Versions-Nummer umgestuft: 6.0.7 -> 1.0.0-RC1]]></change>
+        </changelog>
+      </entry>
+      <entry>
         <date>2008-06-02</date>
         <rev-version>6.0.6</rev-version>
         <changelog lang="en-GB">
