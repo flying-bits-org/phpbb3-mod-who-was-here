@@ -12,6 +12,19 @@ if (!defined('IN_PHPBB'))
 {
 	exit;
 }
+$mtime = explode(' ', microtime());
+$totaltime = $mtime[0] + $mtime[1] - $starttime;
+$debug_output = sprintf('Time : %.3fs | ' . $db->sql_num_queries() . ' Queries | GZIP : ' . (($config['gzip_compress']) ? 'On' : 'Off') . (($user->load) ? ' | Load : ' . $user->load : ''), $totaltime);
+if (function_exists('memory_get_usage'))
+{
+	if ($memory_usage = memory_get_usage())
+	{
+		global $base_memory_usage;
+		$memory_usage -= $base_memory_usage;
+		$memory_usage = get_formatted_filesize($memory_usage);
+		$debug_output .= ' | Memory Usage: ' . $memory_usage;
+	}
+}
 
 $activemenu = ' id="activemenu"';
 echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
@@ -39,19 +52,21 @@ echo '						<ul>';
 echo '							<li' . (($mode == 'else') ? $activemenu : '') . '><a href="install.php"><span>' . $user->lang['INSTALLER_INTRO'] . '</span></a></li>';
 echo '							<li class="header">' . $user->lang['INSTALLER_INSTALL_MENU'] . '</li>';
 echo '							<li' . (($mode == 'install') ? $activemenu : '') . '><a href="install.php?mode=install"><span>' . sprintf($user->lang['INSTALLER_INSTALL_VERSION'], $new_mod_version) . '</span></a></li>';
+echo '							<li' . (($mode == 'delete') ? $activemenu : '') . '><a href="install.php?mode=delete"><span>' . $user->lang['INSTALLER_DELETE'] . '</span></a></li>';
 foreach ($major_versions as $major_version)
 {
-	echo '							<li class="header">' . $user->lang['INSTALLER_UPDATE_MENU'] . '</li>';
-	foreach ($minor_versions[$major_version] as $minor_version)
+	if (count($minor_versions[$major_version]) > 1)
 	{
-		if ($new_mod_version != $major_version . $minor_version)
+		echo '							<li class="header">' . $user->lang['INSTALLER_UPDATE_MENU'] . '</li>';
+		foreach ($minor_versions[$major_version] as $minor_version)
 		{
-			echo '							<li' . (($version == $major_version . $minor_version) ? $activemenu : '') . '><a href="install.php?mode=update&amp;v=' . $major_version . $minor_version . '"><span>' . $user->lang['INSTALLER_UPDATE_VERSION'] . $major_version . $minor_version . '</span></a></li>';
+			if ($new_mod_version != $major_version . $minor_version)
+			{
+				echo '							<li' . (($version == $major_version . $minor_version) ? $activemenu : '') . '><a href="install.php?mode=update&amp;v=' . $major_version . $minor_version . '"><span>' . $user->lang['INSTALLER_UPDATE_VERSION'] . $major_version . $minor_version . '</span></a></li>';
+			}
 		}
 	}
 }
-//echo '							<li class="header">' . $user->lang['INSTALLER_DELETE_MENU'] . '</li>';
-//echo '							<li' . (($mode == 'delete') ? $activemenu : '') . '><a href="install.php?mode=delete"><span>' . $user->lang['INSTALLER_DELETE'] . '</span></a></li>';
 echo '						</ul>';
 echo '					</div>';
 echo '					<div id="main">';
@@ -85,11 +100,6 @@ if ($mode == 'install')
 		echo '		<dl>';
 		echo '			<dt><label for="install">v' . $new_mod_version . ':</label></dt>';
 		echo '			<dd><label><input name="install" value="1" class="radio" type="radio" />' . $user->lang['YES'] . '</label><label><input name="install" value="0" checked="checked" class="radio" type="radio" />' . $user->lang['NO'] . '</label></dd>';
-		echo '		</dl>';
-		echo '		<dl>';
-		echo '			<dt><label for="index">' . $user->lang['CREATE_INDEX'] . ':</label>';
-		echo '				<br /><span>' . $user->lang['CREATE_INDEX_EXP'] . '</span></dt>';
-		echo '			<dd><label><input name="index" value="1" class="radio" checked="checked" type="radio" />' . $user->lang['YES'] . '</label><label><input name="index" value="0" class="radio" type="radio" />' . $user->lang['NO'] . '</label></dd>';
 		echo '		</dl>';
 		echo '		<p class="submit-buttons">';
 		echo '			<input class="button1" id="submit" name="submit" value="Submit" type="submit" />&nbsp;';
@@ -128,14 +138,6 @@ else if ($mode == 'update')
 		echo '			<dt><label for="update">' . sprintf($user->lang['INSTALLER_UPDATE_NOTE'], $version, $new_mod_version) . ':</label></dt>';
 		echo '			<dd><label><input name="update" value="1" class="radio" type="radio" />' . $user->lang['YES'] . '</label><label><input name="update" value="0" checked="checked" class="radio" type="radio" />' . $user->lang['NO'] . '</label></dd>';
 		echo '		</dl>';
-		if ($ask_for_index)
-		{
-			echo '		<dl>';
-			echo '			<dt><label for="index">' . $user->lang['CREATE_INDEX'] . ':</label>';
-			echo '				<br /><span>' . $user->lang['CREATE_INDEX_EXP'] . '</span></dt>';
-			echo '			<dd><label><input name="index" value="1" class="radio" checked="checked" type="radio" />' . $user->lang['YES'] . '</label><label><input name="index" value="0" class="radio" type="radio" />' . $user->lang['NO'] . '</label></dd>';
-			echo '		</dl>';
-		}
 		echo '		<p class="submit-buttons">';
 		echo '			<input class="button1" id="submit" name="submit" value="Submit" type="submit" />&nbsp;';
 		echo '			<input class="button2" id="reset" name="reset" value="Reset" type="reset" />';
@@ -167,7 +169,7 @@ else if ($mode == 'delete')
 	{
 		echo '<h1>' . $user->lang['INSTALLER_DELETE_WELCOME'] . '</h1>';
 		echo '<p>' . $user->lang['INSTALLER_DELETE_WELCOME_NOTE'] . '</p>';
-		echo '<form id="acp_board" method="post" action="install.php?mode=' . $mode . '">';
+		echo '<form id="acp_board" method="post" action="install.php?mode=delete">';
 		echo '	<fieldset>';
 		echo '		<legend>' . $user->lang['INSTALLER_DELETE'] . '</legend>';
 		echo '		<dl>';
@@ -202,7 +204,7 @@ echo '		"phpBB" linked to www.phpbb.com. If you refuse to include even this then
 echo '		forums may be affected.';
 echo '		The phpBB Group : 2006';
 echo '	// -->';
-echo '<div id="page-footer">Powered by phpBB &copy; 2000, 2002, 2005, 2007 <a href="http://www.phpbb.com/">phpBB Group</a><br />Installer by <a href="http://www.flying-bits.org/">nickvergessen</a></div>';
+echo '<div id="page-footer">Powered by phpBB &copy; 2000, 2002, 2005, 2007 <a href="http://www.phpbb.com/">phpBB Group</a><br />Installer by <a href="http://www.flying-bits.org/">nickvergessen</a><br />' . $debug_output . '</div>';
 echo '</div>';
 echo '</body>';
 echo '</html>';

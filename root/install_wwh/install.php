@@ -22,9 +22,10 @@ $auth->acl($user->data);
 $user->setup();
 $user->add_lang('mods/lang_wwh_acp');
 
-$major_versions = array('6.0.');
-$minor_versions['6.0.'] = array(4, 5, 6, 7);
-$new_mod_version = end($major_versions) . end($minor_versions[end($major_versions)]);
+$major_versions = array('6.0.', '1.0.');
+$minor_versions['6.0.'] = array(7, 6, 5, 4);
+$minor_versions['1.0.'] = array('0-RC1');
+$new_mod_version = end($major_versions) . reset($minor_versions[end($major_versions)]);
 
 $page_title = 'NV "who was here?" v' . $new_mod_version;
 $log_name = 'Modification NV "who was here?"' . ((request_var('update', 0) > 0) ? '-Update' : '') . ' v' . $new_mod_version;
@@ -101,36 +102,6 @@ switch ($db->sql_layer)
 		trigger_error('Sorry, unsupportet Databases found.');
 	break;
 }
-function wwh_create_index($table, $column)
-{
-	global $db;
-
-	switch ($db->sql_layer)
-	{
-		case 'firebird':
-		case 'postgres':
-		case 'oracle':
-		case 'sqlite':
-			$sql = 'CREATE INDEX ' . $table . "_$column ON " . TOPICS_TABLE . "($column)";
-		break;
-
-		case 'mysql':
-		case 'mysql4':
-		case 'mysqli':
-			$sql = "ALTER TABLE `" . $table . "` ADD INDEX (`$column`)";
-		break;
-
-		case 'mssql':
-		case 'mssql_odbc':
-			$sql = "CREATE INDEX $column ON " . $table . "($column) ON [PRIMARY]";
-		break;
-
-		default:
-			trigger_error("Your database ({$db->sql_layer})is not supported by phpbb3 itself.");
-		break;
-	}
-	$db->sql_query($sql);
-}
 
 function add_module($array)
 {
@@ -143,8 +114,95 @@ function add_module($array)
 	}
 }
 
+function rebuild_modules()
+{
+	global $db, $module_names;
+
+	remove_modules();
+
+	$acp_cat_dot_mods = 31;
+	$sql = 'SELECT module_id
+		FROM ' . MODULES_TABLE . "
+		WHERE module_langname = 'ACP_CAT_DOT_MODS'";
+	$result = $db->sql_query($sql);
+	while ($row = $db->sql_fetchrow($result))
+	{
+		$acp_cat_dot_mods = $row['module_id'];
+	}
+	$db->sql_freeresult($result);
+
+	$acp_basement = array('module_basename' => '',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $acp_cat_dot_mods,	'module_class' => 'acp',	'module_langname' => 'WWH_TITLE',	'module_mode' => '', 'module_auth' => '');
+	add_module($acp_basement);
+	$acp_module_id = $db->sql_nextid();
+
+	$config_wwh = array('module_basename' => 'wwh',	'module_enabled' => 1,	'module_display' => 1,	'parent_id' => $acp_module_id,	'module_class' => 'acp',	'module_langname' => 'WWH_CONFIG',	'module_mode' => 'overview',	'module_auth' => '');
+	add_module($config_wwh);
+}
+
+function remove_modules()
+{
+	global $db, $user, $module_names;
+
+	$sql = 'SELECT module_id, module_class, left_id, right_id
+		FROM ' . MODULES_TABLE . '
+		WHERE ' . $db->sql_in_set('module_langname', $module_names);
+	$result = $db->sql_query($sql);
+	while ($row = $db->sql_fetchrow($result))
+	{
+		$module_id = $row['module_id'];
+
+		$sql = 'DELETE FROM ' . MODULES_TABLE . "
+			WHERE module_class = '" . $db->sql_escape($row['module_class']) . "'
+		AND module_id = $module_id";
+		$db->sql_query($sql);
+		$diff = 2;
+
+		$sql = 'UPDATE ' . MODULES_TABLE . "
+			SET right_id = right_id - $diff
+			WHERE module_class = '" . $db->sql_escape($row['module_class']) . "'
+		AND left_id < {$row['right_id']} AND right_id > {$row['right_id']}";
+		$db->sql_query($sql);
+
+		$sql = 'UPDATE ' . MODULES_TABLE . "
+			SET left_id = left_id - $diff, right_id = right_id - $diff
+			WHERE module_class = '" . $db->sql_escape($row['module_class']) . "'
+		AND left_id > {$row['right_id']}";
+		$db->sql_query($sql);
+	}
+	$db->sql_freeresult($result);
+
+	$sql = 'SELECT module_id, module_class, left_id, right_id
+		FROM ' . MODULES_TABLE . "
+		WHERE module_langname = 'WWH_TITLE'";
+	$result = $db->sql_query($sql);
+	while ($row = $db->sql_fetchrow($result))
+	{
+		$module_id = $row['module_id'];
+
+		$sql = 'DELETE FROM ' . MODULES_TABLE . "
+			WHERE module_class = '" . $db->sql_escape($row['module_class']) . "'
+		AND module_id = $module_id";
+		$db->sql_query($sql);
+		$diff = 2;
+
+		$sql = 'UPDATE ' . MODULES_TABLE . "
+			SET right_id = right_id - $diff
+			WHERE module_class = '" . $db->sql_escape($row['module_class']) . "'
+		AND left_id < {$row['right_id']} AND right_id > {$row['right_id']}";
+		$db->sql_query($sql);
+
+		$sql = 'UPDATE ' . MODULES_TABLE . "
+			SET left_id = left_id - $diff, right_id = right_id - $diff
+			WHERE module_class = '" . $db->sql_escape($row['module_class']) . "'
+		AND left_id > {$row['right_id']}";
+		$db->sql_query($sql);
+	}
+	$db->sql_freeresult($result);
+}
+$module_names = array('WWH_CONFIG');
+$old_configs = array('wwh_record_ips', 'wwh_record_time', 'wwh_disp_bots', 'wwh_disp_guests', 'wwh_disp_hidden', 'wwh_disp_time', 'wwh_disp_ip', 'wwh_version', 'wwh_del_time', 'wwh_del_time_h', 'wwh_del_time_m', 'wwh_del_time_s', 'wwh_sort_by', 'wwh_record', 'wwh_record_timestamp', 'wwh_reset_time');
+
 $delete = request_var('delete', 0);
-$index = request_var('index', 0);
 $install = request_var('install', 0);
 $update = request_var('update', 0);
 $version = request_var('v', '0', true);
@@ -185,12 +243,6 @@ switch ($mode)
 			}
 			unset($sql_query);
 
-			if ($index == 1)
-			{
-				//we add a little index, so the sql runs faster
-				//wwh_create_index(WWH_TABLE, 'id');
-			}
-
 			set_config('wwh_record_ips', 1, true);
 			set_config('wwh_record_time', time(), true);
 			set_config('wwh_disp_bots', 1);
@@ -207,23 +259,7 @@ switch ($mode)
 			set_config('wwh_record_timestamp', 'D j. M Y');
 			set_config('wwh_reset_time', 1);
 
-			// create the acp modules
-			$modules = new acp_modules();
-			$wwh = array('module_basename' => '', 'module_enabled' => 1, 'module_display' => 1, 'parent_id' => 31, 'module_class' => 'acp', 'module_langname' => 'WWH_TITLE', 'module_mode' => '', 'module_auth' => '');
-			add_module($wwh);
-			$sql = 'SELECT module_id
-				FROM ' . MODULES_TABLE . "
-				WHERE module_langname = 'WWH_TITLE'
-				LIMIT 1";
-			$result = $db->sql_query($sql);
-			while( $row = $db->sql_fetchrow($result) )
-			{
-				$wwh['module_id'] = $row['module_id'];
-			}
-			$db->sql_freeresult($result);
-
-			$config_wwh = array('module_basename' => 'wwh', 'module_enabled' => 1, 'module_display' => 1, 'parent_id' => $wwh['module_id'], 'module_class' => 'acp', 'module_langname' => 'WWH_CONFIG', 'module_mode' => 'overview', 'module_auth' => '');
-			add_module($config_wwh);
+			rebuild_modules();
 
 			// clear cache and log what we did
 			set_config('wwh_mod_version', $new_mod_version);
@@ -234,15 +270,8 @@ switch ($mode)
 		}
 	break;
 	case 'update':
-		$version = request_var('v', '0', true);
+		$version = request_var('v', '0.0.0');
 		$updated = $ask_for_index = false;
-		switch ($version)
-		{
-			case '6.0.4':
-				$ask_for_index = true;
-			case '6.0.5':
-			break;
-		}
 
 		if ($update == 1)
 		{
@@ -250,10 +279,6 @@ switch ($mode)
 			{
 				case '6.0.4':
 					set_config('wwh_disp_hidden', 1);
-					if ($index == 1)
-					{
-						wwh_create_index(WWH_TABLE, 'id');
-					}
 
 				case '6.0.5':
 					set_config('wwh_record_timestamp', 'D j. M Y');
@@ -263,6 +288,9 @@ switch ($mode)
 
 				case '6.0.6':
 					set_config('wwh_disp_ip', 1);
+
+				case '6.0.7':
+					rebuild_modules();
 				break;
 			}
 			set_config('wwh_mod_version', $new_mod_version);
@@ -277,13 +305,9 @@ switch ($mode)
 
 		if ($delete == 1)
 		{
-			$deleting_modules = "'WWH_TITLE', 'WWH_CONFIG'";
-			$sql = 'DELETE FROM ' . MODULES_TABLE . "
-				WHERE module_langname IN ($deleting_modules);";
-			$db->sql_query($sql);
-			$deleting_configs = "'wwh_record_ips', 'wwh_record_time', 'wwh_disp_bots', 'wwh_disp_guests', 'wwh_disp_hidden', 'wwh_disp_time', 'wwh_version', 'wwh_del_time_h', 'wwh_del_time_m', 'wwh_del_time_s', 'wwh_sort_by', 'wwh_record', 'wwh_record_timestamp', 'wwh_reset_time'";
-			$sql = 'DELETE FROM ' . CONFIG_TABLE . "
-				WHERE config_name IN ($deleting_configs);";
+			remove_modules();
+			$sql = 'DELETE FROM ' . CONFIG_TABLE . '
+				WHERE ' . $db->sql_in_set('config_name', $old_configs);
 			$db->sql_query($sql);
 			// Drop thes tables if existing
 			if ($db->sql_layer != 'mssql')
