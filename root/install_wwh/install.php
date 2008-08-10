@@ -23,7 +23,7 @@ $user->setup();
 $user->add_lang('mods/lang_wwh_acp');
 
 $major_versions = array('6.0.', '1.0.');
-$minor_versions['6.0.'] = array(7, 6, 5, 4);
+$minor_versions['6.0.'] = array(6, 5, 4);
 $minor_versions['1.0.'] = array('0-RC1');
 $new_mod_version = end($major_versions) . reset($minor_versions[end($major_versions)]);
 
@@ -288,8 +288,6 @@ switch ($mode)
 
 				case '6.0.6':
 					set_config('wwh_disp_ip', 1);
-
-				case '6.0.7':
 					rebuild_modules();
 				break;
 			}
