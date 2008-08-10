@@ -4,18 +4,54 @@
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.0.xsd">
   <header>
     <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
-    <title lang="en-gb">NV "who was here?"</title>
-    <title lang="de">NV "Wer war da?"</title>
-    <description lang="en-gb">see normal install--file</description>
-    <description lang="de">siehe normale Installations--Datei</description>
-    <author-notes lang="en-gb">see normal install--file</author-notes>
-    <author-notes lang="de">siehe normale Installations--Datei</author-notes>
+    <title lang="de"><![CDATA[NV "Wer war da?"]]></title>
+    <title lang="en-gb"><![CDATA[NV "who was here?"]]></title>
+    <description lang="de"><![CDATA[Fügt auf der index.php einen Abschnitt hinzu, wo die User aufgelistet werden,
+die am heutigem Tage online gewesen sind.
+Features:
+	• Bots in der Liste ein-/ausblenden (im ACP einstellbar)
+	• unsichtbare Benutzer in der Liste ein-/ausblenden (im ACP einstellbar)
+	• Gäste im Rekord mitzählen (im ACP einstellbar)
+	• Besuchszeit in der Liste ein-/ausblenden oder als "hover"-Effekt auf dem Benutzernamen (im ACP einstellbar)
+
+	• Rekord speichern und anzeigen (im ACP einstellbar)
+	• Es gibt 2 Modi:
+	   1. "Wer war heute da?": Hier bei werden alle Benutzer angezeigt, die am heutigen Tage online waren.
+	   2. "Wer war in der letzten Zeit da?": Der Zeitraum in dem die Besucher dagewesen sein sollen, kann im ACP eingestellt werden.
+	• Die Liste kann im Administrationsbereich zurückgesetzt werden.
+
+	• Die Zeit wird nach der Einstellung des Benutzers im persönlichen Bereich ausgegeben. Also mit Berücksichtigung von Zeitzone und Sommerzeit.
+	• Die Benutzernamen sind eingefärbt.
+]]></description>
+    <description lang="en-gb"><![CDATA[Adds a list with all users, which visited the page today, on the index.php.
+With saving the record of usercount.
+Features:
+	• en-/disable bots in the list (adjustable in ACP)
+	• en-/disable hidden users in the list (adjustable in ACP)
+	• en-/disable guests in the record (adjustable in ACP)
+	• en-/disable visit-time in the list or as "hover" on the name (adjustable in ACP)
+
+	• "Who was here?" or "Who was here in the last time?" (adjustable in ACP)
+	• display and store the record (in ACP)
+	• reset-function (in ACP)
+
+	• time is displayed with user-timezone and dst(daylight-saving-time) adjustment of the ucp
+	• usernames are coloured
+	]]></description>
+    <author-notes lang="de"><![CDATA[Die MOD untersützt die "MOD Version Check"-MOD von Handymman´:
+http://www.phpbb.com/community/viewtopic.php?f=69&t=691155
+
+Du kannst sie installieren, um über neue Versionen informiert zu werden, da ich keine Emails mehr schreiben werde.]]></author-notes>
+    <author-notes lang="en-gb"><![CDATA[This MOD supports the "MOD Version Check"-MOD by Handymman´:
+http://www.phpbb.com/community/viewtopic.php?f=69&t=691155
+
+You may install it, to be informed about future versions, as I'm not going to send any more mails.]]></author-notes>
     <author-group>
       <author>
         <realname>Joas Schilling</realname>
         <email>nickvergessen@gmx.de</email>
         <username>nickvergessen</username>
-        <homepage>http://www.flying-bits.org/</homepage>
+        <homepage>http://www.flying-bits.org</homepage>
         <contributions />
       </author>
     </author-group>
@@ -64,7 +100,7 @@
 	<!-- ENDIF -->]]></action>
       </edit>
     </open>
-    <diy-instructions lang="de"><![CDATA[Rufe install_wwh/install.php auf und f�hre den Installer aus
+    <diy-instructions lang="de"><![CDATA[Rufe install_wwh/install.php auf und führe den Installer aus
 
 Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
 
