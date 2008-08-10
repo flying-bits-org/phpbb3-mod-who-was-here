@@ -1,0 +1,28 @@
+[b]Modification Name:[/b] NW "Who was here?"
+[b]Author:[/b] [url=http://www.flying-bits.org][b]nickvergessen[/b][/url]
+
+[b]Modification Version:[/b] 1.0.0-RC1
+[b]Modification Description:[/b]
+[list]Adds a list with all users, which visited the page today, on the index.php.
+With saving the record of usercount.
+Features:
+[*]en-/disable bots in the list (adjustable in ACP)
+[*]en-/disable hidden users in the list (adjustable in ACP)
+[*]en-/disable guests in the record (adjustable in ACP)
+[*]en-/disable visit-time in the list or as "hover" on the name (adjustable in ACP)
+
+[*]"Who was here?" or "Who was here in the last time?" (adjustable in ACP)
+[*]display and store the record (in ACP)
+[*]reset-function (in ACP)
+
+[*]time is displayed with user-timezone and dst(daylight-saving-time) adjustment of the ucp
+[*]usernames are coloured[/list]
+
+[b]Demo URL:[/b] http://www.flying-bits.org/index.php
+[b]Supported Language-Packages:[/b] de, en, fr, tr
+[b]Supported Styles:[/b] prosilver, subsilver2
+
+[b]MOD Repository[/b]: http://code.bantux.de/svn/nv-who-was-here (SVN/Subversion)
+[b]Browse Repository[/b]: http://code.bantux.de/repositories/show/nv-who-was-here
+
+[b]Modification Download:[/b] [size=150][b][url=http://www.flying-bits.org/download.php?mod_id=1]Download v1.0.0-RC1[/url][/b][/size]

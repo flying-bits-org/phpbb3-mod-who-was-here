@@ -1,0 +1,30 @@
+[b]MOD Name:[/b] NV "Wer war da?"
+[b]Autor:[/b] [url=http://www.flying-bits.org][b]nickvergessen[/b][/url]
+
+[b]MOD Version:[/b] 1.0.0-RC1
+[b]MOD Beschreibung:[/b]
+[list]Fügt auf der index.php einen Abschnitt hinzu, wo die User aufgelistet werden,
+die am heutigem Tage online gewesen sind.
+Features:
+[*]Bots in der Liste ein-/ausblenden (im ACP einstellbar)
+[*]unsichtbare Benutzer in der Liste ein-/ausblenden (im ACP einstellbar)
+[*]Gäste im Rekord mitzählen (im ACP einstellbar)
+[*]Besuchszeit in der Liste ein-/ausblenden oder als "hover"-Effekt auf dem Benutzernamen (im ACP einstellbar)
+
+[*]Rekord speichern und anzeigen (im ACP einstellbar)
+[*]Es gibt 2 Modi:[list]
+	[*]"Wer war heute da?": Hier bei werden alle Benutzer angezeigt, die am heutigen Tage online waren.
+	[*]"Wer war in der letzten Zeit da?": Der Zeitraum in dem die Besucher dagewesen sein sollen, kann im ACP eingestellt werden.
+[*]Die Liste kann im Administrationsbereich zurückgesetzt werden.[/list]
+
+[*]Die Zeit wird nach der Einstellung des Benutzers im persönlichen Bereich ausgegeben. Also mit Berücksichtigung von Zeitzone und Sommerzeit.
+[*]Die Benutzernamen sind eingefärbt.[/list]
+
+[b]Demo URL:[/b] http://www.flying-bits.org/index.php
+[b]Unterstpützte Sprachpakete:[/b] de, en, fr, tr
+[b]Unterstpützte Styles:[/b] prosilver, subsilver2
+
+[b]MOD Repository[/b]: http://code.bantux.de/svn/nv-who-was-here (SVN/Subversion)
+[b]Repository durchsuchen[/b]: http://code.bantux.de/repositories/show/nv-who-was-here
+
+[b]MOD Download:[/b] [size=150][b][url=http://www.flying-bits.org/download.php?mod_id=1]Download v1.0.0-RC1[/url][/b][/size]
