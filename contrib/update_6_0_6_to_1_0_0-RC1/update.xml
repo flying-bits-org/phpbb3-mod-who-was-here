@@ -4,23 +4,8 @@
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.0.xsd">
   <header>
     <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
-    <title lang="en-gb"><![CDATA[NV "who was here?"]]></title>
-    <title lang="de"><![CDATA[NV "Wer war da?"]]></title>
-    <description lang="en-gb"><![CDATA[Adds a list with all users, which visited the page today, on the index.php.
-With saving the record of usercount.
-Features:
-	• en-/disable bots in the list (adjustable in ACP)
-	• en-/disable hidden users in the list (adjustable in ACP)
-	• en-/disable guests in the record (adjustable in ACP)
-	• en-/disable visit-time in the list or as "hover" on the name (adjustable in ACP)
-
-	• "Who was here?" or "Who was here in the last time?" (adjustable in ACP)
-	• display and store the record (in ACP)
-	• reset-function (in ACP)
-
-	• time is displayed with user-timezone and dst(daylight-saving-time) adjustment of the ucp
-	• usernames are coloured
-	]]></description>
+    <title lang="de">NV "Wer war da?"</title>
+    <title lang="en-gb">NV "who was here?"</title>
     <description lang="de"><![CDATA[Fügt auf der index.php einen Abschnitt hinzu, wo die User aufgelistet werden,
 die am heutigem Tage online gewesen sind.
 Features:
@@ -38,6 +23,21 @@ Features:
 	• Die Zeit wird nach der Einstellung des Benutzers im persönlichen Bereich ausgegeben. Also mit Berücksichtigung von Zeitzone und Sommerzeit.
 	• Die Benutzernamen sind eingefärbt.
 ]]></description>
+    <description lang="en-gb"><![CDATA[Adds a list with all users, which visited the page today, on the index.php.
+With saving the record of usercount.
+Features:
+	• en-/disable bots in the list (adjustable in ACP)
+	• en-/disable hidden users in the list (adjustable in ACP)
+	• en-/disable guests in the record (adjustable in ACP)
+	• en-/disable visit-time in the list or as "hover" on the name (adjustable in ACP)
+
+	• "Who was here?" or "Who was here in the last time?" (adjustable in ACP)
+	• display and store the record (in ACP)
+	• reset-function (in ACP)
+
+	• time is displayed with user-timezone and dst(daylight-saving-time) adjustment of the ucp
+	• usernames are coloured
+	]]></description>
     <author-notes lang="de"><![CDATA[Die MOD untersützt die "MOD Version Check"-MOD von Handymman´:
 http://www.phpbb.com/community/viewtopic.php?f=69&t=691155
 
@@ -55,56 +55,41 @@ You may install it, to be informed about future versions, as I'm not going to se
         <contributions />
       </author>
     </author-group>
-    <mod-version>6.0.6</mod-version>
+    <mod-version>1.0.0-RC1</mod-version>
     <installation>
       <level>easy</level>
       <time>300</time>
-      <target-version>3.0.1</target-version>
+      <target-version>3.0.2</target-version>
     </installation>
     <link-group>
-      <link type="parent" lang="de" href="../update.xml">Update von 6.0.5 auf 6.0.6</link>
-      <link type="parent" lang="en-gb" href="../update.xml">Update from 6.0.5 to 6.0.6</link>
+      <link type="parent" lang="de" href="../../install.xml">Installations-Anleitung</link>
+      <link type="parent" lang="en-gb" href="../../install.xml">Install</link>
     </link-group>
     <meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
   </header>
   <action-group>
-    <open src="styles/subsilver2/template/index_body.html">
+    <copy>
+      <file from="root/adm/mods/nv_wwh_version.php" to="adm/mods/nv_wwh_version.php" />
+      <file from="root/adm/style/acp_wwh.html" to="adm/style/acp_wwh.html" />
+      <file from="root/includes/*.php" to="includes/*.php" />
+      <file from="root/includes/acp/acp_wwh.php" to="includes/acp/acp_wwh.php" />
+      <file from="root/includes/acp/info/acp_wwh.php" to="includes/acp/info/acp_wwh.php" />
+      <file from="root/install_wwh/schemas/*.sql" to="install_wwh/schemas/*.sql" />
+      <file from="root/install_wwh/*.php" to="install_wwh/*.php" />
+      <file from="root/language/en/mods/*.php" to="language/en/mods/*.php" />
+    </copy>
+    <open src="styles/prosilver/template/index_body.html">
       <edit>
-        <find><![CDATA[	<br clear="all" />
-
-	<table class="tablebg" width="100%" cellspacing="1">
-	<tr>
-		<td class="cat" colspan="2"><h4>{L_WHO_WAS_HERE}</h4></td>
-	</tr>
-	<tr>
-		<td class="row1" align="center" valign="middle"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_WHO_IS_ONLINE}" /></td>
-		<td class="row1" width="100%"><span class="genmed"><!-- IF WHO_WAS_HERE_LIST2 -->{WHO_WAS_HERE_LIST2} ({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}<!-- ELSE -->{L_WWH_UPDATE_NEED}<!-- ENDIF --></span></td>
-	</tr>
-	</table>]]></find>
+        <comment lang="en-gb">You just need to do this, when you installed 6.0.6. If you updated from 6.0.5 you already did this.</comment>
+        <comment lang="de">Die Änderung muss nur gemacht werden, wenn 6.0.6 installiert wurde. Wenn von 6.0.5 upgedated wurde, wurde die Änderung schon gemacht.</comment>
+        <find><![CDATA[	<h3>{L_WHO_WAS_HERE}</h3>
+	<p><!-- IF WHO_WAS_HERE_LIST2 -->{WHO_WAS_HERE_LIST2} ({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}<!-- ELSE -->{L_WWH_UPDATE_NEED}<!-- ENDIF --></p>]]></find>
         <action type="replace-with"><![CDATA[	<!-- IF WHO_WAS_HERE_LIST2 -->
-		<br clear="all" />
-
-		<table class="tablebg" width="100%" cellspacing="1">
-		<tr>
-			<td class="cat" colspan="2"><h4>{L_WHO_WAS_HERE}</h4></td>
-		</tr>
-		<tr>
-			<td class="row1" align="center" valign="middle"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_WHO_IS_ONLINE}" /></td>
-			<td class="row1" width="100%"><span class="genmed">{WHO_WAS_HERE_LIST2} ({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}</span></td>
-		</tr>
-		</table>
+		<h3>{L_WHO_WAS_HERE}</h3>
+		<p>{WHO_WAS_HERE_LIST2} ({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}</p>
 	<!-- ELSEIF U_ACP -->
-		<br clear="all" />
-
-		<table class="tablebg" width="100%" cellspacing="1">
-		<tr>
-			<td class="cat" colspan="2"><h4>{L_WHO_WAS_HERE}</h4></td>
-		</tr>
-		<tr>
-			<td class="row1" align="center" valign="middle"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_WHO_IS_ONLINE}" /></td>
-			<td class="row1" width="100%"><span class="genmed">{L_WWH_UPDATE_NEED}</span></td>
-		</tr>
-		</table>
+		<h3>{L_WHO_WAS_HERE}</h3>
+		<p>{L_WWH_UPDATE_NEED}</p>
 	<!-- ENDIF -->]]></action>
       </edit>
     </open>

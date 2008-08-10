@@ -38,63 +38,45 @@ Features:
 	• Die Zeit wird nach der Einstellung des Benutzers im persönlichen Bereich ausgegeben. Also mit Berücksichtigung von Zeitzone und Sommerzeit.
 	• Die Benutzernamen sind eingefärbt.
 ]]></description>
-    <author-notes lang="en-gb"><![CDATA[i hope you get it installed, otherwise you can ask for help on phpbb.de and phpbb.com
+    <author-notes lang="de"><![CDATA[Die MOD untersützt die "MOD Version Check"-MOD von Handymman´:
+http://www.phpbb.com/community/viewtopic.php?f=69&t=691155
 
+Du kannst sie installieren, um über neue Versionen informiert zu werden, da ich keine Emails mehr schreiben werde.]]></author-notes>
+    <author-notes lang="en-gb"><![CDATA[This MOD supports the "MOD Version Check"-MOD by Handymman´:
+http://www.phpbb.com/community/viewtopic.php?f=69&t=691155
 
-
-	NOTE: If you want to be informed, when there should be a new version of this MOD available,
-	Please register on my Site and join the Group "MODs - NV Who Was Here? - Newsletter".
-
-	I you want to be informed when i release any new version for one of my MODs join the Group "MODs - Newsletter"]]></author-notes>
-    <author-notes lang="de"><![CDATA[Ich hoffe ihr kommt mit dem MOD klar. Wenn nicht, könnt ihr auf phpbb.de oder phpbb.com eure Fragen stellen.
-
-
-
-	HINWEIS: Wenn du über neue Versionen informiert werden willst,
-	Melde dich auch meiner Seite an und trette der Gruppe "MODs - NV AWho Was Here? - Newsletter" bei.
-
-	Wenn du über alle MODs von mir informiert werden willst, trette der Gruppe "MODs - Newsletter" bei]]></author-notes>
+You may install it, to be informed about future versions, as I'm not going to send any more mails.]]></author-notes>
     <author-group>
       <author>
         <realname>Joas Schilling</realname>
         <email>nickvergessen@gmx.de</email>
         <username>nickvergessen</username>
-        <homepage>http://www.flying-bits.org/</homepage>
+        <homepage>http://www.flying-bits.org</homepage>
         <contributions />
       </author>
     </author-group>
-    <mod-version>
-      <major>6</major>
-      <minor>0</minor>
-      <revision>7</revision>
-    </mod-version>
+    <mod-version>1.0.0-RC1</mod-version>
     <installation>
       <level>easy</level>
-      <time>240</time>
-      <target-version>
-        <target-primary>3.0.1</target-primary>
-        <target-major allow="exact">3</target-major>
-        <target-minor allow="exact">0</target-minor>
-      </target-version>
+      <time>300</time>
+      <target-version>3.0.2</target-version>
     </installation>
     <link-group>
-      <link type="language" lang="de" href="de.xml">Anleitung für das deutsche Sprachpaket</link>
-      <link type="language" lang="en-gb" href="de.xml">Manual for German Language-set</link>
-      <link type="language" lang="de" href="fr.xml">Anleitung für das französische Sprachpaket</link>
-      <link type="language" lang="en-gb" href="fr.xml">Manual for French Language-set</link>
-      <link type="language" lang="de" href="tr.xml">Anleitung für das türkische Sprachpaket</link>
-      <link type="language" lang="en-gb" href="tr.xml">Manual for Turkish Language-set</link>
-      <link type="template" lang="de" href="subsilver2.xml">Anleitung für das Style subsilver2</link>
-      <link type="template" lang="en-gb" href="subsilver2.xml">Manual for subsilver2 Style</link>
+      <link type="parent" lang="de" href="contrib/update_6_0_6_to_1_0_0-RC1/update.xml">Update von 6.0.6 auf 1.0.0-RC1</link>
+      <link type="parent" lang="en-gb" href="contrib/update_6_0_6_to_1_0_0-RC1/update.xml">Update from 6.0.6 to 1.0.0-RC1</link>
+      <link type="language" lang="de" href="xml/de.xml">Anleitung für das deutsche Sprachpaket</link>
+      <link type="language" lang="en-gb" href="xml/de.xml">Manual for German Language-set</link>
+      <link type="language" lang="de" href="xml/fr.xml">Anleitung für das französische Sprachpaket</link>
+      <link type="language" lang="en-gb" href="xml/fr.xml">Manual for French Language-set</link>
+      <link type="language" lang="de" href="xml/tr.xml">Anleitung für das türkische Sprachpaket</link>
+      <link type="language" lang="en-gb" href="xml/tr.xml">Manual for Turkish Language-set</link>
+      <link type="template" lang="de" href="xml/subsilver2.xml">Anleitung für das Style subsilver2</link>
+      <link type="template" lang="en-gb" href="xml/subsilver2.xml">Manual for subsilver2 Style</link>
     </link-group>
     <history>
       <entry>
         <date>2008-06-02</date>
-        <rev-version>
-          <major>6</major>
-          <minor>0</minor>
-          <revision>6</revision>
-        </rev-version>
+        <rev-version>6.0.6</rev-version>
         <changelog lang="en-GB">
           <change><![CDATA[[Add] ACP-Option for the timestamp of the user-record]]></change>
           <change><![CDATA[[Change] sql-Index by user-option]]></change>
@@ -107,11 +89,7 @@ Features:
       </entry>
       <entry>
         <date>2008-01-28</date>
-        <rev-version>
-          <major>6</major>
-          <minor>0</minor>
-          <revision>5</revision>
-        </rev-version>
+        <rev-version>6.0.5</rev-version>
         <changelog lang="en-GB">
           <change><![CDATA[[Add] Option to handle invisible users]]></change>
           <change><![CDATA[[Add] sql-Index to id-column to improve reading speed. (credits to Mahony from the phpbb.de-Team)]]></change>
@@ -123,11 +101,7 @@ Features:
       </entry>
       <entry>
         <date>2007-12-13</date>
-        <rev-version>
-          <major>6</major>
-          <minor>0</minor>
-          <revision>4</revision>
-        </rev-version>
+        <rev-version>6.0.4</rev-version>
         <changelog lang="en-GB">
           <change><![CDATA[[Fix] displaying wrong time in normal and 0 on hover]]></change>
         </changelog>
@@ -137,11 +111,7 @@ Features:
       </entry>
       <entry>
         <date>2007-12-10</date>
-        <rev-version>
-          <major>6</major>
-          <minor>0</minor>
-          <revision>3</revision>
-        </rev-version>
+        <rev-version>6.0.3</rev-version>
         <changelog lang="en-GB">
           <change><![CDATA[[Add] last feature: display time on name-hover]]></change>
         </changelog>
@@ -151,11 +121,7 @@ Features:
       </entry>
       <entry>
         <date>2007-12-02</date>
-        <rev-version>
-          <major>6</major>
-          <minor>0</minor>
-          <revision>2</revision>
-        </rev-version>
+        <rev-version>6.0.2</rev-version>
         <changelog lang="en-GB">
           <change><![CDATA[[Fix] this should be the final fix for the timezone problem]]></change>
         </changelog>
@@ -165,11 +131,7 @@ Features:
       </entry>
       <entry>
         <date>2007-10-22</date>
-        <rev-version>
-          <major>6</major>
-          <minor>0</minor>
-          <revision>1</revision>
-        </rev-version>
+        <rev-version>6.0.1</rev-version>
         <changelog lang="en-GB">
           <change><![CDATA[[Fix] on displaying a page without having installed]]></change>
           <change><![CDATA[[Fix] in the acp]]></change>
@@ -181,11 +143,7 @@ Features:
       </entry>
       <entry>
         <date>2007-10-21</date>
-        <rev-version>
-          <major>6</major>
-          <minor>0</minor>
-          <revision>0</revision>
-        </rev-version>
+        <rev-version>6.0.0</rev-version>
         <changelog lang="en-GB">
           <change><![CDATA[[Change] updated to RC7]]></change>
           <change><![CDATA[[Change] created its own module]]></change>
@@ -202,16 +160,14 @@ Features:
   </header>
   <action-group>
     <copy>
+      <file from="root/adm/mods/nv_wwh_version.php" to="adm/mods/nv_wwh_version.php" />
       <file from="root/adm/style/acp_wwh.html" to="adm/style/acp_wwh.html" />
-      <file from="root/includes/functions_wwh.php" to="includes/functions_wwh.php" />
-      <file from="root/includes/functions_wwh2.php" to="includes/functions_wwh2.php" />
+      <file from="root/includes/*.php" to="includes/*.php" />
       <file from="root/includes/acp/acp_wwh.php" to="includes/acp/acp_wwh.php" />
       <file from="root/includes/acp/info/acp_wwh.php" to="includes/acp/info/acp_wwh.php" />
-      <file from="root/install_wwh/schemas/*.*" to="install_wwh/schemas/*.*" />
-      <file from="root/install_wwh/*.*" to="install_wwh/*.*" />
-      <file from="root/language/en/mods/info_acp_wwh.php" to="language/en/mods/info_acp_wwh.php" />
-      <file from="root/language/en/mods/lang_wwh.php" to="language/en/mods/lang_wwh.php" />
-      <file from="root/language/en/mods/lang_wwh_acp.php" to="language/en/mods/lang_wwh_acp.php" />
+      <file from="root/install_wwh/schemas/*.sql" to="install_wwh/schemas/*.sql" />
+      <file from="root/install_wwh/*.php" to="install_wwh/*.php" />
+      <file from="root/language/en/mods/*.php" to="language/en/mods/*.php" />
     </copy>
     <open src="index.php">
       <edit>
@@ -237,17 +193,26 @@ Features:
         <find><![CDATA[	<!-- IF U_VIEWONLINE --><h3><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></h3><!-- ELSE --><h3>{L_WHO_IS_ONLINE}</h3><!-- ENDIF -->
 	<p>{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /> <br />{LOGGED_IN_USER_LIST}
 	<!-- IF LEGEND --><br /><em>{L_LEGEND}: {LEGEND}</em><!-- ENDIF --></p>]]></find>
-        <action type="after-add"><![CDATA[	<h3>{L_WHO_WAS_HERE}</h3>
-	<p><!-- IF WHO_WAS_HERE_LIST2 -->{WHO_WAS_HERE_LIST2} ({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}<!-- ELSE -->{L_WWH_UPDATE_NEED}<!-- ENDIF --></p>]]></action>
+        <action type="after-add"><![CDATA[	<!-- IF WHO_WAS_HERE_LIST2 -->
+		<h3>{L_WHO_WAS_HERE}</h3>
+		<p>{WHO_WAS_HERE_LIST2} ({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}</p>
+	<!-- ELSEIF U_ACP -->
+		<h3>{L_WHO_WAS_HERE}</h3>
+		<p>{L_WWH_UPDATE_NEED}</p>
+	<!-- ENDIF -->]]></action>
       </edit>
     </open>
-    <diy-instructions lang="en-gb"><![CDATA[If you want me to add your language file to the download, just leave me a pm:
-http://www.phpbb.com/community/ucp.php?i=pm&amp;mode=compose&amp;u=315319
+    <diy-instructions lang="de"><![CDATA[Rufe install_wwh/install.php auf und führe den Installer aus
 
-Browse to install_wwh/install.php and run the installer]]></diy-instructions>
-    <diy-instructions lang="de"><![CDATA[Wenn ihr den MOD in eine weitere Sprache übersetzt habt, schickt mir doch eine pm:
-http://www.phpbb.com/community/ucp.php?i=pm&amp;mode=compose&amp;u=315319
+Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
 
-install_wwh/install.php aufrufen und ausführen]]></diy-instructions>
+Aktualisiere deine Styles:
+    "Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"]]></diy-instructions>
+    <diy-instructions lang="en-gb"><![CDATA[Browse to install_wwh/install.php and run the installer
+
+Clear your cache in the "Administration Control Panel" (ACP) > "General" > "Purge the cache"
+
+Refresh your Styles:
+    "Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"]]></diy-instructions>
   </action-group>
 </mod>
