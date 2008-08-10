@@ -38,7 +38,6 @@ if (1 == 1)//REMOVE!file_exists($phpbb_root_path . 'install_wwh'))
 	// let's dump out the list of the users =)
 	$who_was_here_record = $wwh_username_colour = $wwh_username = $wwh_username_full = $wwh_count_total = $wwh_count_reg = $wwh_count_hidden = $wwh_count_guests = $wwh_count_bot = $who_was_here_list = '';
 
-	$config['wwh_sort_by'] = 0;
 	switch ($config['wwh_sort_by'])
 	{
 		case '0':
@@ -66,7 +65,7 @@ if (1 == 1)//REMOVE!file_exists($phpbb_root_path . 'install_wwh'))
 			$order_by = 'wwh_lastpage DESC';
 		break;
 	}
-	$sql = 'SELECT user_id, username, username_clean, user_colour, user_type, viewonline, wwh_lastpage
+	$sql = 'SELECT user_id, username, username_clean, user_colour, user_type, viewonline, wwh_lastpage, user_ip
 		FROM  ' . WWH_TABLE . "
 		ORDER BY $order_by";
 	$result = $db->sql_query($sql);
@@ -75,7 +74,7 @@ if (1 == 1)//REMOVE!file_exists($phpbb_root_path . 'install_wwh'))
 	{
 		$wwh_username_full = get_username_string(($row['user_type'] == USER_IGNORE) ? 'no_profile' : 'full', $row['user_id'], $row['username'], $row['user_colour'], $guest_username = false, $custom_profile_url = false);
 		$hover_time = (($config['wwh_disp_time'] == '2') ? $user->lang['WHO_WAS_HERE_LATEST1'] . '&nbsp;' . $user->format_date($row['wwh_lastpage'],'H:i') . $user->lang['WHO_WAS_HERE_LATEST2'] : '' );
-		$hover_ip = ($auth->acl_get('a_') && $config['wwh_disp_ip']) ? $user->lang['IP'] . ':&nbsp;' . (($row['user_type'] == USER_IGNORE) ? $row['ip'] : $row['user_ip']) : '';
+		$hover_ip = ($auth->acl_get('a_') && $config['wwh_disp_ip']) ? $user->lang['IP'] . ':&nbsp;' . $row['user_ip'] : '';
 		$hover_info = (($hover_time || $hover_ip) ? ' title="' . $hover_time . (($hover_time && $hover_ip) ? ' | ' : '') . $hover_ip . '"' : '');
 		$disp_time = (($config['wwh_disp_time'] == '1') ? '&nbsp;(' . $user->lang['WHO_WAS_HERE_LATEST1'] . '&nbsp;' . $user->format_date($row['wwh_lastpage'],'H:i') . $user->lang['WHO_WAS_HERE_LATEST2'] . (($hover_ip) ? ' | ' . $hover_ip : '' ) . ')' : '' );
 
