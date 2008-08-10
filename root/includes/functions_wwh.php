@@ -16,22 +16,11 @@ if (!defined('IN_PHPBB'))
 $user->add_lang('mods/lang_wwh');
 include_once($phpbb_root_path . 'includes/functions_wwh2.' . $phpEx);
 
-if (!file_exists($phpbb_root_path . 'install_wwh'))
+if (1 == 1)//REMOVE!file_exists($phpbb_root_path . 'install_wwh'))
 {
-	// first let's get some config's
-	$wwh_disp_bots		= $config['wwh_disp_bots'];
-	$wwh_disp_guests	= $config['wwh_disp_guests'];
-	$wwh_disp_hidden	= $config['wwh_disp_hidden'];
-	$wwh_disp_time		= $config['wwh_disp_time'];
-	$wwh_version		= $config['wwh_version'];
-	$wwh_del_time		= (3600 * $config['wwh_del_time_h']) + (60 * $config['wwh_del_time_m']) + $config['wwh_del_time_s'];
-	$wwh_reset_time		= $config['wwh_reset_time'];
-	$wwh_record			= $config['wwh_record'];
-	$wwh_sort_by		= $config['wwh_sort_by'];
-
 	//cleaning the wwh-table
 	$timestamp = time();
-	if ($wwh_version == 1)
+	if ($config['wwh_version'])
 	{
 		$timestamp_cleaning = gmmktime(0,0,0,gmdate('m', $timestamp),gmdate('d', $timestamp),gmdate('Y', $timestamp));
 		$timestamp_cleaning = $timestamp_cleaning - $config['board_timezone'] * 3600;
@@ -40,94 +29,75 @@ if (!file_exists($phpbb_root_path . 'install_wwh'))
 	}
 	else
 	{
-		$timestamp_cleaning = $timestamp - $wwh_del_time;
+		$timestamp_cleaning = $timestamp - ((3600 * $config['wwh_del_time_h']) + (60 * $config['wwh_del_time_m']) + $config['wwh_del_time_s']);
 	}
 
-	$sql = 'DELETE FROM ' . WWH_TABLE . " WHERE last_page <= " . $timestamp_cleaning;
+	$sql = 'DELETE FROM ' . WWH_TABLE . " WHERE wwh_lastpage <= $timestamp_cleaning";
 	$db->sql_query($sql);
-
-	$pre_sql = 'SELECT u.user_id, u.username, u.username_clean, u.user_type, u.user_colour, u.user_allow_viewonline, u.user_lastvisit, w.viewonline, w.id, w.last_page, w.ip, u.user_ip
-		FROM ' . USERS_TABLE . ' u
-		LEFT JOIN ' . WWH_TABLE . ' w
-			ON u.user_id = w.id
-		WHERE (u.user_type = ' . USER_IGNORE . '
-				AND u.user_id != ' . ANONYMOUS . '
-				AND u.user_lastvisit > ' . $timestamp_cleaning . '
-				AND u.user_lastvisit > ' . $wwh_reset_time . ')
-			OR (u.user_id = w.id)
-		ORDER BY ';
-	switch ($wwh_sort_by)
-	{
-		case '0':
-			$sql = $pre_sql . 'u.username_clean ASC';
-		break;
-
-		case '1':
-			$sql = $pre_sql . 'u.username_clean DESC';
-		break;
-
-		case '2':
-			$sql = $pre_sql . 'CASE WHEN
-				( u.user_type = ' . USER_IGNORE . '
-					AND u.user_id != ' . ANONYMOUS . '
-					AND u.user_lastvisit > ' . $timestamp_cleaning . '
-					AND u.user_lastvisit > ' . $wwh_reset_time . ')
-			THEN u.user_lastvisit
-			ELSE w.last_page END ASC';
-		break;
-
-		case '3':
-			$sql = $pre_sql . 'CASE WHEN
-				( u.user_type = ' . USER_IGNORE . '
-					AND u.user_id != ' . ANONYMOUS . '
-					AND u.user_lastvisit > ' . $timestamp_cleaning . '
-					AND u.user_lastvisit > ' . $wwh_reset_time . ')
-			THEN u.user_lastvisit
-			ELSE w.last_page END DESC';
-		break;
-
-		case '4':
-			$sql = $pre_sql . 'u.user_id ASC';
-		break;
-
-		case '5':
-			$sql = $pre_sql . 'u.user_id DESC';
-		break;
-	}
 
 	// let's dump out the list of the users =)
 	$who_was_here_record = $wwh_username_colour = $wwh_username = $wwh_username_full = $wwh_count_total = $wwh_count_reg = $wwh_count_hidden = $wwh_count_guests = $wwh_count_bot = $who_was_here_list = '';
+
+	$config['wwh_sort_by'] = 0;
+	switch ($config['wwh_sort_by'])
+	{
+		case '0':
+			$order_by = 'username_clean ASC';
+		break;
+
+		case '1':
+			$order_by = 'username_clean DESC';
+		break;
+
+		case '4':
+			$order_by = 'user_id ASC';
+		break;
+
+		case '5':
+			$order_by = 'user_id DESC';
+		break;
+
+		case '2':
+			$order_by = 'wwh_lastpage ASC';
+		break;
+
+		case '3':
+		default:
+			$order_by = 'wwh_lastpage DESC';
+		break;
+	}
+	$sql = 'SELECT user_id, username, username_clean, user_colour, user_type, viewonline, wwh_lastpage
+		FROM  ' . WWH_TABLE . "
+		ORDER BY $order_by";
 	$result = $db->sql_query($sql);
+
 	while ($row = $db->sql_fetchrow($result))
 	{
 		$wwh_username_full = get_username_string(($row['user_type'] == USER_IGNORE) ? 'no_profile' : 'full', $row['user_id'], $row['username'], $row['user_colour'], $guest_username = false, $custom_profile_url = false);
-		$hover_time = (($wwh_disp_time == '2') ? $user->lang['WHO_WAS_HERE_LATEST1'] . '&nbsp;' . $user->format_date((($row['user_type'] == USER_IGNORE) ? $row['user_lastvisit'] : $row['last_page']),'H:i') . $user->lang['WHO_WAS_HERE_LATEST2'] : '' );
+		$hover_time = (($config['wwh_disp_time'] == '2') ? $user->lang['WHO_WAS_HERE_LATEST1'] . '&nbsp;' . $user->format_date($row['wwh_lastpage'],'H:i') . $user->lang['WHO_WAS_HERE_LATEST2'] : '' );
 		$hover_ip = ($auth->acl_get('a_') && $config['wwh_disp_ip']) ? $user->lang['IP'] . ':&nbsp;' . (($row['user_type'] == USER_IGNORE) ? $row['ip'] : $row['user_ip']) : '';
 		$hover_info = (($hover_time || $hover_ip) ? ' title="' . $hover_time . (($hover_time && $hover_ip) ? ' | ' : '') . $hover_ip . '"' : '');
-		$disp_time = (($wwh_disp_time == '1') ? '&nbsp;(' . $user->lang['WHO_WAS_HERE_LATEST1'] . '&nbsp;' . $user->format_date((($row['user_type'] == USER_IGNORE) ? $row['user_lastvisit'] : $row['last_page']),'H:i') . $user->lang['WHO_WAS_HERE_LATEST2'] . (($hover_ip) ? ' | ' . $hover_ip : '' ) . ')' : '' );
-		//list the user / bot
-		if (($row['user_allow_viewonline'] && $row['viewonline']) || ($row['user_type'] == USER_IGNORE))
+		$disp_time = (($config['wwh_disp_time'] == '1') ? '&nbsp;(' . $user->lang['WHO_WAS_HERE_LATEST1'] . '&nbsp;' . $user->format_date($row['wwh_lastpage'],'H:i') . $user->lang['WHO_WAS_HERE_LATEST2'] . (($hover_ip) ? ' | ' . $hover_ip : '' ) . ')' : '' );
+
+		if (($row['viewonline']) || ($row['user_type'] == USER_IGNORE))
 		{
-			if (($row['user_type'] == USER_IGNORE) && ($row['user_id'] != ANONYMOUS))
+			if ($row['user_id'] != ANONYMOUS)
 			{
-				if ($wwh_disp_bots == '1')
+				if ($config['wwh_disp_bots'] || ($row['user_type'] != USER_IGNORE))
 				{
 					$who_was_here_list .= (($who_was_here_list != '') ? $user->lang['COMMA_SEPARATOR'] : '') . '<span' . $hover_info . '>' . $wwh_username_full . '</span>' . $disp_time;
 				}
 			}
-			else if ($row['user_id'] != ANONYMOUS)
-			{
-				$who_was_here_list .= (($who_was_here_list != '') ? $user->lang['COMMA_SEPARATOR'] : '') . '<span' . $hover_info . '>' . $wwh_username_full . '</span>' . $disp_time;
-			}
 		}
-		else if ($wwh_disp_hidden)
+		else if ($config['wwh_disp_hidden'])
 		{
 			if ($auth->acl_get('u_viewonline'))
-			{ // hidden users are seen by themselves and admin's in <em></em>
+			{
 				$who_was_here_list .= (($who_was_here_list != '') ? $user->lang['COMMA_SEPARATOR'] : '') . '<em' . $hover_info . '>' .$wwh_username_full . '</em>' . $disp_time;
 			}
 		}
-	// at the end let's count them =)
+
+		// at the end let's count them =)
 		if ($row['user_id'] == ANONYMOUS)
 		{
 			$wwh_count_guests = $wwh_count_guests + 1;
@@ -136,7 +106,7 @@ if (!file_exists($phpbb_root_path . 'install_wwh'))
 		{
 			$wwh_count_bot = $wwh_count_bot + 1;
 		}
-		else if (($row['user_allow_viewonline'] == 1) && ($row['viewonline'] == 1))
+		else if ($row['viewonline'] == 1)
 		{
 			$wwh_count_reg = $wwh_count_reg + 1;
 		}
@@ -152,20 +122,20 @@ if (!file_exists($phpbb_root_path . 'install_wwh'))
 		$who_was_here_list = $user->lang['NO_ONLINE_USERS'];
 	}
 
-	if ($wwh_disp_bots == '0')
+	if (!$config['wwh_disp_bots'])
 	{
 		$wwh_count_total = $wwh_count_total - $wwh_count_bot;
 	}
-	if ($wwh_disp_guests == '0')
+	if (!$config['wwh_disp_guests'])
 	{
 		$wwh_count_total = $wwh_count_total - $wwh_count_guests;
 	}
-	if ($wwh_disp_hidden == '0')
+	if (!$config['wwh_disp_hidden'])
 	{
 		$wwh_count_total = $wwh_count_total - $wwh_count_hidden;
 	}
 	// ok, now we saved the data, lets make the record
-	if (($wwh_record == 1) && ( $config['wwh_record_ips'] < $wwh_count_total ))
+	if ($config['wwh_record_ips'] < $wwh_count_total)
 	{
 		set_config('wwh_record_ips', $wwh_count_total, true);
 		set_config('wwh_record_time', time(), true);
@@ -173,11 +143,11 @@ if (!file_exists($phpbb_root_path . 'install_wwh'))
 
 	// end of record, so we make the output
 	$vars_online = array(
-			'WHO_WAS_HERE'			=> array('wwh_count_total', 'l_t2_user_s'),
-			'WHO_WAS_HERE_REG'		=> array('wwh_count_reg', 'l_r2_user_s'),
-			'WHO_WAS_HERE_HIDDEN'	=> array('wwh_count_hidden', 'l_h2_user_s'),
-			'WHO_WAS_HERE_BOTS'		=> array('wwh_count_bot', 'l_b2_user_s'),
-			'WHO_WAS_HERE_GUEST'	=> array('wwh_count_guests', 'l_g2_user_s'),
+		'WHO_WAS_HERE'			=> array('wwh_count_total', 'l_t2_user_s'),
+		'WHO_WAS_HERE_REG'		=> array('wwh_count_reg', 'l_r2_user_s'),
+		'WHO_WAS_HERE_HIDDEN'	=> array('wwh_count_hidden', 'l_h2_user_s'),
+		'WHO_WAS_HERE_BOTS'		=> array('wwh_count_bot', 'l_b2_user_s'),
+		'WHO_WAS_HERE_GUEST'	=> array('wwh_count_guests', 'l_g2_user_s'),
 	);
 	foreach ($vars_online as $l_prefix => $var_ary)
 	{
@@ -198,18 +168,17 @@ if (!file_exists($phpbb_root_path . 'install_wwh'))
 	}
 	unset($vars_online);
 
-	$replacements = 0;
 	$who_was_here_list2 = sprintf($l_t2_user_s, $wwh_count_total);
 	$who_was_here_list2 .= sprintf($l_r2_user_s, $wwh_count_reg);
-	if ($wwh_disp_hidden == 1)
+	if ($config['wwh_disp_hidden'])
 	{
 		$who_was_here_list2 .= '%s ' . sprintf($l_h2_user_s, $wwh_count_hidden);
 	}
-	if ($wwh_disp_bots == 1)
+	if ($config['wwh_disp_bots'])
 	{
 		$who_was_here_list2 .= '%s ' . sprintf($l_b2_user_s, $wwh_count_bot);
 	}
-	if ($wwh_disp_guests == 1)
+	if ($config['wwh_disp_guests'])
 	{
 		$who_was_here_list2 .= '%s ' . sprintf($l_g2_user_s, $wwh_count_guests);
 	}
@@ -228,10 +197,10 @@ if (!file_exists($phpbb_root_path . 'install_wwh'))
 			break;
 	}
 
-	if ($wwh_version == 1)
+	if ($config['wwh_version'])
 	{
 		$who_was_here_explain = $user->lang['WHO_WAS_HERE_EXP'];
-		if ($wwh_record == 1)
+		if ($config['wwh_record'])
 		{
 			$who_was_here_record = sprintf($user->lang['WHO_WAS_HERE_RECORD'], $config['wwh_record_ips'], $user->format_date($config['wwh_record_time'], $config['wwh_record_timestamp'])) . '<br />';
 		}
@@ -261,14 +230,14 @@ if (!file_exists($phpbb_root_path . 'install_wwh'))
 				$who_was_here_explain = sprintf($who_was_here_explain, $user->lang['WHO_WAS_HERE_WORD']);
 				break;
 		}
-		if ($wwh_record == 1)
+		if ($config['wwh_record'])
 		{
 			$config['wwh_record_time2'] = $config['wwh_record_time'] - (3600 * $config['wwh_del_time_h']) - (60 * $config['wwh_del_time_m']) - $config['wwh_del_time_s'];
 			$who_was_here_record = sprintf($user->lang['WHO_WAS_HERE_RECORD_TIME'], $config['wwh_record_ips'], $user->format_date($config['wwh_record_time2'], $config['wwh_record_timestamp']), $user->format_date($config['wwh_record_time'], $config['wwh_record_timestamp'])) . '<br />';
 		}
 	}
 	$template->assign_vars(array(
-			'WHO_WAS_HERE_LIST'		=> $user->lang['REGISTERED_USERS'] .' '. $who_was_here_list,
+			'WHO_WAS_HERE_LIST'		=> $user->lang['REGISTERED_USERS'] . ' ' . $who_was_here_list,
 			'WHO_WAS_HERE_LIST2'	=> $who_was_here_list2,
 			'WHO_WAS_HERE_RECORD'	=> $who_was_here_record,
 			'WHO_WAS_HERE_EXP'		=> $who_was_here_explain,

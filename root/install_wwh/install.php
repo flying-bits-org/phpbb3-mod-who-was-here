@@ -188,7 +188,7 @@ switch ($mode)
 			if ($index == 1)
 			{
 				//we add a little index, so the sql runs faster
-				wwh_create_index(WWH_TABLE, 'id');
+				//wwh_create_index(WWH_TABLE, 'id');
 			}
 
 			set_config('wwh_record_ips', 1, true);

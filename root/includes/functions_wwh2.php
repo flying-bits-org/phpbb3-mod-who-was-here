@@ -14,29 +14,51 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-if (!file_exists($phpbb_root_path . 'install_wwh'))
+if (1 == 1)//REMOVE!file_exists($phpbb_root_path . 'install_wwh'))
 {
-	if (($user->data['user_id'] != ANONYMOUS) && ($user->data['user_type'] != USER_IGNORE))
+	if ($user->data['user_id'] != ANONYMOUS)
 	{
-		$sql = 'DELETE FROM ' . WWH_TABLE . " WHERE (ip = '" . $user->ip . "' AND id = '1') OR id = " . $user->data['user_id'];
+		$sql = 'DELETE FROM ' . WWH_TABLE . '
+			WHERE user_id = ' . $user->data['user_id'] . '
+				OR (user_ip = "' . $user->ip . '"
+					AND user_id = ' . ANONYMOUS . ')';
 		$db->sql_query($sql);
-		$sql = 'INSERT INTO ' . WWH_TABLE . " (ip, id, viewonline, last_page) VALUES ('" . $user->ip . "', '" . $user->data['user_id'] . "', '" . $user->data['session_viewonline'] . "', '" . time() . "')";
-		$db->sql_query($sql);
+
+		$wwh_data = array(
+			'user_id'			=> $user->data['user_id'],
+			'user_ip'			=> $user->ip,
+			'username'			=> $user->data['username'],
+			'username_clean'	=> $user->data['username_clean'],
+			'user_colour'		=> $user->data['user_colour'],
+			'user_type'			=> $user->data['user_type'],
+			'viewonline'		=> $user->data['session_viewonline'],
+			'wwh_lastpage'		=> time(),
+		);
+		$db->sql_query('INSERT INTO ' . WWH_TABLE . ' ' . $db->sql_build_array('INSERT', $wwh_data));
 	}
-	else if($user->data['user_id'] == ANONYMOUS)
+	else
 	{
-		$user_viewonline = 1;
-		$your_ip = false;
-		$sql = 'SELECT ip FROM ' . WWH_TABLE . " WHERE ip = '" . $user->ip . "'";
+		$user_logged = false;
+		$sql = 'SELECT * FROM ' . WWH_TABLE . " WHERE user_ip = '" . $user->ip . "'";
 		$result = $db->sql_query($sql);
 		while ($row = $db->sql_fetchrow($result))
 		{
-			$your_ip = true;
+			$user_logged = true;
 		}
-		if (!$your_ip)
+		$db->sql_freeresult($result);
+		if (!$user_logged)
 		{
-			$sql = 'INSERT INTO ' . WWH_TABLE . " (ip, id, viewonline, last_page) VALUES ('" . $user->ip . "', '" . $user->data['user_id'] . "', '" . $user->data['session_viewonline'] . "', '" . time() . "')";
-			$db->sql_query($sql);
+			$wwh_data = array(
+				'user_id'			=> $user->data['user_id'],
+				'user_ip'			=> $user->ip,
+				'username'			=> $user->data['username'],
+				'username_clean'	=> $user->data['username_clean'],
+				'user_colour'		=> $user->data['user_colour'],
+				'user_type'			=> $user->data['user_type'],
+				'viewonline'		=> 1,
+				'wwh_lastpage'		=> time(),
+			);
+			$db->sql_query('INSERT INTO ' . WWH_TABLE . ' ' . $db->sql_build_array('INSERT', $wwh_data));
 		}
 	}
 }
