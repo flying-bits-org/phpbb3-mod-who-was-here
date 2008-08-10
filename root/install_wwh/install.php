@@ -288,6 +288,38 @@ switch ($mode)
 				case '6.0.6':
 					set_config('wwh_disp_ip', 1);
 					rebuild_modules();
+
+					// Drop thes tables if existing
+					if ($db->sql_layer != 'mssql')
+					{
+						$sql = 'DROP TABLE IF EXISTS ' . $table_prefix . 'wwh';
+						$result = $db->sql_query($sql);
+						$db->sql_freeresult($result);
+					}
+					else
+					{
+						$sql = 'if exists (select * from sysobjects where name = ' . $table_prefix . 'wwh)
+							drop table ' . $table_prefix . 'wwh';
+						$result = $db->sql_query($sql);
+						$db->sql_freeresult($result);
+					}
+					// locate the schema files
+					$dbms_schema = 'schemas/_' . $db_schema . '_schema.sql';
+					$sql_query = @file_get_contents($dbms_schema);
+					$sql_query = preg_replace('#phpbb_#i', $table_prefix, $sql_query);
+					$sql_query = preg_replace('/\n{2,}/', "\n", preg_replace('/^#.*$/m', "\n", $sql_query));
+					$sql_query = split_sql_file($sql_query, $delimiter);
+					// make the new one's
+					foreach ($sql_query as $sql)
+					{
+						if (!$db->sql_query($sql))
+						{
+							$error = $db->sql_error();
+							$this->p_master->db_error($error['message'], $sql, __LINE__, __FILE__);
+						}
+					}
+					unset($sql_query);
+
 				break;
 			}
 			set_config('wwh_mod_version', $new_mod_version);
