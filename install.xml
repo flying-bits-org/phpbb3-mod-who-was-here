@@ -4,23 +4,8 @@
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.0.xsd">
   <header>
     <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
-    <title lang="en-gb"><![CDATA[NV "who was here?"]]></title>
     <title lang="de"><![CDATA[NV "Wer war da?"]]></title>
-    <description lang="en-gb"><![CDATA[Adds a list with all users, which visited the page today, on the index.php.
-With saving the record of usercount.
-Features:
-	• en-/disable bots in the list (adjustable in ACP)
-	• en-/disable hidden users in the list (adjustable in ACP)
-	• en-/disable guests in the record (adjustable in ACP)
-	• en-/disable visit-time in the list or as "hover" on the name (adjustable in ACP)
-
-	• "Who was here?" or "Who was here in the last time?" (adjustable in ACP)
-	• display and store the record (in ACP)
-	• reset-function (in ACP)
-
-	• time is displayed with user-timezone and dst(daylight-saving-time) adjustment of the ucp
-	• usernames are coloured
-	]]></description>
+    <title lang="en-gb"><![CDATA[NV "who was here?"]]></title>
     <description lang="de"><![CDATA[Fügt auf der index.php einen Abschnitt hinzu, wo die User aufgelistet werden,
 die am heutigem Tage online gewesen sind.
 Features:
@@ -38,6 +23,21 @@ Features:
 	• Die Zeit wird nach der Einstellung des Benutzers im persönlichen Bereich ausgegeben. Also mit Berücksichtigung von Zeitzone und Sommerzeit.
 	• Die Benutzernamen sind eingefärbt.
 ]]></description>
+    <description lang="en-gb"><![CDATA[Adds a list with all users, which visited the page today, on the index.php.
+With saving the record of usercount.
+Features:
+	• en-/disable bots in the list (adjustable in ACP)
+	• en-/disable hidden users in the list (adjustable in ACP)
+	• en-/disable guests in the record (adjustable in ACP)
+	• en-/disable visit-time in the list or as "hover" on the name (adjustable in ACP)
+
+	• "Who was here?" or "Who was here in the last time?" (adjustable in ACP)
+	• display and store the record (in ACP)
+	• reset-function (in ACP)
+
+	• time is displayed with user-timezone and dst(daylight-saving-time) adjustment of the ucp
+	• usernames are coloured
+	]]></description>
     <author-notes lang="de"><![CDATA[Die MOD untersützt die "MOD Version Check"-MOD von Handymman´:
 http://www.phpbb.com/community/viewtopic.php?f=69&t=691155
 
