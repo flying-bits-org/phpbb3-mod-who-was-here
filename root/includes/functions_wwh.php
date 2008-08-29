@@ -65,6 +65,10 @@ if (1 == 1)//REMOVE!file_exists($phpbb_root_path . 'install_wwh'))
 			$order_by = 'wwh_lastpage DESC';
 		break;
 	}
+
+	// let's try another method to deny doubles
+	$user_id_ary = array();
+
 	$sql = 'SELECT user_id, username, username_clean, user_colour, user_type, viewonline, wwh_lastpage, user_ip
 		FROM  ' . WWH_TABLE . "
 		ORDER BY $order_by";
@@ -72,6 +76,8 @@ if (1 == 1)//REMOVE!file_exists($phpbb_root_path . 'install_wwh'))
 
 	while ($row = $db->sql_fetchrow($result))
 	{
+		if (!in_array($row['user_id'], $user_id_ary))
+		{
 		$wwh_username_full = get_username_string(($row['user_type'] == USER_IGNORE) ? 'no_profile' : 'full', $row['user_id'], $row['username'], $row['user_colour'], $guest_username = false, $custom_profile_url = false);
 		$hover_time = (($config['wwh_disp_time'] == '2') ? $user->lang['WHO_WAS_HERE_LATEST1'] . '&nbsp;' . $user->format_date($row['wwh_lastpage'],'H:i') . $user->lang['WHO_WAS_HERE_LATEST2'] : '' );
 		$hover_ip = ($auth->acl_get('a_') && $config['wwh_disp_ip']) ? $user->lang['IP'] . ':&nbsp;' . $row['user_ip'] : '';
@@ -85,6 +91,7 @@ if (1 == 1)//REMOVE!file_exists($phpbb_root_path . 'install_wwh'))
 				if ($config['wwh_disp_bots'] || ($row['user_type'] != USER_IGNORE))
 				{
 					$who_was_here_list .= (($who_was_here_list != '') ? $user->lang['COMMA_SEPARATOR'] : '') . '<span' . $hover_info . '>' . $wwh_username_full . '</span>' . $disp_time;
+					$user_id_ary[] = $row['user_id'];
 				}
 			}
 		}
@@ -93,6 +100,7 @@ if (1 == 1)//REMOVE!file_exists($phpbb_root_path . 'install_wwh'))
 			if ($auth->acl_get('u_viewonline'))
 			{
 				$who_was_here_list .= (($who_was_here_list != '') ? $user->lang['COMMA_SEPARATOR'] : '') . '<em' . $hover_info . '>' .$wwh_username_full . '</em>' . $disp_time;
+				$user_id_ary[] = $row['user_id'];
 			}
 		}
 
@@ -114,6 +122,7 @@ if (1 == 1)//REMOVE!file_exists($phpbb_root_path . 'install_wwh'))
 			$wwh_count_hidden = $wwh_count_hidden + 1;
 		}
 		$wwh_count_total = $wwh_count_total + 1;
+		}
 	}//end while!
 
 	if ($who_was_here_list == '')
