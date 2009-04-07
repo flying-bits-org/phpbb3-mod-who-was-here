@@ -78,13 +78,13 @@ display_who_was_here();]]></action>
 			</edit>
 		</open>
 
-		<diy-instructions lang="de"><![CDATA[Rufe install_wwh/install.php auf und führe den Installer aus
+		<diy-instructions lang="de"><![CDATA[Rufe install/index.php auf und führe den Installer aus
 
 Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
 
 Aktualisiere deine Styles:
 		"Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"]]></diy-instructions>
-		<diy-instructions lang="en"><![CDATA[Browse to install_wwh/install.php and run the installer
+		<diy-instructions lang="en"><![CDATA[Browse to install/index.php and run the installer
 
 Clear your cache in the "Administration Control Panel" (ACP) > "General" > "Purge the cache"
 

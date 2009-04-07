@@ -75,18 +75,5 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 		<copy>
 			<file from="root/language/de/mods/*.*" to="language/de/mods/*.*" />
 		</copy>
-
-		<diy-instructions lang="de"><![CDATA[Rufe install_wwh/install.php auf und führe den Installer aus
-
-Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
-
-Aktualisiere deine Styles:
-		"Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"]]></diy-instructions>
-		<diy-instructions lang="en"><![CDATA[Browse to install_wwh/install.php and run the installer
-
-Clear your cache in the "Administration Control Panel" (ACP) > "General" > "Purge the cache"
-
-Refresh your Styles:
-		"Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"]]></diy-instructions>
 	</action-group>
 </mod>
