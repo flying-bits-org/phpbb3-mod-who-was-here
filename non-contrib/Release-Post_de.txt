@@ -24,7 +24,7 @@ Features:
 [b]Unterstützte Sprachpakete:[/b] de, en
 [b]Unterstützte Styles:[/b] prosilver, subsilver2
 
-[b]MOD Repository[/b]: http://code.bantux.de/svn/nv-who-was-here (SVN/Subversion)
-[b]Repository durchsuchen[/b]: http://code.bantux.de/repositories/show/nv-who-was-here
+[b]MOD Repository[/b]: http://code.bantux.org/svn/nv-who-was-here (SVN/Subversion)
+[b]Repository durchsuchen[/b]: http://code.bantux.org/repositories/show/nv-who-was-here
 
 [b]MOD Download:[/b] [size=150][b][url=http://www.flying-bits.org/download.php?mod_id=1]Download v1.0.0[/url][/b][/size]
