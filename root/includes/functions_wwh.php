@@ -13,7 +13,6 @@ if (!defined('IN_PHPBB'))
 {
 	exit;
 }
-$user->add_lang('mods/lang_wwh');
 
 function update_who_was_here_session ()
 {
@@ -70,6 +69,7 @@ function display_who_was_here ()
 {
 	global $auth, $config, $db, $template, $user;
 
+	$user->add_lang('mods/lang_wwh');
 	// Cleaning the wwh-table
 	$timestamp = time();
 	if ($config['wwh_version'])
