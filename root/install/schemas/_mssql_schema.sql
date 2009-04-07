@@ -16,7 +16,7 @@ CREATE TABLE [phpbb_wwh] (
 	[username] [varchar] (255) DEFAULT ('') NOT NULL ,
 	[username_clean] [varchar] (255) DEFAULT ('') NOT NULL ,
 	[user_colour] [varchar] (6) DEFAULT ('') NOT NULL ,
-	[user_ip] [varchar] (15) DEFAULT ('127.0.0.1') NOT NULL ,
+	[user_ip] [varchar] (40) DEFAULT ('127.0.0.1') NOT NULL ,
 	[user_type] [int] DEFAULT (1) NOT NULL ,
 	[viewonline] [int] DEFAULT (1) NOT NULL ,
 	[wwh_lastpage] [int] DEFAULT (0) NOT NULL 
