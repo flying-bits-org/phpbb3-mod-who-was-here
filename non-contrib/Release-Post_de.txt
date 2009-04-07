@@ -1,7 +1,7 @@
 [b]MOD Name:[/b] NV "Wer war da?"
 [b]Autor:[/b] [url=http://www.flying-bits.org][b]nickvergessen[/b][/url]
 
-[b]MOD Version:[/b] 1.0.0-RC1
+[b]MOD Version:[/b] 1.0.0
 [b]MOD Beschreibung:[/b]
 [list]Fügt auf der index.php einen Abschnitt hinzu, wo die User aufgelistet werden,
 die am heutigem Tage online gewesen sind.
@@ -21,10 +21,10 @@ Features:
 [*]Die Benutzernamen sind eingefärbt.[/list]
 
 [b]Demo URL:[/b] http://www.flying-bits.org/index.php
-[b]Unterstützte Sprachpakete:[/b] de, en, fr, tr
+[b]Unterstützte Sprachpakete:[/b] de, en
 [b]Unterstützte Styles:[/b] prosilver, subsilver2
 
 [b]MOD Repository[/b]: http://code.bantux.de/svn/nv-who-was-here (SVN/Subversion)
 [b]Repository durchsuchen[/b]: http://code.bantux.de/repositories/show/nv-who-was-here
 
-[b]MOD Download:[/b] [size=150][b][url=http://www.flying-bits.org/download.php?mod_id=1]Download v1.0.0-RC1[/url][/b][/size]
+[b]MOD Download:[/b] [size=150][b][url=http://www.flying-bits.org/download.php?mod_id=1]Download v1.0.0[/url][/b][/size]

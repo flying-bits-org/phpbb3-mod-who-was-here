@@ -2,7 +2,7 @@
 /** 
 *
 * @package phpBB3
-* @version $Id: create_schema_files.php 103 2007-11-26 19:26:18Z nickvergessen $
+* @version $Id$
 * @copyright (c) 2006 phpBB Group 
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License 
 *
@@ -801,7 +801,7 @@ foreach ($supported_dbms as $dbms)
 function get_schema_struct()
 {
 	$schema_data = array();
-//*
+/*
 	$schema_data['phpbb_wwh'] = array(
 		'COLUMNS'		=> array(
 			'wwh_id'			=> array('UINT', NULL, 'auto_increment'),
@@ -809,10 +809,10 @@ function get_schema_struct()
 			'username'			=> array('VCHAR', ''),
 			'username_clean'	=> array('VCHAR', ''),
 			'user_colour'		=> array('VCHAR:6', ''),
-			'user_ip'			=> array('VCHAR:15', '127.0.0.1'),
+			'user_ip'			=> array('VCHAR:40', '127.0.0.1'),
 			'user_type'			=> array('UINT:2', 1),
 			'viewonline'		=> array('UINT:1', 1),
-			'wwh_lastpage'		=> array('UINT:11', 0),
+			'wwh_lastpage'		=> array('TIMESTAMP', 0),
 		),
 		'PRIMARY_KEY'		=> 'wwh_id',
 	);
@@ -827,132 +827,7 @@ echo $schema_path;
 */
 function custom_data($dbms)
 {
-	switch ($dbms)
-	{
-		case 'oracle':
-			return <<<EOF
-/*
-  This first section is optional, however its probably the best method
-  of running phpBB on Oracle. If you already have a tablespace and user created
-  for phpBB you can leave this section commented out!
-
-  The first set of statements create a phpBB tablespace and a phpBB user,
-  make sure you change the password of the phpBB user before you run this script!!
-*/
-
-/*
-CREATE TABLESPACE "PHPBB"
-	LOGGING 
-	DATAFILE 'E:\ORACLE\ORADATA\LOCAL\PHPBB.ora' 
-	SIZE 10M
-	AUTOEXTEND ON NEXT 10M
-	MAXSIZE 100M;
-
-CREATE USER "PHPBB" 
-	PROFILE "DEFAULT" 
-	IDENTIFIED BY "phpbb_password" 
-	DEFAULT TABLESPACE "PHPBB" 
-	QUOTA UNLIMITED ON "PHPBB" 
-	ACCOUNT UNLOCK;
-
-GRANT ANALYZE ANY TO "PHPBB";
-GRANT CREATE SEQUENCE TO "PHPBB";
-GRANT CREATE SESSION TO "PHPBB";
-GRANT CREATE TABLE TO "PHPBB";
-GRANT CREATE TRIGGER TO "PHPBB";
-GRANT CREATE VIEW TO "PHPBB";
-GRANT "CONNECT" TO "PHPBB";
-
-COMMIT;
-DISCONNECT;
-
-CONNECT phpbb/phpbb_password;
-*/
-EOF;
-
-		break;
-
-		case 'postgres':
-			return <<<EOF
-/*
-	Domain definition
-*/
-CREATE DOMAIN varchar_ci AS varchar(255) NOT NULL DEFAULT ''::character varying;
-
-/*
-	Operation Functions
-*/
-CREATE FUNCTION _varchar_ci_equal(varchar_ci, varchar_ci) RETURNS boolean AS 'SELECT LOWER($1) = LOWER($2)' LANGUAGE SQL STRICT;
-CREATE FUNCTION _varchar_ci_not_equal(varchar_ci, varchar_ci) RETURNS boolean AS 'SELECT LOWER($1) != LOWER($2)' LANGUAGE SQL STRICT;
-CREATE FUNCTION _varchar_ci_less_than(varchar_ci, varchar_ci) RETURNS boolean AS 'SELECT LOWER($1) < LOWER($2)' LANGUAGE SQL STRICT;
-CREATE FUNCTION _varchar_ci_less_equal(varchar_ci, varchar_ci) RETURNS boolean AS 'SELECT LOWER($1) <= LOWER($2)' LANGUAGE SQL STRICT;
-CREATE FUNCTION _varchar_ci_greater_than(varchar_ci, varchar_ci) RETURNS boolean AS 'SELECT LOWER($1) > LOWER($2)' LANGUAGE SQL STRICT;
-CREATE FUNCTION _varchar_ci_greater_equals(varchar_ci, varchar_ci) RETURNS boolean AS 'SELECT LOWER($1) >= LOWER($2)' LANGUAGE SQL STRICT;
-
-/*
-	Operators
-*/
-CREATE OPERATOR <(
-  PROCEDURE = _varchar_ci_less_than,
-  LEFTARG = varchar_ci,
-  RIGHTARG = varchar_ci,
-  COMMUTATOR = >,
-  NEGATOR = >=,
-  RESTRICT = scalarltsel,
-  JOIN = scalarltjoinsel);
-
-CREATE OPERATOR <=(
-  PROCEDURE = _varchar_ci_less_equal,
-  LEFTARG = varchar_ci,
-  RIGHTARG = varchar_ci,
-  COMMUTATOR = >=,
-  NEGATOR = >,
-  RESTRICT = scalarltsel,
-  JOIN = scalarltjoinsel);
-
-CREATE OPERATOR >(
-  PROCEDURE = _varchar_ci_greater_than,
-  LEFTARG = varchar_ci,
-  RIGHTARG = varchar_ci,
-  COMMUTATOR = <,
-  NEGATOR = <=,
-  RESTRICT = scalargtsel,
-  JOIN = scalargtjoinsel);
-
-CREATE OPERATOR >=(
-  PROCEDURE = _varchar_ci_greater_equals,
-  LEFTARG = varchar_ci,
-  RIGHTARG = varchar_ci,
-  COMMUTATOR = <=,
-  NEGATOR = <,
-  RESTRICT = scalargtsel,
-  JOIN = scalargtjoinsel);
-
-CREATE OPERATOR <>(
-  PROCEDURE = _varchar_ci_not_equal,
-  LEFTARG = varchar_ci,
-  RIGHTARG = varchar_ci,
-  COMMUTATOR = <>,
-  NEGATOR = =,
-  RESTRICT = neqsel,
-  JOIN = neqjoinsel);
-
-CREATE OPERATOR =(
-  PROCEDURE = _varchar_ci_equal,
-  LEFTARG = varchar_ci,
-  RIGHTARG = varchar_ci,
-  COMMUTATOR = =,
-  NEGATOR = <>,
-  RESTRICT = eqsel,
-  JOIN = eqjoinsel,
-  HASHES,
-  MERGES,
-  SORT1= <);
-
-EOF;
-		break;
-	}
-
+	// Just needed for new DBs, so phpBB already did this.
 	return '';
 }
 

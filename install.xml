@@ -2,11 +2,13 @@
 <?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
 <!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
 <mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.0.xsd">
-  <header>
-    <license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
-    <title lang="de"><![CDATA[NV "Wer war da?"]]></title>
-    <title lang="en-gb"><![CDATA[NV "who was here?"]]></title>
-    <description lang="de"><![CDATA[Fügt auf der index.php einen Abschnitt hinzu, wo die User aufgelistet werden,
+	<header>
+		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+
+		<title lang="de"><![CDATA[NV "Wer war da?"]]></title>
+		<title lang="en"><![CDATA[NV "who was here?"]]></title>
+
+		<description lang="de"><![CDATA[Fügt auf der index.php einen Abschnitt hinzu, wo die User aufgelistet werden,
 die am heutigem Tage online gewesen sind.
 Features:
 	• Bots in der Liste ein-/ausblenden (im ACP einstellbar)
@@ -16,14 +18,14 @@ Features:
 
 	• Rekord speichern und anzeigen (im ACP einstellbar)
 	• Es gibt 2 Modi:
-	   1. "Wer war heute da?": Hier bei werden alle Benutzer angezeigt, die am heutigen Tage online waren.
-	   2. "Wer war in der letzten Zeit da?": Der Zeitraum in dem die Besucher dagewesen sein sollen, kann im ACP eingestellt werden.
+		 1. "Wer war heute da?": Hier bei werden alle Benutzer angezeigt, die am heutigen Tage online waren.
+		 2. "Wer war in der letzten Zeit da?": Der Zeitraum in dem die Besucher dagewesen sein sollen, kann im ACP eingestellt werden.
 	• Die Liste kann im Administrationsbereich zurückgesetzt werden.
 
 	• Die Zeit wird nach der Einstellung des Benutzers im persönlichen Bereich ausgegeben. Also mit Berücksichtigung von Zeitzone und Sommerzeit.
 	• Die Benutzernamen sind eingefärbt.
 ]]></description>
-    <description lang="en-gb"><![CDATA[Adds a list with all users, which visited the page today, on the index.php.
+		<description lang="en"><![CDATA[Adds a list with all users, which visited the page today, on the index.php.
 With saving the record of usercount.
 Features:
 	• en-/disable bots in the list (adjustable in ACP)
@@ -37,196 +39,232 @@ Features:
 
 	• time is displayed with user-timezone and dst(daylight-saving-time) adjustment of the ucp
 	• usernames are coloured
-	]]></description>
-    <author-notes lang="de"><![CDATA[Die MOD untersützt die "MOD Version Check"-MOD von Handymman´:
-http://www.phpbb.com/community/viewtopic.php?f=69&t=691155
+]]></description>
 
-Du kannst sie installieren, um über neue Versionen informiert zu werden, da ich keine Emails mehr schreiben werde.]]></author-notes>
-    <author-notes lang="en-gb"><![CDATA[This MOD supports the "MOD Version Check"-MOD by Handymman´:
-http://www.phpbb.com/community/viewtopic.php?f=69&t=691155
+		<author-notes lang="de"><![CDATA[
+Die MOD untersützt die "MOD Version Check"-MOD von Handymman´:
+http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
+		<author-notes lang="en"><![CDATA[
+This MOD supports the "MOD Version Check"-MOD by Handymman´:
+http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 
-You may install it, to be informed about future versions, as I'm not going to send any more mails.]]></author-notes>
-    <author-group>
-      <author>
-        <realname>Joas Schilling</realname>
-        <email>nickvergessen@gmx.de</email>
-        <username>nickvergessen</username>
-        <homepage>http://www.flying-bits.org</homepage>
-        <contributions />
-      </author>
-    </author-group>
-    <mod-version>1.0.0-RC1</mod-version>
-    <installation>
-      <level>easy</level>
-      <time>300</time>
-      <target-version>3.0.2</target-version>
-    </installation>
-    <link-group>
-      <link type="parent" lang="de" href="contrib/update_6_0_6_to_1_0_0-RC1/update.xml">Update von 6.0.6 auf 1.0.0-RC1</link>
-      <link type="parent" lang="en-gb" href="contrib/update_6_0_6_to_1_0_0-RC1/update.xml">Update from 6.0.6 to 1.0.0-RC1</link>
-      <link type="language" lang="de" href="xml/de.xml">Anleitung für das deutsche Sprachpaket</link>
-      <link type="language" lang="en-gb" href="xml/de.xml">Manual for German Language-set</link>
-      <link type="language" lang="de" href="xml/fr.xml">Anleitung für das französische Sprachpaket</link>
-      <link type="language" lang="en-gb" href="xml/fr.xml">Manual for French Language-set</link>
-      <link type="language" lang="de" href="xml/tr.xml">Anleitung für das türkische Sprachpaket</link>
-      <link type="language" lang="en-gb" href="xml/tr.xml">Manual for Turkish Language-set</link>
-      <link type="template" lang="de" href="xml/subsilver2.xml">Anleitung für das Style subsilver2</link>
-      <link type="template" lang="en-gb" href="xml/subsilver2.xml">Manual for subsilver2 Style</link>
-    </link-group>
-    <history>
-      <entry>
-        <date>2008-08-10</date>
-        <rev-version>1.0.0-RC1</rev-version>
-        <changelog lang="en-GB">
-          <change><![CDATA[[Change] don't use users-Table any more (should be faster now)]]></change>
-          <change><![CDATA[[Add] display IP for Admins]]></change>
-          <change><![CDATA[[Change] reversioned: 6.0.7 -> 1.0.0-RC1]]></change>
-        </changelog>
-        <changelog lang="de">
-          <change><![CDATA[[Change] Benutzerfarbe, usw. werden jetzt mit gespeichert. (sollte schneller sein so)]]></change>
-          <change><![CDATA[[Add] IP-Anzeige für Admins]]></change>
-          <change><![CDATA[[Change] Versions-Nummer umgestuft: 6.0.7 -> 1.0.0-RC1]]></change>
-        </changelog>
-      </entry>
-      <entry>
-        <date>2008-06-02</date>
-        <rev-version>6.0.6</rev-version>
-        <changelog lang="en-GB">
-          <change><![CDATA[[Add] ACP-Option for the timestamp of the user-record]]></change>
-          <change><![CDATA[[Change] sql-Index by user-option]]></change>
-        </changelog>
-        <changelog lang="de">
-          <change><![CDATA[[Add] ACP-Option für das Datumsformat beim User-Rekord]]></change>
-          <change><![CDATA[[Change] SQL-Index nach Benutzer-Eingabe]]></change>
-          <change><![CDATA[[Fix] Sprachanpassung an phpBB3.0.1]]></change>
-        </changelog>
-      </entry>
-      <entry>
-        <date>2008-01-28</date>
-        <rev-version>6.0.5</rev-version>
-        <changelog lang="en-GB">
-          <change><![CDATA[[Add] Option to handle invisible users]]></change>
-          <change><![CDATA[[Add] sql-Index to id-column to improve reading speed. (credits to Mahony from the phpbb.de-Team)]]></change>
-        </changelog>
-        <changelog lang="de">
-          <change><![CDATA[[Add] Option zum ausblenden der unsichtbaren Benutzer]]></change>
-          <change><![CDATA[[Add] SQL-Index auf id-Spalte um die Auslese-geschwindigkeit zu verbessern (Dank an Mahony aus dem phpbb.de-Team)]]></change>
-        </changelog>
-      </entry>
-      <entry>
-        <date>2007-12-13</date>
-        <rev-version>6.0.4</rev-version>
-        <changelog lang="en-GB">
-          <change><![CDATA[[Fix] displaying wrong time in normal and 0 on hover]]></change>
-        </changelog>
-        <changelog lang="de">
-          <change><![CDATA[[Fix] falsche Zeit angezeigt, oder 0 beim Hover]]></change>
-        </changelog>
-      </entry>
-      <entry>
-        <date>2007-12-10</date>
-        <rev-version>6.0.3</rev-version>
-        <changelog lang="en-GB">
-          <change><![CDATA[[Add] last feature: display time on name-hover]]></change>
-        </changelog>
-        <changelog lang="de">
-          <change><![CDATA[[Add] letztes Feature: Zeit beim überfahren des Namens anzeigen]]></change>
-        </changelog>
-      </entry>
-      <entry>
-        <date>2007-12-02</date>
-        <rev-version>6.0.2</rev-version>
-        <changelog lang="en-GB">
-          <change><![CDATA[[Fix] this should be the final fix for the timezone problem]]></change>
-        </changelog>
-        <changelog lang="de">
-          <change><![CDATA[[Fix] Jetzt sollte endlich das Problem mit den Zeitzonen erledigt sein]]></change>
-        </changelog>
-      </entry>
-      <entry>
-        <date>2007-10-22</date>
-        <rev-version>6.0.1</rev-version>
-        <changelog lang="en-GB">
-          <change><![CDATA[[Fix] on displaying a page without having installed]]></change>
-          <change><![CDATA[[Fix] in the acp]]></change>
-        </changelog>
-        <changelog lang="de">
-          <change><![CDATA[[Fix] beim Aufrufen der Seite ohne Installation]]></change>
-          <change><![CDATA[[Fix] im ACP]]></change>
-        </changelog>
-      </entry>
-      <entry>
-        <date>2007-10-21</date>
-        <rev-version>6.0.0</rev-version>
-        <changelog lang="en-GB">
-          <change><![CDATA[[Change] updated to RC7]]></change>
-          <change><![CDATA[[Change] created its own module]]></change>
-          <change><![CDATA[[Fix] fixed some bugs]]></change>
-        </changelog>
-        <changelog lang="de">
-          <change><![CDATA[[Change] auf RC7 angepasst]]></change>
-          <change><![CDATA[[Change] eigenes Modul erstellt]]></change>
-          <change><![CDATA[[Fix] einige Bugs behoben]]></change>
-        </changelog>
-      </entry>
-    </history>
-    <meta name="generator" content="Phpbb.ModTeam.Tools (c#)" />
-  </header>
-  <action-group>
-    <copy>
-      <file from="root/adm/mods/nv_wwh_version.php" to="adm/mods/nv_wwh_version.php" />
-      <file from="root/adm/style/acp_wwh.html" to="adm/style/acp_wwh.html" />
-      <file from="root/includes/*.php" to="includes/*.php" />
-      <file from="root/includes/acp/acp_wwh.php" to="includes/acp/acp_wwh.php" />
-      <file from="root/includes/acp/info/acp_wwh.php" to="includes/acp/info/acp_wwh.php" />
-      <file from="root/install_wwh/schemas/*.sql" to="install_wwh/schemas/*.sql" />
-      <file from="root/install_wwh/*.php" to="install_wwh/*.php" />
-      <file from="root/language/en/mods/*.php" to="language/en/mods/*.php" />
-    </copy>
-    <open src="index.php">
-      <edit>
-        <find><![CDATA[// Assign index specific vars]]></find>
-        <action type="before-add"><![CDATA[include($phpbb_root_path . 'includes/functions_wwh.' . $phpEx);]]></action>
-      </edit>
-    </open>
-    <open src="includes/constants.php">
-      <edit>
-        <find><![CDATA[// Additional tables]]></find>
-        <action type="after-add"><![CDATA[define('WWH_TABLE',					$table_prefix . 'wwh');]]></action>
-      </edit>
-    </open>
-    <open src="includes/functions.php">
-      <edit>
-        <find><![CDATA[	// Which timezone?
-	$tz = ($user->data['user_id'] != ANONYMOUS) ? strval(doubleval($user->data['user_timezone'])) : strval(doubleval($config['board_timezone']));]]></find>
-        <action type="after-add"><![CDATA[include_once($phpbb_root_path . 'includes/functions_wwh2.' . $phpEx);]]></action>
-      </edit>
-    </open>
-    <open src="styles/prosilver/template/index_body.html">
-      <edit>
-        <find><![CDATA[	<!-- IF U_VIEWONLINE --><h3><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></h3><!-- ELSE --><h3>{L_WHO_IS_ONLINE}</h3><!-- ENDIF -->
+		<author-group>
+			<author>
+				<realname>Joas Schilling</realname>
+				<email>nickvergessen@gmx.de</email>
+				<username>nickvergessen</username>
+				<homepage>http://www.flying-bits.org/</homepage>
+			</author>
+		</author-group>
+
+		<mod-version>1.0.0</mod-version>
+
+		<installation>
+			<level>easy</level>
+			<time>300</time>
+			<target-version>3.0.4</target-version>
+		</installation>
+
+		<link-group>
+			<link type="parent" lang="de" href="contrib/update_1_0_0-RC1_to_1_0_0/update.xml">Update von 1.0.0-RC1 auf 1.0.0</link>
+			<link type="parent" lang="en" href="contrib/update_1_0_0-RC1_to_1_0_0/update.xml">Update from 1.0.0-RC1 to 1.0.0</link>
+			<link type="language" lang="de" href="contrib/de.xml">Anleitung für das deutsche Sprachpaket</link>
+			<link type="language" lang="en" href="contrib/de.xml">Manual for German Language-set</link>
+			<link type="template" lang="de" href="contrib/subsilver2.xml">Anleitung für das Style subsilver2</link>
+			<link type="template" lang="en" href="contrib/subsilver2.xml">Manual for subsilver2 Style</link>
+		</link-group>
+
+		<history>
+			<entry>
+				<date>2009-04-07</date>
+				<rev-version>1.0.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[[Fix] Final CleanUp for 1.0.0]]></change>
+				</changelog>
+				<changelog lang="de">
+					<change><![CDATA[[Fix] Final CleanUp für 1.0.0]]></change>
+				</changelog>
+			</entry>
+
+			<entry>
+				<date>2008-08-10</date>
+				<rev-version>1.0.0-RC1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[[Change] don't use users-Table any more (should be faster now)]]></change>
+					<change><![CDATA[[Add] display IP for Admins]]></change>
+					<change><![CDATA[[Change] reversioned: 6.0.7 -> 1.0.0-RC1]]></change>
+				</changelog>
+				<changelog lang="de">
+					<change><![CDATA[[Change] Benutzerfarbe, usw. werden jetzt mit gespeichert. (sollte schneller sein so)]]></change>
+					<change><![CDATA[[Add] IP-Anzeige für Admins]]></change>
+					<change><![CDATA[[Change] Versions-Nummer umgestuft: 6.0.7 -> 1.0.0-RC1]]></change>
+				</changelog>
+			</entry>
+
+			<entry>
+				<date>2008-06-02</date>
+				<rev-version>6.0.6</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[[Add] ACP-Option for the timestamp of the user-record]]></change>
+					<change><![CDATA[[Change] sql-Index by user-option]]></change>
+				</changelog>
+				<changelog lang="de">
+					<change><![CDATA[[Add] ACP-Option für das Datumsformat beim User-Rekord]]></change>
+					<change><![CDATA[[Change] SQL-Index nach Benutzer-Eingabe]]></change>
+					<change><![CDATA[[Fix] Sprachanpassung an phpBB3.0.1]]></change>
+				</changelog>
+			</entry>
+
+			<entry>
+				<date>2008-01-28</date>
+				<rev-version>6.0.5</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[[Add] Option to handle invisible users]]></change>
+					<change><![CDATA[[Add] sql-Index to id-column to improve reading speed. (credits to Mahony from the phpbb.de-Team)]]></change>
+				</changelog>
+				<changelog lang="de">
+					<change><![CDATA[[Add] Option zum ausblenden der unsichtbaren Benutzer]]></change>
+					<change><![CDATA[[Add] SQL-Index auf id-Spalte um die Auslese-geschwindigkeit zu verbessern (Dank an Mahony aus dem phpbb.de-Team)]]></change>
+				</changelog>
+			</entry>
+
+			<entry>
+				<date>2007-12-13</date>
+				<rev-version>6.0.4</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[[Fix] displaying wrong time in normal and 0 on hover]]></change>
+				</changelog>
+				<changelog lang="de">
+					<change><![CDATA[[Fix] falsche Zeit angezeigt, oder 0 beim Hover]]></change>
+				</changelog>
+			</entry>
+
+			<entry>
+				<date>2007-12-10</date>
+				<rev-version>6.0.3</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[[Add] last feature: display time on name-hover]]></change>
+				</changelog>
+				<changelog lang="de">
+					<change><![CDATA[[Add] letztes Feature: Zeit beim überfahren des Namens anzeigen]]></change>
+				</changelog>
+			</entry>
+
+			<entry>
+				<date>2007-12-02</date>
+				<rev-version>6.0.2</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[[Fix] this should be the final fix for the timezone problem]]></change>
+				</changelog>
+				<changelog lang="de">
+					<change><![CDATA[[Fix] Jetzt sollte endlich das Problem mit den Zeitzonen erledigt sein]]></change>
+				</changelog>
+			</entry>
+
+			<entry>
+				<date>2007-10-22</date>
+				<rev-version>6.0.1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[[Fix] on displaying a page without having installed]]></change>
+					<change><![CDATA[[Fix] in the acp]]></change>
+				</changelog>
+				<changelog lang="de">
+					<change><![CDATA[[Fix] beim Aufrufen der Seite ohne Installation]]></change>
+					<change><![CDATA[[Fix] im ACP]]></change>
+				</changelog>
+			</entry>
+
+			<entry>
+				<date>2007-10-21</date>
+				<rev-version>6.0.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[[Change] updated to RC7]]></change>
+					<change><![CDATA[[Change] created its own module]]></change>
+					<change><![CDATA[[Fix] fixed some bugs]]></change>
+				</changelog>
+				<changelog lang="de">
+					<change><![CDATA[[Change] auf RC7 angepasst]]></change>
+					<change><![CDATA[[Change] eigenes Modul erstellt]]></change>
+					<change><![CDATA[[Fix] einige Bugs behoben]]></change>
+				</changelog>
+			</entry>
+		</history>
+	</header>
+
+	<action-group>
+		<copy>
+			<file from="root/adm/mods/nv_wwh_version.php" to="adm/mods/nv_wwh_version.php" />
+			<file from="root/adm/style/acp_wwh.html" to="adm/style/acp_wwh.html" />
+			<file from="root/includes/functions_wwh.php" to="includes/functions_wwh.php" />
+			<file from="root/includes/acp/acp_wwh.php" to="includes/acp/acp_wwh.php" />
+			<file from="root/includes/acp/info/acp_wwh.php" to="includes/acp/info/acp_wwh.php" />
+			<file from="root/install/*.*" to="install/*.*" />
+			<file from="root/language/en/mods/*.*" to="language/en/mods/*.*" />
+		</copy>
+
+		<open src="index.php">
+			<edit>
+				<find><![CDATA[// Assign index specific vars]]></find>
+				<action type="before-add"><![CDATA[if (!function_exists('display_who_was_here'))
+{
+	include($phpbb_root_path . 'includes/functions_wwh.' . $phpEx);
+}
+display_who_was_here();
+]]></action>
+			</edit>
+		</open>
+
+		<open src="includes/constants.php">
+			<edit>
+				<find><![CDATA[// Additional tables]]></find>
+				<action type="after-add"><![CDATA[define('WWH_TABLE',					$table_prefix . 'wwh');]]></action>
+			</edit>
+		</open>
+
+		<open src="includes/functions.php">
+			<edit>
+				<find><![CDATA[	// Send a proper content-language to the output
+	$user_lang = $user->lang['USER_LANG'];
+	if (strpos($user_lang, '-x-') !== false)
+	{
+		$user_lang = substr($user_lang, 0, strpos($user_lang, '-x-'));
+	}
+]]></find>
+				<action type="after-add"><![CDATA[	if (!function_exists('update_who_was_here_session'))
+	{
+		include($phpbb_root_path . 'includes/functions_wwh.' . $phpEx);
+	}
+	update_who_was_here_session();
+]]></action>
+			</edit>
+		</open>
+
+		<open src="styles/prosilver/template/index_body.html">
+			<edit>
+				<find><![CDATA[	<!-- IF U_VIEWONLINE --><h3><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></h3><!-- ELSE --><h3>{L_WHO_IS_ONLINE}</h3><!-- ENDIF -->
 	<p>{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /> <br />{LOGGED_IN_USER_LIST}
 	<!-- IF LEGEND --><br /><em>{L_LEGEND}: {LEGEND}</em><!-- ENDIF --></p>]]></find>
-        <action type="after-add"><![CDATA[	<!-- IF WHO_WAS_HERE_LIST2 -->
+				<action type="after-add"><![CDATA[	<!-- IF WHO_WAS_HERE_LIST2 -->
 		<h3>{L_WHO_WAS_HERE}</h3>
 		<p>{WHO_WAS_HERE_LIST2} ({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}</p>
 	<!-- ELSEIF U_ACP -->
 		<h3>{L_WHO_WAS_HERE}</h3>
 		<p>{L_WWH_UPDATE_NEED}</p>
 	<!-- ENDIF -->]]></action>
-      </edit>
-    </open>
-    <diy-instructions lang="de"><![CDATA[Rufe install_wwh/install.php auf und führe den Installer aus
+			</edit>
+		</open>
+
+		<diy-instructions lang="de"><![CDATA[Rufe install_wwh/install.php auf und führe den Installer aus
 
 Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
 
 Aktualisiere deine Styles:
-    "Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"]]></diy-instructions>
-    <diy-instructions lang="en-gb"><![CDATA[Browse to install_wwh/install.php and run the installer
+		"Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"]]></diy-instructions>
+		<diy-instructions lang="en"><![CDATA[Browse to install_wwh/install.php and run the installer
 
 Clear your cache in the "Administration Control Panel" (ACP) > "General" > "Purge the cache"
 
 Refresh your Styles:
-    "Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"]]></diy-instructions>
-  </action-group>
+		"Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"]]></diy-instructions>
+	</action-group>
 </mod>

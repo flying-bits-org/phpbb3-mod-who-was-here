@@ -14,15 +14,67 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 $user->add_lang('mods/lang_wwh');
-include_once($phpbb_root_path . 'includes/functions_wwh2.' . $phpEx);
 
-if (1 == 1)//REMOVE!file_exists($phpbb_root_path . 'install_wwh'))
+function update_who_was_here_session ()
 {
-	//cleaning the wwh-table
+	global $phpbb_root_path, $db, $user;
+
+	$db->sql_return_on_error(true);
+	if ($user->data['user_id'] != ANONYMOUS)
+	{
+		$sql = 'DELETE FROM ' . WWH_TABLE . "
+			WHERE user_id = {$user->data['user_id']}
+				OR (user_ip = '{$user->ip}'
+					AND user_id = " . ANONYMOUS . ')';
+		$db->sql_query($sql);
+
+		$wwh_data = array(
+			'user_id'			=> $user->data['user_id'],
+			'user_ip'			=> $user->ip,
+			'username'			=> $user->data['username'],
+			'username_clean'	=> $user->data['username_clean'],
+			'user_colour'		=> $user->data['user_colour'],
+			'user_type'			=> $user->data['user_type'],
+			'viewonline'		=> $user->data['session_viewonline'],
+			'wwh_lastpage'		=> time(),
+		);
+		$db->sql_query('INSERT INTO ' . WWH_TABLE . ' ' . $db->sql_build_array('INSERT', $wwh_data));
+	}
+	else
+	{
+		$sql = 'SELECT user_id
+			FROM ' . WWH_TABLE . "
+			WHERE user_ip = '{$user->ip}'";
+		$result = $db->sql_query_limit($sql, 1);
+		$user_logged = (int) $db->sql_fetchfield('user_id');
+		$db->sql_freeresult($result);
+		if (!$user_logged)
+		{
+			$wwh_data = array(
+				'user_id'			=> $user->data['user_id'],
+				'user_ip'			=> $user->ip,
+				'username'			=> $user->data['username'],
+				'username_clean'	=> $user->data['username_clean'],
+				'user_colour'		=> $user->data['user_colour'],
+				'user_type'			=> $user->data['user_type'],
+				'viewonline'		=> 1,
+				'wwh_lastpage'		=> time(),
+			);
+			$db->sql_query('INSERT INTO ' . WWH_TABLE . ' ' . $db->sql_build_array('INSERT', $wwh_data));
+		}
+	}
+	$db->sql_return_on_error(false);
+}
+
+function display_who_was_here ()
+{
+	global $auth, $config, $db, $template, $user;
+
+	// Cleaning the wwh-table
 	$timestamp = time();
 	if ($config['wwh_version'])
 	{
-		$timestamp_cleaning = gmmktime(0,0,0,gmdate('m', $timestamp),gmdate('d', $timestamp),gmdate('Y', $timestamp));
+		$timestamp_cleaning = gmmktime(0, 0, 0, gmdate('m', $timestamp), gmdate('d', $timestamp), gmdate('Y', $timestamp));
 		$timestamp_cleaning = $timestamp_cleaning - $config['board_timezone'] * 3600;
 		$timestamp_cleaning = $timestamp_cleaning - $config['board_dst'] * 3600;
 		$timestamp_cleaning = ($timestamp_cleaning < $timestamp - 86400) ? $timestamp_cleaning + 86400 : (($timestamp_cleaning > $timestamp) ? $timestamp_cleaning - 86400 : $timestamp_cleaning);
@@ -32,53 +84,51 @@ if (1 == 1)//REMOVE!file_exists($phpbb_root_path . 'install_wwh'))
 		$timestamp_cleaning = $timestamp - ((3600 * $config['wwh_del_time_h']) + (60 * $config['wwh_del_time_m']) + $config['wwh_del_time_s']);
 	}
 
-	$sql = 'DELETE FROM ' . WWH_TABLE . " WHERE wwh_lastpage <= $timestamp_cleaning";
-	$db->sql_query($sql);
+	$db->sql_return_on_error(true);
+	$sql = 'DELETE FROM ' . WWH_TABLE . '
+		WHERE wwh_lastpage <= ' . $timestamp_cleaning;
+	$result = $db->sql_query($sql);
+	$db->sql_return_on_error(false);
+	if ($result === false)
+	{
+		$user->add_lang('mods/info_acp_wwh');
+		return;
+	}
 
-	// let's dump out the list of the users =)
+	// Let's dump out the list of the users =)
 	$who_was_here_record = $wwh_username_colour = $wwh_username = $wwh_username_full = $wwh_count_total = $wwh_count_reg = $wwh_count_hidden = $wwh_count_guests = $wwh_count_bot = $who_was_here_list = '';
 
 	switch ($config['wwh_sort_by'])
 	{
 		case '0':
-			$order_by = 'username_clean ASC';
-		break;
-
 		case '1':
-			$order_by = 'username_clean DESC';
+			$sql_order_by = 'username_clean';
 		break;
-
 		case '4':
-			$order_by = 'user_id ASC';
-		break;
-
 		case '5':
-			$order_by = 'user_id DESC';
+			$sql_order_by = 'user_id';
 		break;
-
 		case '2':
-			$order_by = 'wwh_lastpage ASC';
-		break;
-
 		case '3':
 		default:
-			$order_by = 'wwh_lastpage DESC';
+			$sql_order_by = 'wwh_lastpage';
 		break;
 	}
+	$sql_ordering = (($config['wwh_sort_by'] % 2) == 0) ? 'ASC' : 'DESC';
 
 	// let's try another method to deny doubles
 	$user_id_ary = array();
 
 	$sql = 'SELECT user_id, username, username_clean, user_colour, user_type, viewonline, wwh_lastpage, user_ip
 		FROM  ' . WWH_TABLE . "
-		ORDER BY $order_by";
+		ORDER BY $sql_order_by $sql_ordering";
 	$result = $db->sql_query($sql);
 
 	while ($row = $db->sql_fetchrow($result))
 	{
 		if (!in_array($row['user_id'], $user_id_ary))
 		{
-			$wwh_username_full = get_username_string(($row['user_type'] == USER_IGNORE) ? 'no_profile' : 'full', $row['user_id'], $row['username'], $row['user_colour'], $guest_username = false, $custom_profile_url = false);
+			$wwh_username_full = get_username_string((($row['user_type'] == USER_IGNORE) ? 'no_profile' : 'full'), $row['user_id'], $row['username'], $row['user_colour']);
 			$hover_time = (($config['wwh_disp_time'] == '2') ? $user->lang['WHO_WAS_HERE_LATEST1'] . '&nbsp;' . $user->format_date($row['wwh_lastpage'],'H:i') . $user->lang['WHO_WAS_HERE_LATEST2'] : '' );
 			$hover_ip = ($auth->acl_get('a_') && $config['wwh_disp_ip']) ? $user->lang['IP'] . ':&nbsp;' . $row['user_ip'] : '';
 			$hover_info = (($hover_time || $hover_ip) ? ' title="' . $hover_time . (($hover_time && $hover_ip) ? ' | ' : '') . $hover_ip . '"' : '');
@@ -104,7 +154,7 @@ if (1 == 1)//REMOVE!file_exists($phpbb_root_path . 'install_wwh'))
 				}
 			}
 
-			// at the end let's count them =)
+			// At the end let's count them =)
 			if ($row['user_id'] == ANONYMOUS)
 			{
 				$wwh_count_guests = $wwh_count_guests + 1;
@@ -123,7 +173,7 @@ if (1 == 1)//REMOVE!file_exists($phpbb_root_path . 'install_wwh'))
 			}
 			$wwh_count_total = $wwh_count_total + 1;
 		}
-	}//end while!
+	}
 
 	if ($who_was_here_list == '')
 	{

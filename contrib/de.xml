@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.0.xsd">
+	<header>
+		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+
+		<title lang="de"><![CDATA[NV "Wer war da?"]]></title>
+		<title lang="en"><![CDATA[NV "who was here?"]]></title>
+
+		<description lang="de"><![CDATA[Fügt auf der index.php einen Abschnitt hinzu, wo die User aufgelistet werden,
+die am heutigem Tage online gewesen sind.
+Features:
+	• Bots in der Liste ein-/ausblenden (im ACP einstellbar)
+	• unsichtbare Benutzer in der Liste ein-/ausblenden (im ACP einstellbar)
+	• Gäste im Rekord mitzählen (im ACP einstellbar)
+	• Besuchszeit in der Liste ein-/ausblenden oder als "hover"-Effekt auf dem Benutzernamen (im ACP einstellbar)
+
+	• Rekord speichern und anzeigen (im ACP einstellbar)
+	• Es gibt 2 Modi:
+		 1. "Wer war heute da?": Hier bei werden alle Benutzer angezeigt, die am heutigen Tage online waren.
+		 2. "Wer war in der letzten Zeit da?": Der Zeitraum in dem die Besucher dagewesen sein sollen, kann im ACP eingestellt werden.
+	• Die Liste kann im Administrationsbereich zurückgesetzt werden.
+
+	• Die Zeit wird nach der Einstellung des Benutzers im persönlichen Bereich ausgegeben. Also mit Berücksichtigung von Zeitzone und Sommerzeit.
+	• Die Benutzernamen sind eingefärbt.
+]]></description>
+		<description lang="en"><![CDATA[Adds a list with all users, which visited the page today, on the index.php.
+With saving the record of usercount.
+Features:
+	• en-/disable bots in the list (adjustable in ACP)
+	• en-/disable hidden users in the list (adjustable in ACP)
+	• en-/disable guests in the record (adjustable in ACP)
+	• en-/disable visit-time in the list or as "hover" on the name (adjustable in ACP)
+
+	• "Who was here?" or "Who was here in the last time?" (adjustable in ACP)
+	• display and store the record (in ACP)
+	• reset-function (in ACP)
+
+	• time is displayed with user-timezone and dst(daylight-saving-time) adjustment of the ucp
+	• usernames are coloured
+]]></description>
+
+		<author-notes lang="de"><![CDATA[
+Die MOD untersützt die "MOD Version Check"-MOD von Handymman´:
+http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
+		<author-notes lang="en"><![CDATA[
+This MOD supports the "MOD Version Check"-MOD by Handymman´:
+http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
+
+		<author-group>
+			<author>
+				<realname>Joas Schilling</realname>
+				<email>nickvergessen@gmx.de</email>
+				<username>nickvergessen</username>
+				<homepage>http://www.flying-bits.org/</homepage>
+			</author>
+		</author-group>
+
+		<mod-version>1.0.0</mod-version>
+
+		<installation>
+			<level>easy</level>
+			<time>300</time>
+			<target-version>3.0.4</target-version>
+		</installation>
+
+		<link-group>
+			<link type="parent" lang="de" href="../install.xml">Installations-Anleitung</link>
+			<link type="parent" lang="en" href="../install.xml">Install-Manual</link>
+		</link-group>
+	</header>
+
+	<action-group>
+		<copy>
+			<file from="root/language/de/mods/*.*" to="language/de/mods/*.*" />
+		</copy>
+
+		<diy-instructions lang="de"><![CDATA[Rufe install_wwh/install.php auf und führe den Installer aus
+
+Leere den Cache im "Administrations-Bereich" (ACP) > "Allgemein" > "Den Cache leeren"
+
+Aktualisiere deine Styles:
+		"Administrations-Bereich" (ACP) > "Styles" > "Templates" > jedes > "Aktualisieren"]]></diy-instructions>
+		<diy-instructions lang="en"><![CDATA[Browse to install_wwh/install.php and run the installer
+
+Clear your cache in the "Administration Control Panel" (ACP) > "General" > "Purge the cache"
+
+Refresh your Styles:
+		"Administration Control Panel" (ACP) > "Styles" > "Templates" > each > "refresh"]]></diy-instructions>
+	</action-group>
+</mod>

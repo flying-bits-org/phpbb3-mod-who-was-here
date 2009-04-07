@@ -22,10 +22,6 @@ class acp_wwh
 		global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx;
 
 		add_form_key('wwh');
-		$new_mod_version = $old_mod_version = '1';
-		include($phpbb_root_path . 'includes/functions_wwh2.' . $phpEx);
-		$user->add_lang('acp/common');
-		$user->add_lang('mods/lang_wwh_acp');
 		$user->add_lang('ucp');
 		$this->tpl_name = 'acp_wwh';
 		$this->page_title = $user->lang['WWH_TITLE'];
