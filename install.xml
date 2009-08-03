@@ -76,6 +76,14 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 
 		<history>
 			<entry>
+				<date>2009-MM-DD</date>
+				<rev-version>1.0.1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[[Fix] Some performance tweaks for cleaning the list and updating it. (Bug #516)]]></change>
+				</changelog>
+			</entry>
+
+			<entry>
 				<date>2009-04-07</date>
 				<rev-version>1.0.0</rev-version>
 				<changelog lang="en">

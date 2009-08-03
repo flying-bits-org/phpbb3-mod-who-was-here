@@ -18,15 +18,8 @@ function update_who_was_here_session ()
 {
 	global $phpbb_root_path, $db, $user;
 
-	$db->sql_return_on_error(true);
 	if ($user->data['user_id'] != ANONYMOUS)
 	{
-		$sql = 'DELETE FROM ' . WWH_TABLE . "
-			WHERE user_id = {$user->data['user_id']}
-				OR (user_ip = '{$user->ip}'
-					AND user_id = " . ANONYMOUS . ')';
-		$db->sql_query($sql);
-
 		$wwh_data = array(
 			'user_id'			=> $user->data['user_id'],
 			'user_ip'			=> $user->ip,
@@ -37,16 +30,73 @@ function update_who_was_here_session ()
 			'viewonline'		=> $user->data['session_viewonline'],
 			'wwh_lastpage'		=> time(),
 		);
-		$db->sql_query('INSERT INTO ' . WWH_TABLE . ' ' . $db->sql_build_array('INSERT', $wwh_data));
+
+		$db->sql_return_on_error(true);
+		$sql = 'UPDATE ' . WWH_TABLE . ' 
+			SET ' . $db->sql_build_array('UPDATE', $wwh_data) . "
+			WHERE user_id = {$user->data['user_id']}
+				OR (user_ip = '{$user->ip}'
+					AND user_id = " . ANONYMOUS . ')';
+		$result = $db->sql_query($sql);
+		$db->sql_return_on_error(false);
+
+		if ($result === false)
+		{
+			// database does not exist yet...
+			return;
+		}
+
+		$sql_affectedrows = (int) $db->sql_affectedrows();
+		if ($sql_affectedrows <> 1)
+		{
+			if ($sql_affectedrows > 1)
+			{
+				// Found multiple matches, so we delete them and just add one
+				$sql = 'DELETE FROM ' . WWH_TABLE . "
+					WHERE user_id = {$user->data['user_id']}
+						OR (user_ip = '{$user->ip}'
+							AND user_id = " . ANONYMOUS . ')';
+				$db->sql_query($sql);
+				$db->sql_query('INSERT INTO ' . WWH_TABLE . ' ' . $db->sql_build_array('INSERT', $wwh_data));
+			}
+
+			if ($sql_affectedrows == 0)
+			{
+				// No entry updated. Either the user is not listed yet, or has opened two links in the same time
+				$sql = 'SELECT 1 as found
+					FROM ' . WWH_TABLE . "
+					WHERE user_id = {$user->data['user_id']}
+						OR (user_ip = '{$user->ip}'
+							AND user_id = " . ANONYMOUS . ')';
+				$result = $db->sql_query($sql);
+				$found = (int) $db->sql_fetchfield('found');
+				$db->sql_freeresult($result);
+				if (!$found)
+				{
+					// He wasn't listed.
+					$db->sql_query('INSERT INTO ' . WWH_TABLE . ' ' . $db->sql_build_array('INSERT', $wwh_data));
+				}
+			}
+		}
 	}
 	else
 	{
+		$db->sql_return_on_error(true);
 		$sql = 'SELECT user_id
 			FROM ' . WWH_TABLE . "
 			WHERE user_ip = '{$user->ip}'";
 		$result = $db->sql_query_limit($sql, 1);
+		$db->sql_return_on_error(false);
+
+		if ($result === false)
+		{
+			// database does not exist yet...
+			return;
+		}
+
 		$user_logged = (int) $db->sql_fetchfield('user_id');
 		$db->sql_freeresult($result);
+
 		if (!$user_logged)
 		{
 			$wwh_data = array(
@@ -84,15 +134,25 @@ function display_who_was_here ()
 		$timestamp_cleaning = $timestamp - ((3600 * $config['wwh_del_time_h']) + (60 * $config['wwh_del_time_m']) + $config['wwh_del_time_s']);
 	}
 
-	$db->sql_return_on_error(true);
-	$sql = 'DELETE FROM ' . WWH_TABLE . '
-		WHERE wwh_lastpage <= ' . $timestamp_cleaning;
-	$result = $db->sql_query($sql);
-	$db->sql_return_on_error(false);
-	if ($result === false)
+	if (($config['wwh_last_clean'] != $timestamp_cleaning) || !$config['wwh_version'])
 	{
-		$user->add_lang('mods/info_acp_wwh');
-		return;
+		$db->sql_return_on_error(true);
+		$sql = 'DELETE FROM ' . WWH_TABLE . '
+			WHERE wwh_lastpage <= ' . $timestamp_cleaning;
+		$result = $db->sql_query($sql);
+		$db->sql_return_on_error(false);
+
+		if ($result === false)
+		{
+			// database does not exist yet...
+			$user->add_lang('mods/info_acp_wwh');
+			return;
+		}
+
+		if ($config['wwh_version'])
+		{
+			set_config('wwh_last_clean', $timestamp_cleaning);
+		}
 	}
 
 	// Let's dump out the list of the users =)
