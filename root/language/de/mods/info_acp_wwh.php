@@ -29,6 +29,7 @@ $lang = array_merge($lang, array(
 	'WWH_DISP_HIDDEN'			=> 'Unsichtbare Benutzer anzeigen',
 	'WWH_DISP_HIDDEN_EXP'		=> 'Sollen unsichtbare Benutzer angezeigt werden? (Nur mit Berechtigung von phpBB3 selbst)',
 	'WWH_DISP_TIME'				=> 'Zeit anzeigen',
+	'WWH_DISP_TIME_FORMAT'		=> 'Zeit/Datums-Format',
 	'WWH_DISP_HOVER'			=> 'als Hover-Effekt',
 	'WWH_DISP_TIME_EXP'			=> 'Entweder sehen alle Benutzer die Zeit oder niemand.',
 	'WWH_DISP_IP'				=> 'IP anzeigen',
@@ -65,27 +66,14 @@ $lang = array_merge($lang, array(
 	'WWH_VERSION2_EXP2'			=> 'deaktiviert, wenn "Heute" ausgewählt wurde',
 	'WWH_VERSION2_EXP3'			=> 'Sekunden',
 
-	'INSTALLER_INTRO'					=> 'Intro',
-	'INSTALLER_INTRO_WELCOME'			=> 'Willkommen zur MOD-Installation',
-	'INSTALLER_INTRO_WELCOME_NOTE'		=> 'Bitte wähle aus, was du tun möchtest.',
 
-	'INSTALLER_INSTALL'					=> 'Installieren',
-	'INSTALLER_INSTALL_MENU'			=> 'Installation',
-	'INSTALLER_INSTALL_SUCCESSFUL'		=> 'Installation der MOD v%s war erfolgreich.',
-	'INSTALLER_INSTALL_VERSION'			=> 'Installiere MOD v%s',
-	'INSTALLER_INSTALL_WELCOME'			=> 'Willkommen zur Installation',
-	'INSTALLER_INSTALL_WELCOME_NOTE'	=> 'Wenn du den MOD installierst, obwohl er schon installiert ist, werden die Einstellungen überschrieben.',
-
-	'INSTALLER_NEEDS_FOUNDER'			=> 'Du musst als Gründer eingeloggt sein.',
-
-	'INSTALLER_UPDATE'					=> 'Update',
-	'INSTALLER_UPDATE_MENU'				=> 'Updatemenü',
-	'INSTALLER_UPDATE_NOTE'				=> 'Update MOD von v%s nach v%s',
-	'INSTALLER_UPDATE_SUCCESSFUL'		=> 'Update der MOD von v%s nach v%s war erfolgreich.',
-	'INSTALLER_UPDATE_VERSION'			=> 'Update MOD von v',
-	'INSTALLER_UPDATE_WELCOME'			=> 'Willkommen zum Update',
-
-	'WARNING'							=> 'Warnung',
+	'WWH_MOD'					=> '"Who was here?" MOD',
+	'INSTALL_WWH_MOD'			=> '"Who was here?" MOD installieren',
+	'INSTALL_WWH_MOD_CONFIRM'	=> 'Bist du dir sicher, dass du die "Who was here?" MOD installieren möchtest?',
+	'UPDATE_WWH_MOD'			=> '"Who was here?" MOD aktualisieren',
+	'UPDATE_WWH_MOD_CONFIRM'	=> 'Bist du dir sicher, dass du die "Who was here?" MOD aktualisieren möchtest?',
+	'UNINSTALL_WWH_MOD'			=> '"Who was here?" MOD deinstallieren',
+	'UNINSTALL_WWH_MOD_CONFIRM'	=> 'Bist du dir sicher, dass du die "Who was here?" MOD deinstallieren möchtest?',
 ));
 
 ?>

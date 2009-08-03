@@ -29,6 +29,7 @@ $lang = array_merge($lang, array(
 	'WWH_DISP_HIDDEN'			=> 'show hidden users',
 	'WWH_DISP_HIDDEN_EXP'		=> 'Should hidden users be displayed in the list? (only by permission)',
 	'WWH_DISP_TIME'				=> 'show time',
+	'WWH_DISP_TIME_FORMAT'		=> 'time/date format',
 	'WWH_DISP_HOVER'			=> 'display on hover',
 	'WWH_DISP_TIME_EXP'			=> 'All User see it or none. No special function for Admins.',
 	'WWH_DISP_IP'				=> 'show ip',
@@ -65,27 +66,13 @@ $lang = array_merge($lang, array(
 	'WWH_VERSION2_EXP2'			=> 'disabled, if you have choosen "today"',
 	'WWH_VERSION2_EXP3'			=> 'seconds',
 
-	'INSTALLER_INTRO'					=> 'Intro',
-	'INSTALLER_INTRO_WELCOME'			=> 'Welcome to the MOD Installation',
-	'INSTALLER_INTRO_WELCOME_NOTE'		=> 'Please choose what you want to do.',
-
-	'INSTALLER_INSTALL'					=> 'Installation',
-	'INSTALLER_INSTALL_MENU'			=> 'Installationmenu',
-	'INSTALLER_INSTALL_SUCCESSFUL'		=> 'Installation of the MOD v%s was successful. You may delete the install-folder now.',
-	'INSTALLER_INSTALL_VERSION'			=> 'Install MOD v%s',
-	'INSTALLER_INSTALL_WELCOME'			=> 'Welcome to the Installationmenu',
-	'INSTALLER_INSTALL_WELCOME_NOTE'	=> 'When you choose to install the MOD, even though it is already installed, the previous adjustments will be overwritten.',
-
-	'INSTALLER_NEEDS_FOUNDER'			=> 'You must be logged in as a founder.',
-
-	'INSTALLER_UPDATE'					=> 'Update',
-	'INSTALLER_UPDATE_MENU'				=> 'Updatemenu',
-	'INSTALLER_UPDATE_NOTE'				=> 'Update MOD from v%s to v%s',
-	'INSTALLER_UPDATE_SUCCESSFUL'		=> 'Update of the MOD from v%s to v%s was successful. You may delete the install-folder now.',
-	'INSTALLER_UPDATE_VERSION'			=> 'Update MOD from v',
-	'INSTALLER_UPDATE_WELCOME'			=> 'Welcome to the Updatemenu',
-
-	'WARNING'							=> 'Warning',
+	'WWH_MOD'					=> '"Who was here?" MOD',
+	'INSTALL_WWH_MOD'			=> 'Install "Who was here?" MOD',
+	'INSTALL_WWH_MOD_CONFIRM'	=> 'Are you sure you want to install the "Who was here?" MOD?',
+	'UPDATE_WWH_MOD'			=> 'Update "Who was here?" MOD',
+	'UPDATE_WWH_MOD_CONFIRM'	=> 'Are you sure you want to update the "Who was here?" MOD?',
+	'UNINSTALL_WWH_MOD'			=> 'Uninstall "Who was here?" MOD',
+	'UNINSTALL_WWH_MOD_CONFIRM'	=> 'Are you sure you want to uninstall the "Who was here?" MOD?',
 ));
 
 ?>

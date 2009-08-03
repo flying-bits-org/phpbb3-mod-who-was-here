@@ -19,7 +19,7 @@ class acp_wwh_info
 		return array(
 			'filename'	=> 'acp_wwh',
 			'title'		=> 'WWH_TITLE',
-			'version'	=> '6.0.7',
+			'version'	=> '1.0.1',
 			'modes'		=> array(
 				'config_wwh'	=> array(
 				'title'		=> 'WWH_CONFIG',

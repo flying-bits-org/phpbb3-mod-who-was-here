@@ -57,17 +57,17 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 			</author>
 		</author-group>
 
-		<mod-version>1.0.0</mod-version>
+		<mod-version>1.0.1</mod-version>
 
 		<installation>
 			<level>easy</level>
 			<time>300</time>
-			<target-version>3.0.4</target-version>
+			<target-version>3.0.5</target-version>
 		</installation>
 
 		<link-group>
-			<link type="parent" lang="de" href="contrib/update_1_0_0-RC1_to_1_0_0/update.xml">Update von 1.0.0-RC1 auf 1.0.0</link>
-			<link type="parent" lang="en" href="contrib/update_1_0_0-RC1_to_1_0_0/update.xml">Update from 1.0.0-RC1 to 1.0.0</link>
+			<link type="parent" lang="de" href="contrib/update_1_0_0_to_1_0_1/update.xml">Update von 1.0.0 auf 1.0.1</link>
+			<link type="parent" lang="en" href="contrib/update_1_0_0_to_1_0_1/update.xml">Update from 1.0.0 to 1.0.1</link>
 			<link type="language" lang="de" href="contrib/de.xml">Anleitung für das deutsche Sprachpaket</link>
 			<link type="language" lang="en" href="contrib/de.xml">Manual for German Language-set</link>
 			<link type="template" lang="de" href="contrib/subsilver2.xml">Anleitung für das Style subsilver2</link>
@@ -76,9 +76,10 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 
 		<history>
 			<entry>
-				<date>2009-MM-DD</date>
+				<date>2009-08-03</date>
 				<rev-version>1.0.1</rev-version>
 				<changelog lang="en">
+					<change><![CDATA[[Fix] Give ACP-Option for date-format when viewing timestamp of last visit (Bug #609)]]></change>
 					<change><![CDATA[[Fix] Some performance tweaks for cleaning the list and updating it. (Bug #516)]]></change>
 				</changelog>
 			</entry>
@@ -208,6 +209,7 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 			<file from="root/includes/acp/info/acp_wwh.php" to="includes/acp/info/acp_wwh.php" />
 			<file from="root/install/*.*" to="install/*.*" />
 			<file from="root/language/en/mods/*.*" to="language/en/mods/*.*" />
+			<file from="root/umil/*.*" to="umil/*.*" />
 		</copy>
 
 		<open src="index.php">

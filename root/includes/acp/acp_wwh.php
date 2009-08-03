@@ -46,6 +46,7 @@ class acp_wwh
 			set_config('wwh_disp_guests', request_var('wwh_disp_guests', 0));
 			set_config('wwh_disp_hidden', request_var('wwh_disp_hidden', 0));
 			set_config('wwh_disp_time', request_var('wwh_disp_time', 0));
+			set_config('wwh_disp_time_format', request_var('wwh_disp_time_format', 'H:i'));
 			set_config('wwh_disp_ip', request_var('wwh_disp_ip', 0));
 			set_config('wwh_version', request_var('wwh_version', 0));
 			set_config('wwh_del_time_h', request_var('wwh_del_time_h', 0));
@@ -69,6 +70,7 @@ class acp_wwh
 			'WWH_DISP_GUESTS'		=> $config['wwh_disp_guests'],
 			'WWH_DISP_HIDDEN'		=> $config['wwh_disp_hidden'],
 			'WWH_DISP_TIME'			=> $config['wwh_disp_time'],
+			'WWH_DISP_TIME_FORMAT'	=> $config['wwh_disp_time_format'],
 			'WWH_DISP_IP'			=> $config['wwh_disp_ip'],
 			'WWH_VERSION'			=> $config['wwh_version'],
 			'WWH_DEL_TIME_H'		=> $config['wwh_del_time_h'],

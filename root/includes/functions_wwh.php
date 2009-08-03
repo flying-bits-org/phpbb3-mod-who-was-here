@@ -189,10 +189,10 @@ function display_who_was_here ()
 		if (!in_array($row['user_id'], $user_id_ary))
 		{
 			$wwh_username_full = get_username_string((($row['user_type'] == USER_IGNORE) ? 'no_profile' : 'full'), $row['user_id'], $row['username'], $row['user_colour']);
-			$hover_time = (($config['wwh_disp_time'] == '2') ? $user->lang['WHO_WAS_HERE_LATEST1'] . '&nbsp;' . $user->format_date($row['wwh_lastpage'],'H:i') . $user->lang['WHO_WAS_HERE_LATEST2'] : '' );
+			$hover_time = (($config['wwh_disp_time'] == '2') ? $user->lang['WHO_WAS_HERE_LATEST1'] . '&nbsp;' . $user->format_date($row['wwh_lastpage'], $config['wwh_disp_time_format']) . $user->lang['WHO_WAS_HERE_LATEST2'] : '' );
 			$hover_ip = ($auth->acl_get('a_') && $config['wwh_disp_ip']) ? $user->lang['IP'] . ':&nbsp;' . $row['user_ip'] : '';
 			$hover_info = (($hover_time || $hover_ip) ? ' title="' . $hover_time . (($hover_time && $hover_ip) ? ' | ' : '') . $hover_ip . '"' : '');
-			$disp_time = (($config['wwh_disp_time'] == '1') ? '&nbsp;(' . $user->lang['WHO_WAS_HERE_LATEST1'] . '&nbsp;' . $user->format_date($row['wwh_lastpage'],'H:i') . $user->lang['WHO_WAS_HERE_LATEST2'] . (($hover_ip) ? ' | ' . $hover_ip : '' ) . ')' : '' );
+			$disp_time = (($config['wwh_disp_time'] == '1') ? '&nbsp;(' . $user->lang['WHO_WAS_HERE_LATEST1'] . '&nbsp;' . $user->format_date($row['wwh_lastpage'], $config['wwh_disp_time_format']) . $user->lang['WHO_WAS_HERE_LATEST2'] . (($hover_ip) ? ' | ' . $hover_ip : '' ) . ')' : '' );
 
 			if (($row['viewonline']) || ($row['user_type'] == USER_IGNORE))
 			{
@@ -304,15 +304,15 @@ function display_who_was_here ()
 	{
 		case 3:
 			$who_was_here_list2 = sprintf($who_was_here_list2, $user->lang['COMMA_SEPARATOR'], $user->lang['COMMA_SEPARATOR'], $user->lang['WHO_WAS_HERE_WORD']);
-			break;
+		break;
 
 		case 2:
 			$who_was_here_list2 = sprintf($who_was_here_list2, $user->lang['COMMA_SEPARATOR'], $user->lang['WHO_WAS_HERE_WORD']);
-			break;
+		break;
 
 		case 1:
 			$who_was_here_list2 = sprintf($who_was_here_list2, $user->lang['WHO_WAS_HERE_WORD']);
-			break;
+		break;
 	}
 
 	if ($config['wwh_version'])
