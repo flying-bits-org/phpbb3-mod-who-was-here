@@ -134,7 +134,7 @@ function display_who_was_here ()
 		$timestamp_cleaning = $timestamp - ((3600 * $config['wwh_del_time_h']) + (60 * $config['wwh_del_time_m']) + $config['wwh_del_time_s']);
 	}
 
-	if (($config['wwh_last_clean'] != $timestamp_cleaning) || !$config['wwh_version'])
+	if ((!isset($config['wwh_last_clean']) || ($config['wwh_last_clean']  != $timestamp_cleaning)) || !$config['wwh_version'])
 	{
 		$db->sql_return_on_error(true);
 		$sql = 'DELETE FROM ' . WWH_TABLE . '
@@ -156,7 +156,8 @@ function display_who_was_here ()
 	}
 
 	// Let's dump out the list of the users =)
-	$who_was_here_record = $wwh_username_colour = $wwh_username = $wwh_username_full = $wwh_count_total = $wwh_count_reg = $wwh_count_hidden = $wwh_count_guests = $wwh_count_bot = $who_was_here_list = '';
+	$who_was_here_record = $wwh_username_colour = $wwh_username = $wwh_username_full = $who_was_here_list = '';
+	$wwh_count_total = $wwh_count_reg = $wwh_count_hidden = $wwh_count_guests = $wwh_count_bot = 0;
 
 	switch ($config['wwh_sort_by'])
 	{
