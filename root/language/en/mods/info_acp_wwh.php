@@ -16,6 +16,14 @@ if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
 }
+if (!isset($phpbb_root_path) && !defined('IN_ADMIN'))
+{
+	$phpbb_root_path = '../';
+}
+else if (!isset($phpbb_root_path))
+{
+	$phpbb_root_path = './';
+}
 
 $lang = array_merge($lang, array(
 	'WWH_CONFIG'				=> 'Configurate "Who was here?"',

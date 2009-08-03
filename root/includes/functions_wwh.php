@@ -134,7 +134,7 @@ function display_who_was_here ()
 		$timestamp_cleaning = $timestamp - ((3600 * $config['wwh_del_time_h']) + (60 * $config['wwh_del_time_m']) + $config['wwh_del_time_s']);
 	}
 
-	if ((!isset($config['wwh_last_clean']) || ($config['wwh_last_clean']  != $timestamp_cleaning)) || !$config['wwh_version'])
+	if ((!isset($config['wwh_last_clean']) || ($config['wwh_last_clean'] != $timestamp_cleaning)) || !$config['wwh_version'])
 	{
 		$db->sql_return_on_error(true);
 		$sql = 'DELETE FROM ' . WWH_TABLE . '
