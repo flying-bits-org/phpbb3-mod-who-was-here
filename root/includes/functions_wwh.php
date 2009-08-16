@@ -33,9 +33,9 @@ function update_who_was_here_session ()
 
 		$db->sql_return_on_error(true);
 		$sql = 'UPDATE ' . WWH_TABLE . ' 
-			SET ' . $db->sql_build_array('UPDATE', $wwh_data) . "
-			WHERE user_id = {$user->data['user_id']}
-				OR (user_ip = '{$user->ip}'
+			SET ' . $db->sql_build_array('UPDATE', $wwh_data) . '
+			WHERE user_id = ' . (int) $user->data['user_id'] . "
+				OR (user_ip = '" . $db->sql_escape($user->ip) . "'
 					AND user_id = " . ANONYMOUS . ')';
 		$result = $db->sql_query($sql);
 		$db->sql_return_on_error(false);
@@ -47,14 +47,14 @@ function update_who_was_here_session ()
 		}
 
 		$sql_affectedrows = (int) $db->sql_affectedrows();
-		if ($sql_affectedrows <> 1)
+		if ($sql_affectedrows != 1)
 		{
 			if ($sql_affectedrows > 1)
 			{
 				// Found multiple matches, so we delete them and just add one
-				$sql = 'DELETE FROM ' . WWH_TABLE . "
-					WHERE user_id = {$user->data['user_id']}
-						OR (user_ip = '{$user->ip}'
+				$sql = 'DELETE FROM ' . WWH_TABLE . '
+					WHERE user_id = ' . (int) $user->data['user_id'] . "
+						OR (user_ip = '" . $db->sql_escape($user->ip) . "'
 							AND user_id = " . ANONYMOUS . ')';
 				$db->sql_query($sql);
 				$db->sql_query('INSERT INTO ' . WWH_TABLE . ' ' . $db->sql_build_array('INSERT', $wwh_data));
@@ -64,9 +64,9 @@ function update_who_was_here_session ()
 			{
 				// No entry updated. Either the user is not listed yet, or has opened two links in the same time
 				$sql = 'SELECT 1 as found
-					FROM ' . WWH_TABLE . "
-					WHERE user_id = {$user->data['user_id']}
-						OR (user_ip = '{$user->ip}'
+					FROM ' . WWH_TABLE . '
+					WHERE user_id = ' . (int) $user->data['user_id'] . "
+						OR (user_ip = '" . $db->sql_escape($user->ip) . "'
 							AND user_id = " . ANONYMOUS . ')';
 				$result = $db->sql_query($sql);
 				$found = (int) $db->sql_fetchfield('found');
@@ -84,7 +84,7 @@ function update_who_was_here_session ()
 		$db->sql_return_on_error(true);
 		$sql = 'SELECT user_id
 			FROM ' . WWH_TABLE . "
-			WHERE user_ip = '{$user->ip}'";
+			WHERE user_ip = '" . $db->sql_escape($user->ip) . "'";
 		$result = $db->sql_query_limit($sql, 1);
 		$db->sql_return_on_error(false);
 
@@ -125,8 +125,8 @@ function display_who_was_here ()
 	if ($config['wwh_version'])
 	{
 		$timestamp_cleaning = gmmktime(0, 0, 0, gmdate('m', $timestamp), gmdate('d', $timestamp), gmdate('Y', $timestamp));
-		$timestamp_cleaning = $timestamp_cleaning - $config['board_timezone'] * 3600;
-		$timestamp_cleaning = $timestamp_cleaning - $config['board_dst'] * 3600;
+		$timestamp_cleaning = $timestamp_cleaning - ($config['board_timezone'] * 3600);
+		$timestamp_cleaning = $timestamp_cleaning - ($config['board_dst'] * 3600);
 		$timestamp_cleaning = ($timestamp_cleaning < $timestamp - 86400) ? $timestamp_cleaning + 86400 : (($timestamp_cleaning > $timestamp) ? $timestamp_cleaning - 86400 : $timestamp_cleaning);
 	}
 	else
@@ -195,24 +195,15 @@ function display_who_was_here ()
 			$hover_info = (($hover_time || $hover_ip) ? ' title="' . $hover_time . (($hover_time && $hover_ip) ? ' | ' : '') . $hover_ip . '"' : '');
 			$disp_time = (($config['wwh_disp_time'] == '1') ? '&nbsp;(' . $user->lang['WHO_WAS_HERE_LATEST1'] . '&nbsp;' . $user->format_date($row['wwh_lastpage'], $config['wwh_disp_time_format']) . $user->lang['WHO_WAS_HERE_LATEST2'] . (($hover_ip) ? ' | ' . $hover_ip : '' ) . ')' : '' );
 
-			if (($row['viewonline']) || ($row['user_type'] == USER_IGNORE))
+			if ((($row['viewonline']) || ($row['user_type'] == USER_IGNORE)) && ($row['user_id'] != ANONYMOUS) && ($config['wwh_disp_bots'] || ($row['user_type'] != USER_IGNORE)))
 			{
-				if ($row['user_id'] != ANONYMOUS)
-				{
-					if ($config['wwh_disp_bots'] || ($row['user_type'] != USER_IGNORE))
-					{
-						$who_was_here_list .= (($who_was_here_list != '') ? $user->lang['COMMA_SEPARATOR'] : '') . '<span' . $hover_info . '>' . $wwh_username_full . '</span>' . $disp_time;
-						$user_id_ary[] = $row['user_id'];
-					}
-				}
+				$who_was_here_list .= (($who_was_here_list != '') ? $user->lang['COMMA_SEPARATOR'] : '') . '<span' . $hover_info . '>' . $wwh_username_full . '</span>' . $disp_time;
+				$user_id_ary[] = $row['user_id'];
 			}
-			else if ($config['wwh_disp_hidden'])
+			else if (($config['wwh_disp_hidden']) && ($auth->acl_get('u_viewonline')))
 			{
-				if ($auth->acl_get('u_viewonline'))
-				{
-					$who_was_here_list .= (($who_was_here_list != '') ? $user->lang['COMMA_SEPARATOR'] : '') . '<em' . $hover_info . '>' .$wwh_username_full . '</em>' . $disp_time;
-					$user_id_ary[] = $row['user_id'];
-				}
+				$who_was_here_list .= (($who_was_here_list != '') ? $user->lang['COMMA_SEPARATOR'] : '') . '<em' . $hover_info . '>' .$wwh_username_full . '</em>' . $disp_time;
+				$user_id_ary[] = $row['user_id'];
 			}
 
 			// At the end let's count them =)
