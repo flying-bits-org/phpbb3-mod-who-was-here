@@ -16,7 +16,7 @@ if (empty($lang) || !is_array($lang))
 {
 	$lang = array();
 }
-if (!isset($phpbb_root_path) && !defined('IN_ADMIN'))
+if (!isset($phpbb_root_path) && defined('IN_ADMIN'))
 {
 	$phpbb_root_path = '../';
 }

@@ -40,7 +40,7 @@ function update_who_was_here_session ()
 		$result = $db->sql_query($sql);
 		$db->sql_return_on_error(false);
 
-		if ($result === false)
+		if ((bool) $result === false)
 		{
 			// database does not exist yet...
 			return;
@@ -88,7 +88,7 @@ function update_who_was_here_session ()
 		$result = $db->sql_query_limit($sql, 1);
 		$db->sql_return_on_error(false);
 
-		if ($result === false)
+		if ((bool) $result === false)
 		{
 			// database does not exist yet...
 			return;
@@ -142,7 +142,7 @@ function display_who_was_here ()
 		$result = $db->sql_query($sql);
 		$db->sql_return_on_error(false);
 
-		if ($result === false)
+		if ((bool) $result === false)
 		{
 			// database does not exist yet...
 			$user->add_lang('mods/info_acp_wwh');

@@ -1,7 +1,7 @@
 [b]MOD Name:[/b] NV "Wer war da?"
 [b]Autor:[/b] [url=http://www.flying-bits.org][b]nickvergessen[/b][/url]
 
-[b]MOD Version:[/b] 1.0.1
+[b]MOD Version:[/b] 1.0.2
 [b]MOD Beschreibung:[/b]
 [list]Fügt auf der index.php einen Abschnitt hinzu, wo die User aufgelistet werden,
 die am heutigem Tage online gewesen sind.

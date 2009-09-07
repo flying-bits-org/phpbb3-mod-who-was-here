@@ -91,6 +91,9 @@ $versions = array(
 			array('wwh_disp_time_format', 'G:i'),
 		),
 	),
+
+	// Version 1.0.2
+	'1.0.2'	=> array(),
 );
 
 // Include the UMIL Auto file and everything else will be handled automatically.
