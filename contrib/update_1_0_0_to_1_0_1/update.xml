@@ -29,7 +29,7 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 			</author>
 		</author-group>
 
-		<mod-version>1.0.2</mod-version>
+		<mod-version>1.0.1</mod-version>
 
 		<installation>
 			<level>intermediate</level>
@@ -40,14 +40,20 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 		<link-group>
 			<link type="parent" lang="de" href="../../install.xml">Installations-Anleitung</link>
 			<link type="parent" lang="en" href="../../install.xml">Install</link>
+			<link type="language" lang="de" href="contrib/de.xml">Anleitung für das deutsche Sprachpaket</link>
+			<link type="language" lang="en" href="contrib/de.xml">Manual for German Language-set</link>
 		</link-group>
 	</header>
 
 	<action-group>
 		<copy>
 			<file from="root/adm/mods/nv_wwh_version.php" to="adm/mods/nv_wwh_version.php" />
+			<file from="root/adm/style/acp_wwh.html" to="adm/style/acp_wwh.html" />
 			<file from="root/includes/functions_wwh.php" to="includes/functions_wwh.php" />
-			<file from="root/install/index.php" to="install/index.php" />
+			<file from="root/includes/acp/acp_wwh.php" to="includes/acp/acp_wwh.php" />
+			<file from="root/includes/acp/info/acp_wwh.php" to="includes/acp/info/acp_wwh.php" />
+			<file from="root/install/*.*" to="install/*.*" />
+			<file from="root/language/en/mods/*.*" to="language/en/mods/*.*" />
 			<file from="root/umil/*.*" to="umil/*.*" />
 		</copy>
 
