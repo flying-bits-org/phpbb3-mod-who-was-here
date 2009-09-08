@@ -195,10 +195,13 @@ function display_who_was_here ()
 			$hover_info = (($hover_time || $hover_ip) ? ' title="' . $hover_time . (($hover_time && $hover_ip) ? ' | ' : '') . $hover_ip . '"' : '');
 			$disp_time = (($config['wwh_disp_time'] == '1') ? '&nbsp;(' . $user->lang['WHO_WAS_HERE_LATEST1'] . '&nbsp;' . $user->format_date($row['wwh_lastpage'], $config['wwh_disp_time_format']) . $user->lang['WHO_WAS_HERE_LATEST2'] . (($hover_ip) ? ' | ' . $hover_ip : '' ) . ')' : '' );
 
-			if ((($row['viewonline']) || ($row['user_type'] == USER_IGNORE)) && ($row['user_id'] != ANONYMOUS) && ($config['wwh_disp_bots'] || ($row['user_type'] != USER_IGNORE)))
+			if ($row['viewonline'] || ($row['user_type'] == USER_IGNORE))
 			{
-				$who_was_here_list .= (($who_was_here_list != '') ? $user->lang['COMMA_SEPARATOR'] : '') . '<span' . $hover_info . '>' . $wwh_username_full . '</span>' . $disp_time;
-				$user_id_ary[] = $row['user_id'];
+				if (($row['user_id'] != ANONYMOUS) && ($config['wwh_disp_bots'] || ($row['user_type'] != USER_IGNORE)))
+				{
+					$who_was_here_list .= (($who_was_here_list != '') ? $user->lang['COMMA_SEPARATOR'] : '') . '<span' . $hover_info . '>' . $wwh_username_full . '</span>' . $disp_time;
+					$user_id_ary[] = $row['user_id'];
+				}
 			}
 			else if (($config['wwh_disp_hidden']) && ($auth->acl_get('u_viewonline')))
 			{
