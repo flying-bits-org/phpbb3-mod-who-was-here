@@ -224,19 +224,13 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 		<open src="index.php">
 			<edit>
 				<find><![CDATA[// Assign index specific vars]]></find>
-				<action type="before-add"><![CDATA[if (!function_exists('display_who_was_here'))
+				<action type="before-add"><![CDATA[if (!class_exists('nv_who_was_here'))
 {
 	include($phpbb_root_path . 'includes/functions_wwh.' . $phpEx);
+	nv_who_was_here::update_session();
 }
-display_who_was_here();
+nv_who_was_here::display();
 ]]></action>
-			</edit>
-		</open>
-
-		<open src="includes/constants.php">
-			<edit>
-				<find><![CDATA[// Additional tables]]></find>
-				<action type="after-add"><![CDATA[define('WWH_TABLE',					$table_prefix . 'wwh');]]></action>
 			</edit>
 		</open>
 
@@ -249,11 +243,11 @@ display_who_was_here();
 		$user_lang = substr($user_lang, 0, strpos($user_lang, '-x-'));
 	}
 ]]></find>
-				<action type="after-add"><![CDATA[	if (!function_exists('update_who_was_here_session'))
+				<action type="after-add"><![CDATA[	if (!class_exists('nv_who_was_here'))
 	{
 		include($phpbb_root_path . 'includes/functions_wwh.' . $phpEx);
+		nv_who_was_here::update_session();
 	}
-	update_who_was_here_session();
 ]]></action>
 			</edit>
 		</open>
@@ -263,9 +257,9 @@ display_who_was_here();
 				<find><![CDATA[	<!-- IF U_VIEWONLINE --><h3><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></h3><!-- ELSE --><h3>{L_WHO_IS_ONLINE}</h3><!-- ENDIF -->
 	<p>{TOTAL_USERS_ONLINE} ({L_ONLINE_EXPLAIN})<br />{RECORD_USERS}<br /> <br />{LOGGED_IN_USER_LIST}
 	<!-- IF LEGEND --><br /><em>{L_LEGEND}: {LEGEND}</em><!-- ENDIF --></p>]]></find>
-				<action type="after-add"><![CDATA[	<!-- IF WHO_WAS_HERE_LIST2 -->
+				<action type="after-add"><![CDATA[	<!-- IF WHO_WAS_HERE_TOTAL -->
 		<h3>{L_WHO_WAS_HERE}</h3>
-		<p>{WHO_WAS_HERE_LIST2} ({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}</p>
+		<p>{WHO_WAS_HERE_TOTAL} ({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}</p>
 	<!-- ELSEIF U_ACP -->
 		<h3>{L_WHO_WAS_HERE}</h3>
 		<p>{L_WWH_UPDATE_NEED}</p>

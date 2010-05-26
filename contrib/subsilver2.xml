@@ -77,7 +77,7 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 				<find><![CDATA[<!-- ENDIF -->
 
 <!-- IF S_DISPLAY_BIRTHDAY_LIST -->]]></find>
-				<action type="before-add"><![CDATA[	<!-- IF WHO_WAS_HERE_LIST2 -->
+				<action type="before-add"><![CDATA[	<!-- IF WHO_WAS_HERE_TOTAL -->
 		<br clear="all" />
 
 		<table class="tablebg" width="100%" cellspacing="1">
@@ -86,7 +86,7 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 		</tr>
 		<tr>
 			<td class="row1" align="center" valign="middle"><img src="{T_THEME_PATH}/images/whosonline.gif" alt="{L_WHO_IS_ONLINE}" /></td>
-			<td class="row1" width="100%"><span class="genmed">{WHO_WAS_HERE_LIST2} ({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}</span></td>
+			<td class="row1" width="100%"><span class="genmed">{WHO_WAS_HERE_TOTAL} ({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}</span></td>
 		</tr>
 		</table>
 	<!-- ELSEIF U_ACP -->

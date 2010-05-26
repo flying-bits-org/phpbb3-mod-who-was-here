@@ -17,6 +17,7 @@ define('IN_INSTALL', true);
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : '../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
+include($phpbb_root_path . 'includes/functions_wwh.' . $phpEx);
 
 $user->session_begin();
 $auth->acl($user->data);
@@ -64,7 +65,7 @@ $versions = array(
 			),
 		),
 		'table_add' => array(
-			array(WWH_TABLE, array(
+			array(nv_who_was_here::table(), array(
 					'COLUMNS'		=> array(
 						'wwh_id'			=> array('UINT', NULL, 'auto_increment'),
 						'user_id'			=> array('UINT', 0),
@@ -83,7 +84,8 @@ $versions = array(
 	),
 
 	// Version 1.0.0
-	'1.0.0'	=> array(),
+	'1.0.0'	=> array(
+	),
 
 	// Version 1.0.1
 	'1.0.1'	=> array(
@@ -93,7 +95,12 @@ $versions = array(
 	),
 
 	// Version 1.0.2
-	'1.0.2'	=> array(),
+	'1.0.2'	=> array(
+	),
+
+	// Version 1.2.0
+	'1.2.0'	=> array(
+	),
 );
 
 // Include the UMIL Auto file and everything else will be handled automatically.
