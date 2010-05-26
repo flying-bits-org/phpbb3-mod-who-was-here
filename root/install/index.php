@@ -102,7 +102,6 @@ $versions = array(
 	'1.2.0'	=> array(
 		'table_index_add' => array(
 			array(nv_who_was_here::table(), 'user_id_ip', array('user_id', 'user_ip')),
-			array(nv_who_was_here::table(), 'wwh_lastpage', array('wwh_lastpage')),
 		),
 	),
 );
