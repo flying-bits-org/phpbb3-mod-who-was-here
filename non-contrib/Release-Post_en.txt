@@ -1,7 +1,7 @@
 [b]Modification Name:[/b] NW "Who was here?"
 [b]Author:[/b] [url=http://www.flying-bits.org][b]nickvergessen[/b][/url]
 
-[b]Modification Version:[/b] 1.0.2
+[b]Modification Version:[/b] 1.2.0
 [b]Modification Description:[/b]
 [list]Adds a list with all users, which visited the page today, on the index.php.
 With saving the record of usercount.
@@ -25,4 +25,4 @@ Features:
 [b]MOD Repository[/b]: http://code.bantux.org/svn/nv-who-was-here (SVN/Subversion)
 [b]Browse Repository[/b]: http://code.bantux.org/repositories/show/nv-who-was-here
 
-[b]Modification Download:[/b] [size=150][b][url=http://www.flying-bits.org/download.php?mod_id=1]Download v1.0.1[/url][/b][/size]
+[b]Modification Download:[/b] [size=150][b][url=http://www.flying-bits.org/download.php?mod_id=1]Download v1.2.0[/url][/b][/size]

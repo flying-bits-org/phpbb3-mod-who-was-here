@@ -25,7 +25,7 @@ class nv_wwh_version
 			'author'	=> 'nickvergessen',
 			'title'		=> 'NV "who was here?"',
 			'tag'		=> 'nv_wwh',
-			'version'	=> '1.0.2',
+			'version'	=> '1.2.0',
 			'file'		=> array('www.flying-bits.org', 'updatecheck', 'nv_wwh.xml'),
 		);
 	}

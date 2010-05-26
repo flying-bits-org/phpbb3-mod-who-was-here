@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
 <!--For security purposes, please check: http://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
-<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.2.xsd">
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
@@ -57,17 +57,15 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 			</author>
 		</author-group>
 
-		<mod-version>1.0.2</mod-version>
+		<mod-version>1.2.0</mod-version>
 
 		<installation>
 			<level>easy</level>
 			<time>300</time>
-			<target-version>3.0.5</target-version>
+			<target-version>3.0.7</target-version>
 		</installation>
 
 		<link-group>
-			<link type="parent" lang="de" href="contrib/update_1_0_0_to_1_0_1/update.xml">Update von 1.0.0 auf 1.0.1</link>
-			<link type="parent" lang="en" href="contrib/update_1_0_0_to_1_0_1/update.xml">Update from 1.0.0 to 1.0.1</link>
 			<link type="language" lang="de" href="contrib/de.xml">Anleitung für das deutsche Sprachpaket</link>
 			<link type="language" lang="en" href="contrib/de.xml">Manual for German Language-set</link>
 			<link type="template" lang="de" href="contrib/subsilver2.xml">Anleitung für das Style subsilver2</link>
@@ -75,6 +73,15 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 		</link-group>
 
 		<history>
+			<entry>
+				<date>2010-MM-DD</date>
+				<rev-version>1.2.0</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[[Fix] Added index to the wwh-table to increase the speed of the queries.]]></change>
+					<change><![CDATA[[Feature] Turned the MOD into a static-class.]]></change>
+				</changelog>
+			</entry>
+
 			<entry>
 				<date>2009-09-07</date>
 				<rev-version>1.0.2</rev-version>
@@ -90,120 +97,6 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 				<changelog lang="en">
 					<change><![CDATA[[Fix] Give ACP-Option for date-format when viewing timestamp of last visit (Bug #609)]]></change>
 					<change><![CDATA[[Fix] Some performance tweaks for cleaning the list and updating it. (Bug #516)]]></change>
-				</changelog>
-			</entry>
-
-			<entry>
-				<date>2009-04-07</date>
-				<rev-version>1.0.0</rev-version>
-				<changelog lang="en">
-					<change><![CDATA[[Fix] Final CleanUp for 1.0.0]]></change>
-				</changelog>
-				<changelog lang="de">
-					<change><![CDATA[[Fix] Final CleanUp für 1.0.0]]></change>
-				</changelog>
-			</entry>
-
-			<entry>
-				<date>2008-08-10</date>
-				<rev-version>1.0.0-RC1</rev-version>
-				<changelog lang="en">
-					<change><![CDATA[[Change] don't use users-Table any more (should be faster now)]]></change>
-					<change><![CDATA[[Add] display IP for Admins]]></change>
-					<change><![CDATA[[Change] reversioned: 6.0.7 -> 1.0.0-RC1]]></change>
-				</changelog>
-				<changelog lang="de">
-					<change><![CDATA[[Change] Benutzerfarbe, usw. werden jetzt mit gespeichert. (sollte schneller sein so)]]></change>
-					<change><![CDATA[[Add] IP-Anzeige für Admins]]></change>
-					<change><![CDATA[[Change] Versions-Nummer umgestuft: 6.0.7 -> 1.0.0-RC1]]></change>
-				</changelog>
-			</entry>
-
-			<entry>
-				<date>2008-06-02</date>
-				<rev-version>6.0.6</rev-version>
-				<changelog lang="en">
-					<change><![CDATA[[Add] ACP-Option for the timestamp of the user-record]]></change>
-					<change><![CDATA[[Change] sql-Index by user-option]]></change>
-				</changelog>
-				<changelog lang="de">
-					<change><![CDATA[[Add] ACP-Option für das Datumsformat beim User-Rekord]]></change>
-					<change><![CDATA[[Change] SQL-Index nach Benutzer-Eingabe]]></change>
-					<change><![CDATA[[Fix] Sprachanpassung an phpBB3.0.1]]></change>
-				</changelog>
-			</entry>
-
-			<entry>
-				<date>2008-01-28</date>
-				<rev-version>6.0.5</rev-version>
-				<changelog lang="en">
-					<change><![CDATA[[Add] Option to handle invisible users]]></change>
-					<change><![CDATA[[Add] sql-Index to id-column to improve reading speed. (credits to Mahony from the phpbb.de-Team)]]></change>
-				</changelog>
-				<changelog lang="de">
-					<change><![CDATA[[Add] Option zum ausblenden der unsichtbaren Benutzer]]></change>
-					<change><![CDATA[[Add] SQL-Index auf id-Spalte um die Auslese-geschwindigkeit zu verbessern (Dank an Mahony aus dem phpbb.de-Team)]]></change>
-				</changelog>
-			</entry>
-
-			<entry>
-				<date>2007-12-13</date>
-				<rev-version>6.0.4</rev-version>
-				<changelog lang="en">
-					<change><![CDATA[[Fix] displaying wrong time in normal and 0 on hover]]></change>
-				</changelog>
-				<changelog lang="de">
-					<change><![CDATA[[Fix] falsche Zeit angezeigt, oder 0 beim Hover]]></change>
-				</changelog>
-			</entry>
-
-			<entry>
-				<date>2007-12-10</date>
-				<rev-version>6.0.3</rev-version>
-				<changelog lang="en">
-					<change><![CDATA[[Add] last feature: display time on name-hover]]></change>
-				</changelog>
-				<changelog lang="de">
-					<change><![CDATA[[Add] letztes Feature: Zeit beim überfahren des Namens anzeigen]]></change>
-				</changelog>
-			</entry>
-
-			<entry>
-				<date>2007-12-02</date>
-				<rev-version>6.0.2</rev-version>
-				<changelog lang="en">
-					<change><![CDATA[[Fix] this should be the final fix for the timezone problem]]></change>
-				</changelog>
-				<changelog lang="de">
-					<change><![CDATA[[Fix] Jetzt sollte endlich das Problem mit den Zeitzonen erledigt sein]]></change>
-				</changelog>
-			</entry>
-
-			<entry>
-				<date>2007-10-22</date>
-				<rev-version>6.0.1</rev-version>
-				<changelog lang="en">
-					<change><![CDATA[[Fix] on displaying a page without having installed]]></change>
-					<change><![CDATA[[Fix] in the acp]]></change>
-				</changelog>
-				<changelog lang="de">
-					<change><![CDATA[[Fix] beim Aufrufen der Seite ohne Installation]]></change>
-					<change><![CDATA[[Fix] im ACP]]></change>
-				</changelog>
-			</entry>
-
-			<entry>
-				<date>2007-10-21</date>
-				<rev-version>6.0.0</rev-version>
-				<changelog lang="en">
-					<change><![CDATA[[Change] updated to RC7]]></change>
-					<change><![CDATA[[Change] created its own module]]></change>
-					<change><![CDATA[[Fix] fixed some bugs]]></change>
-				</changelog>
-				<changelog lang="de">
-					<change><![CDATA[[Change] auf RC7 angepasst]]></change>
-					<change><![CDATA[[Change] eigenes Modul erstellt]]></change>
-					<change><![CDATA[[Fix] einige Bugs behoben]]></change>
 				</changelog>
 			</entry>
 		</history>
