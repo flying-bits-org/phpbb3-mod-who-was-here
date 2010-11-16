@@ -50,11 +50,15 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 	<action-group>
 		<copy>
 			<file from="root/adm/mods/nv_wwh_version.php" to="adm/mods/nv_wwh_version.php" />
-			<file from="root/includes/functions_wwh.php" to="includes/functions_wwh.php" />
+			<file from="root/includes/nickv/who_was_here.php" to="includes/nickv/who_was_here.php" />
 			<file from="root/language/en/mods/lang_wwh.php" to="language/en/mods/lang_wwh.php" />
 			<file from="root/install/index.php" to="install/index.php" />
 			<file from="root/umil/*.*" to="umil/*.*" />
 		</copy>
+
+		<delete>
+			<file name="includes/functions_wwh.php" />
+		</delete>
 
 		<open src="index.php">
 			<edit>
@@ -63,12 +67,12 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 	include($phpbb_root_path . 'includes/functions_wwh.' . $phpEx);
 }
 display_who_was_here();]]></find>
-				<action type="before-add"><![CDATA[if (!class_exists('nv_who_was_here'))
+				<action type="before-add"><![CDATA[if (!class_exists('phpbb_nickv_who_was_here'))
 {
-	include($phpbb_root_path . 'includes/functions_wwh.' . $phpEx);
-	nv_who_was_here::update_session();
+	include($phpbb_root_path . 'includes/nickv/who_was_here.' . $phpEx);
+	phpbb_nickv_who_was_here::update_session();
 }
-nv_who_was_here::display();]]></action>
+phpbb_nickv_who_was_here::display();]]></action>
 			</edit>
 		</open>
 
@@ -85,10 +89,10 @@ nv_who_was_here::display();]]></action>
 		include($phpbb_root_path . 'includes/functions_wwh.' . $phpEx);
 	}
 	update_who_was_here_session();]]></find>
-				<action type="after-add"><![CDATA[	if (!class_exists('nv_who_was_here'))
+				<action type="after-add"><![CDATA[	if (!class_exists('phpbb_nickv_who_was_here'))
 	{
-		include($phpbb_root_path . 'includes/functions_wwh.' . $phpEx);
-		nv_who_was_here::update_session();
+		include($phpbb_root_path . 'includes/nickv/who_was_here.' . $phpEx);
+		phpbb_nickv_who_was_here::update_session();
 	}]]></action>
 			</edit>
 		</open>

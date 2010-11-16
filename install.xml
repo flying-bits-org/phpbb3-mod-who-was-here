@@ -117,12 +117,12 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 		<open src="index.php">
 			<edit>
 				<find><![CDATA[// Assign index specific vars]]></find>
-				<action type="before-add"><![CDATA[if (!class_exists('nv_who_was_here'))
+				<action type="before-add"><![CDATA[if (!class_exists('phpbb_nickv_who_was_here'))
 {
-	include($phpbb_root_path . 'includes/functions_wwh.' . $phpEx);
-	nv_who_was_here::update_session();
+	include($phpbb_root_path . 'includes/nickv/who_was_here.' . $phpEx);
+	phpbb_nickv_who_was_here::update_session();
 }
-nv_who_was_here::display();
+phpbb_nickv_who_was_here::display();
 ]]></action>
 			</edit>
 		</open>
@@ -136,10 +136,10 @@ nv_who_was_here::display();
 		$user_lang = substr($user_lang, 0, strpos($user_lang, '-x-'));
 	}
 ]]></find>
-				<action type="after-add"><![CDATA[	if (!class_exists('nv_who_was_here'))
+				<action type="after-add"><![CDATA[	if (!class_exists('phpbb_nickv_who_was_here'))
 	{
-		include($phpbb_root_path . 'includes/functions_wwh.' . $phpEx);
-		nv_who_was_here::update_session();
+		include($phpbb_root_path . 'includes/nickv/who_was_here.' . $phpEx);
+		phpbb_nickv_who_was_here::update_session();
 	}
 ]]></action>
 			</edit>

@@ -13,7 +13,7 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-class nv_who_was_here
+class phpbb_nickv_who_was_here
 {
 	static $prune_timestamp = 0;
 
