@@ -6,8 +6,8 @@
 	<header>
 		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
 
-		<title lang="de">NV "Wer war da?"</title>
-		<title lang="en">NV "who was here?"</title>
+		<title lang="de"><![CDATA[NV "Wer war da?"]]></title>
+		<title lang="en"><![CDATA[NV "who was here?"]]></title>
 
 		<description lang="de"><![CDATA[Update-Anleitung]]></description>
 		<description lang="en"><![CDATA[Update-Manual]]></description>
@@ -34,7 +34,7 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 		<installation>
 			<level>easy</level>
 			<time>300</time>
-			<target-version>3.0.7</target-version>
+			<target-version>3.0.8</target-version>
 		</installation>
 
 		<link-group>

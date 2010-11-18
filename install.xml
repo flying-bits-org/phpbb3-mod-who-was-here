@@ -62,7 +62,7 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 		<installation>
 			<level>easy</level>
 			<time>300</time>
-			<target-version>3.0.7</target-version>
+			<target-version>3.0.8</target-version>
 		</installation>
 
 		<link-group>
@@ -74,7 +74,7 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 
 		<history>
 			<entry>
-				<date>2010-MM-DD</date>
+				<date>2010-11-18</date>
 				<rev-version>1.2.0</rev-version>
 				<changelog lang="en">
 					<change><![CDATA[[Fix] Added index to the wwh-table to increase the speed of the queries.]]></change>
