@@ -106,9 +106,9 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 		<copy>
 			<file from="root/adm/mods/nv_wwh_version.php" to="adm/mods/nv_wwh_version.php" />
 			<file from="root/adm/style/acp_wwh.html" to="adm/style/acp_wwh.html" />
-			<file from="root/includes/functions_wwh.php" to="includes/functions_wwh.php" />
 			<file from="root/includes/acp/acp_wwh.php" to="includes/acp/acp_wwh.php" />
 			<file from="root/includes/acp/info/acp_wwh.php" to="includes/acp/info/acp_wwh.php" />
+			<file from="root/includes/mods/who_was_here.php" to="includes/mods/who_was_here.php" />
 			<file from="root/install/index.php" to="install/index.php" />
 			<file from="root/language/en/mods/*.*" to="language/en/mods/*.*" />
 			<file from="root/umil/*.*" to="umil/*.*" />
@@ -117,12 +117,12 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 		<open src="index.php">
 			<edit>
 				<find><![CDATA[// Assign index specific vars]]></find>
-				<action type="before-add"><![CDATA[if (!class_exists('phpbb_nickv_who_was_here'))
+				<action type="before-add"><![CDATA[if (!class_exists('phpbb_mods_who_was_here'))
 {
-	include($phpbb_root_path . 'includes/nickv/who_was_here.' . $phpEx);
-	phpbb_nickv_who_was_here::update_session();
+	include($phpbb_root_path . 'includes/mods/who_was_here.' . $phpEx);
+	phpbb_mods_who_was_here::update_session();
 }
-phpbb_nickv_who_was_here::display();
+phpbb_mods_who_was_here::display();
 ]]></action>
 			</edit>
 		</open>
@@ -136,10 +136,10 @@ phpbb_nickv_who_was_here::display();
 		$user_lang = substr($user_lang, 0, strpos($user_lang, '-x-'));
 	}
 ]]></find>
-				<action type="after-add"><![CDATA[	if (!class_exists('phpbb_nickv_who_was_here'))
+				<action type="after-add"><![CDATA[	if (!class_exists('phpbb_mods_who_was_here'))
 	{
-		include($phpbb_root_path . 'includes/nickv/who_was_here.' . $phpEx);
-		phpbb_nickv_who_was_here::update_session();
+		include($phpbb_root_path . 'includes/mods/who_was_here.' . $phpEx);
+		phpbb_mods_who_was_here::update_session();
 	}
 ]]></action>
 			</edit>

@@ -13,24 +13,24 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-class phpbb_nickv_who_was_here
+class phpbb_mods_who_was_here
 {
-	static $prune_timestamp = 0;
+	static private $prune_timestamp = 0;
 
-	static $count_total = 0;
-	static $count_reg = 0;
-	static $count_hidden = 0;
-	static $count_bot = 0;
-	static $count_guests = 0;
+	static private $count_total = 0;
+	static private $count_reg = 0;
+	static private $count_hidden = 0;
+	static private $count_bot = 0;
+	static private $count_guests = 0;
 
-	static $ids_reg = array();
-	static $ids_hidden = array();
-	static $ids_bot = array();
+	static private $ids_reg = array();
+	static private $ids_hidden = array();
+	static private $ids_bot = array();
 
 	/**
 	* Would have been to nice, if we could use a constant.
 	*/
-	static function table($table_name = 'wwh')
+	static public function table($table_name = 'wwh')
 	{
 		global $table_prefix;
 		return $table_prefix . $table_name;
@@ -39,7 +39,7 @@ class phpbb_nickv_who_was_here
 	/**
 	* Update the users session in the table.
 	*/
-	static function update_session()
+	static public function update_session()
 	{
 		global $db, $user;
 
@@ -274,7 +274,7 @@ class phpbb_nickv_who_was_here
 	/**
 	* Deletes the users from the list, whose visit is to old.
 	*/
-	static function prune()
+	static public function prune()
 	{
 		global $config;
 
@@ -321,7 +321,7 @@ class phpbb_nickv_who_was_here
 	* Logs the daily stats.
 	* NOTE: Currently not active, as there might be law conflicts in some states.
 	*/
-	static function log()
+	static public function log()
 	{
 		global $config;
 
@@ -371,7 +371,7 @@ class phpbb_nickv_who_was_here
 	* Demo:	based on users active today
 	*		based on users active over the past 30 minutes
 	*/
-	static function get_explanation_string($mode)
+	static public function get_explanation_string($mode)
 	{
 		global $config, $user;
 
@@ -405,7 +405,7 @@ class phpbb_nickv_who_was_here
 	* Demo:	Most users ever online was 1 on Mon 7. Sep 2009
 	*		Most users ever online was 1 between Mon 7. Sep 2009 and Tue 8. Sep 2009
 	*/
-	static function get_record_string($active, $mode)
+	static public function get_record_string($active, $mode)
 	{
 		global $config, $user;
 
@@ -430,7 +430,7 @@ class phpbb_nickv_who_was_here
 	* Returns the Total string for the online list:
 	* Demo:	In total there was 1 user online :: 1 registered, 0 hidden, 0 bots and 0 guests
 	*/
-	static function get_total_users_string($display_hidden, $display_bots, $display_guests)
+	static public function get_total_users_string($display_hidden, $display_bots, $display_guests)
 	{
 		global $user;
 

@@ -17,9 +17,9 @@ define('IN_INSTALL', true);
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : '../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
-if (!class_exists('phpbb_nickv_who_was_here'))
+if (!class_exists('phpbb_mods_who_was_here'))
 {
-	include($phpbb_root_path . 'includes/nickv/who_was_here.' . $phpEx);
+	include($phpbb_root_path . 'includes/mods/who_was_here.' . $phpEx);
 }
 
 $user->session_begin();
@@ -68,7 +68,7 @@ $versions = array(
 			),
 		),
 		'table_add' => array(
-			array(phpbb_nickv_who_was_here::table(), array(
+			array(phpbb_mods_who_was_here::table(), array(
 					'COLUMNS'		=> array(
 						'wwh_id'			=> array('UINT', NULL, 'auto_increment'),
 						'user_id'			=> array('UINT', 0),
@@ -104,7 +104,7 @@ $versions = array(
 	// Version 1.2.0
 	'1.2.0'	=> array(
 		'table_index_add' => array(
-			array(phpbb_nickv_who_was_here::table(), 'user_id_ip', array('user_id', 'user_ip')),
+			array(phpbb_mods_who_was_here::table(), 'user_id_ip', array('user_id', 'user_ip')),
 		),
 	),
 );
