@@ -15,6 +15,15 @@ if (!defined('IN_PHPBB'))
 
 class phpbb_mods_who_was_here
 {
+	const SORT_ASC = 0;
+
+	const SORT_USERNAME_ASC = 0;
+	const SORT_USERNAME_DESC = 1;
+	const SORT_LASTPAGE_ASC = 2;
+	const SORT_LASTPAGE_DESC = 3;
+	const SORT_USERID_ASC = 4;
+	const SORT_USERID_DESC = 5;
+
 	static private $prune_timestamp = 0;
 
 	static private $count_total = 0;
@@ -143,7 +152,7 @@ class phpbb_mods_who_was_here
 	/**
 	* Fetching the user-list and putting the stuff into the template.
 	*/
-	function display()
+	static public function display()
 	{
 		global $auth, $config, $db, $template, $user;
 
@@ -161,21 +170,21 @@ class phpbb_mods_who_was_here
 
 		switch ($config['wwh_sort_by'])
 		{
-			case '0':
-			case '1':
+			case self::SORT_USERNAME_ASC:
+			case self::SORT_USERNAME_DESC:
 				$sql_order_by = 'username_clean';
 			break;
-			case '4':
-			case '5':
+			case self::SORT_USERID_ASC:
+			case self::SORT_USERID_DESC:
 				$sql_order_by = 'user_id';
 			break;
-			case '2':
-			case '3':
+			case self::SORT_LASTPAGE_ASC:
+			case self::SORT_LASTPAGE_DESC:
 			default:
 				$sql_order_by = 'wwh_lastpage';
 			break;
 		}
-		$sql_ordering = (($config['wwh_sort_by'] % 2) == 0) ? 'ASC' : 'DESC';
+		$sql_ordering = (($config['wwh_sort_by'] % 2) == self::SORT_ASC) ? 'ASC' : 'DESC';
 
 		// Let's try another method, to deny duplicate appearance of usernames.
 		$user_id_ary = array();
