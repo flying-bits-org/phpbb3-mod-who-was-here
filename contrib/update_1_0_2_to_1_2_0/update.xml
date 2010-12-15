@@ -66,7 +66,7 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 	include($phpbb_root_path . 'includes/functions_wwh.' . $phpEx);
 }
 display_who_was_here();]]></find>
-				<action type="before-add"><![CDATA[if (!class_exists('phpbb_mods_who_was_here'))
+				<action type="replace-with"><![CDATA[if (!class_exists('phpbb_mods_who_was_here'))
 {
 	include($phpbb_root_path . 'includes/mods/who_was_here.' . $phpEx);
 	phpbb_mods_who_was_here::update_session();
@@ -88,7 +88,7 @@ phpbb_mods_who_was_here::display();]]></action>
 		include($phpbb_root_path . 'includes/functions_wwh.' . $phpEx);
 	}
 	update_who_was_here_session();]]></find>
-				<action type="after-add"><![CDATA[	if (!class_exists('phpbb_mods_who_was_here'))
+				<action type="replace-with"><![CDATA[	if (!class_exists('phpbb_mods_who_was_here'))
 	{
 		include($phpbb_root_path . 'includes/mods/who_was_here.' . $phpEx);
 		phpbb_mods_who_was_here::update_session();
@@ -105,7 +105,7 @@ phpbb_mods_who_was_here::display();]]></action>
 		<h3>{L_WHO_WAS_HERE}</h3>
 		<p>{L_WWH_UPDATE_NEED}</p>
 	<!-- ENDIF -->]]></find>
-				<action type="after-add"><![CDATA[	<!-- IF WHO_WAS_HERE_TOTAL -->
+				<action type="replace-with"><![CDATA[	<!-- IF WHO_WAS_HERE_TOTAL -->
 		<h3>{L_WHO_WAS_HERE}</h3>
 		<p>{WHO_WAS_HERE_TOTAL} ({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}</p>
 	<!-- ELSEIF U_ACP -->

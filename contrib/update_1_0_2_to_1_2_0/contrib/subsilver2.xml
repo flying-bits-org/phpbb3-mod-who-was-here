@@ -58,7 +58,7 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 			<td class="row1" width="100%"><span class="genmed">{WHO_WAS_HERE_LIST2} ({WHO_WAS_HERE_EXP})<br />{WHO_WAS_HERE_RECORD}<br />{WHO_WAS_HERE_LIST}</span></td>
 		</tr>
 		</table>]]></find>
-				<action type="before-add"><![CDATA[	<!-- IF WHO_WAS_HERE_TOTAL -->
+				<action type="replace-with"><![CDATA[	<!-- IF WHO_WAS_HERE_TOTAL -->
 		<br clear="all" />
 
 		<table class="tablebg" width="100%" cellspacing="1">
