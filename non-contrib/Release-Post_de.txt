@@ -1,7 +1,7 @@
 [b]MOD Name:[/b] NV "Wer war da?"
 [b]Autor:[/b] [url=http://www.flying-bits.org][b]nickvergessen[/b][/url]
 
-[b]MOD Version:[/b] 1.2.0
+[b]MOD Version:[/b] 1.2.1
 [b]MOD Beschreibung:[/b]
 [list]Fügt auf der index.php einen Abschnitt hinzu, wo die User aufgelistet werden,
 die am heutigem Tage online gewesen sind.
@@ -27,4 +27,4 @@ Features:
 [b]MOD Repository[/b]: git@github.com:nickvergessen/phpbb3-mod-who-was-here.git (git)
 [b]Repository durchsuchen[/b]: https://github.com/nickvergessen/phpbb3-mod-who-was-here
 
-[b]MOD Download:[/b] [size=150][b][url=http://www.flying-bits.org/download.php?mod_id=1]Download v1.2.0[/url][/b][/size]
+[b]MOD Download:[/b] [size=150][b][url=http://www.flying-bits.org/download.php?mod_id=1]Download v1.2.1[/url][/b][/size]

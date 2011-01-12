@@ -41,12 +41,8 @@ Features:
 	• usernames are coloured
 ]]></description>
 
-		<author-notes lang="de"><![CDATA[
-Die MOD untersützt die "MOD Version Check"-MOD von Handymman´:
-http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
-		<author-notes lang="en"><![CDATA[
-This MOD supports the "MOD Version Check"-MOD by Handymman´:
-http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
+		<author-notes lang="de"><![CDATA[Diese MOD benötigt php5.]]></author-notes>
+		<author-notes lang="en"><![CDATA[This MOD required php5.]]></author-notes>
 
 		<author-group>
 			<author>
@@ -57,7 +53,7 @@ http://www.phpbb.com/community/viewtopic.php?f=69&t=691155]]></author-notes>
 			</author>
 		</author-group>
 
-		<mod-version>1.2.0</mod-version>
+		<mod-version>1.2.1</mod-version>
 
 		<installation>
 			<level>easy</level>

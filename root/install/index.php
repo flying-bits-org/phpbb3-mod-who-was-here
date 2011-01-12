@@ -107,6 +107,10 @@ $versions = array(
 			array(phpbb_mods_who_was_here::table(), 'user_id_ip', array('user_id', 'user_ip')),
 		),
 	),
+
+	// Version 1.2.1
+	'1.2.1'	=> array(
+	),
 );
 
 // Include the UMIL Auto file and everything else will be handled automatically.
