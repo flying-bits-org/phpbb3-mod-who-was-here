@@ -466,6 +466,8 @@ class phpbb_mods_who_was_here
 				return sprintf($total_users_string, $user->lang['COMMA_SEPARATOR'], $user->lang['WHO_WAS_HERE_WORD']);
 			case 1:
 				return sprintf($total_users_string, $user->lang['WHO_WAS_HERE_WORD']);
+			default:
+				return $total_users_string;
 		}
 	}
 }

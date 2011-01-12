@@ -53,7 +53,7 @@ Features:
 			</author>
 		</author-group>
 
-		<mod-version>1.2.0</mod-version>
+		<mod-version>1.2.1</mod-version>
 
 		<installation>
 			<level>easy</level>
@@ -69,6 +69,14 @@ Features:
 		</link-group>
 
 		<history>
+			<entry>
+				<date>2011-01-12</date>
+				<rev-version>1.2.1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[[Fix] MOD does not work with first three config-options set to "No".]]></change>
+				</changelog>
+			</entry>
+
 			<entry>
 				<date>2010-11-18</date>
 				<rev-version>1.2.0</rev-version>
