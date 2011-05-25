@@ -344,7 +344,7 @@ class phpbb_mods_who_was_here
 			'guest_users'		=> self::$count_guests,
 			'hidden_users'		=> self::$count_hidden,
 			'registered_users'	=> self::$count_reg,
-			'bots'				=> self::$count_bots,
+			'bots'				=> self::$count_bot,
 			'hidden_users_list'		=> implode(', ', self::$ids_hidden),
 			'registered_users_list'	=> implode(', ', self::$ids_reg),
 			'bots_list'				=> implode(', ', self::$ids_bot),
@@ -352,9 +352,9 @@ class phpbb_mods_who_was_here
 			'end_time'			=> self::$prune_timestamp + 86400,
 		);
 
-		$www_log_hash = self::$count_guests . '-' . self::$count_hidden . '-' . self::$count_reg . '-' . self::$count_bots;
+		$www_log_hash = self::$count_guests . '-' . self::$count_hidden . '-' . self::$count_reg . '-' . self::$count_bot;
 
-		if ($config['wwh_log_hash'] != $www_log_hash)
+		if ((time() > $config['wwh_log_endtime']) || ($config['wwh_log_hash'] != $www_log_hash))
 		{
 			global $db;
 
@@ -369,7 +369,7 @@ class phpbb_mods_who_was_here
 			{
 				$db->sql_query('INSERT INTO ' . self::table('wwh_logs') . ' ' . $db->sql_build_array('INSERT', $log_data));
 				set_config('wwh_current_log_id', (int) $db->sql_nextid());
-				set_config('wwh_log_endtime', $timestamp_cleaning + 86400);
+				set_config('wwh_log_endtime', $log_data['end_time']);
 			}
 			set_config('wwh_log_hash', $www_log_hash);
 		}
