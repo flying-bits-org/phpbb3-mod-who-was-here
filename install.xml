@@ -71,6 +71,14 @@ Features:
 		<history>
 			<entry>
 				<date>2011-01-12</date>
+				<rev-version>1.2.1.1</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[[Fix] Language string for "MOD version" misleading, should be "Display users of" (Bug #775)]]></change>
+				</changelog>
+			</entry>
+
+			<entry>
+				<date>2011-01-12</date>
 				<rev-version>1.2.1</rev-version>
 				<changelog lang="en">
 					<change><![CDATA[[Fix] MOD does not work with first three config-options set to "No".]]></change>

@@ -65,7 +65,7 @@ $lang = array_merge($lang, array(
 
 	'WWH_UPDATE_NEED'			=> 'Update deinen "Wer War Da?" MOD. Führe dazu die <a style="font-weight: bold;" href="' . $phpbb_root_path . 'install/index.php">install/index.php</a> aus.<br />Wenn du das getan hast, kannst solltest du das install/ Verzeichnis wieder entfernen.',
 
-	'WWH_VERSION'				=> 'MOD Version',
+	'WWH_VERSION'				=> 'Benutzer von ... anzeigen',
 	'WWH_VERSION_EXP'			=> 'Benutzer von heute anzeigen, oder aus dem Zeitraum der im nächsten Feld eingegeben wird',
 	'WWH_VERSION1'				=> 'Heute',
 	'WWH_VERSION2'				=> 'Zeitraum',

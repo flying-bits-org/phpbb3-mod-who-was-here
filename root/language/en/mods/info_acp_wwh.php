@@ -65,7 +65,7 @@ $lang = array_merge($lang, array(
 
 	'WWH_UPDATE_NEED'			=> 'Update the "Who was here?" MOD. Therefor run the <a style="font-weight: bold;" href="' . $phpbb_root_path . 'install/index.php">install/index.php</a>.<br />If you did this, you should delete the install/ directory.',
 
-	'WWH_VERSION'				=> 'MOD Version',
+	'WWH_VERSION'				=> 'Displaying users of ...',
 	'WWH_VERSION_EXP'			=> 'Displaying users of today, or of the period set in the next option.',
 	'WWH_VERSION1'				=> 'Today',
 	'WWH_VERSION2'				=> 'Period of time',
