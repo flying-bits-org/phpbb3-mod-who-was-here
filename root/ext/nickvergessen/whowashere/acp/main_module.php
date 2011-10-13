@@ -20,7 +20,7 @@ if (!defined('IN_PHPBB'))
 /**
 * @package acp
 */
-class acp_wwh
+class phpbb_ext_nickvergessen_whowashere_acp_main_module
 {
 	var $u_action;
 

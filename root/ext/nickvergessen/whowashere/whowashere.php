@@ -13,7 +13,7 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-class phpbb_mods_who_was_here
+class phpbb_ext_nickvergessen_whowashere
 {
 	const SORT_ASC = 0;
 

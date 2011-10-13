@@ -20,7 +20,7 @@ if (!defined('IN_PHPBB'))
 /**
 * @package module_install
 */
-class acp_wwh_info
+class phpbb_ext_nickvergessen_whowashere_acp_main_info
 {
 	function module()
 	{		
