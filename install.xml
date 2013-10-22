@@ -60,7 +60,7 @@ Features:
 		<installation>
 			<level>easy</level>
 			<time>300</time>
-			<target-version>3.0.9</target-version>
+			<target-version>3.0.12</target-version>
 		</installation>
 
 		<link-group>
@@ -71,6 +71,15 @@ Features:
 		</link-group>
 
 		<history>
+			<entry>
+				<date>2013-10-22</date>
+				<rev-version>1.2.1.2</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[[Fix] Updated UMIL and MODx to latest versions]]></change>
+					<change><![CDATA[[Fix] Updated phpBB version statement to latest]]></change>
+				</changelog>
+			</entry>
+
 			<entry>
 				<date>2011-01-12</date>
 				<rev-version>1.2.1.1</rev-version>
