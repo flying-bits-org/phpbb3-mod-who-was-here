@@ -1,11 +1,9 @@
 <?php
-
 /**
 *
-* @package phpBB3 - who was here MOD
-* @version $Id: info_acp_wwh.php 61 2007-12-17 20:15:23Z nickvergessen $
-* @copyright (c) nickvergessen ( http://www.flying-bits.org/ )
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
+* @package - NV "who was here?"
+* @copyright (c) nickvergessen - http://www.flying-bits.org/
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
 if (!defined('IN_PHPBB'))

@@ -1,11 +1,9 @@
 <?php
-
 /**
 *
 * @package - NV "who was here?"
-* @version $Id: acp_wwh.php 61 2007-12-17 20:15:23Z nickvergessen $
-* @copyright (c) nickvergessen ( http://www.flying-bits.org/ )
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License 
+* @copyright (c) nickvergessen - http://www.flying-bits.org/
+* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
 
